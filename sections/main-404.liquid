@@ -1,23 +1,141 @@
 <style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
+  .bsod-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0000aa;
+    color: white;
+    font-family: "MS Sans Serif", "Courier New", monospace;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 9999;
+    overflow: hidden;
   }
 
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
+  .bsod-container * {
+    font-family: "MS Sans Serif", "Courier New", monospace !important;
+    color: white !important;
+  }
+
+  .bsod-header {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .bsod-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .bsod-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .bsod-error-box {
+    background: #008080;
+    border: 2px solid #00ffff;
+    padding: 15px;
+    margin: 30px auto;
+    max-width: 600px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .bsod-instructions {
+    margin: 30px 0;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .bsod-button {
+    background: #c0c0c0;
+    color: #000 !important;
+    border: 2px outset #c0c0c0;
+    padding: 8px 16px;
+    font-family: "MS Sans Serif", sans-serif !important;
+    font-size: 11px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+  }
+
+  .bsod-button:hover {
+    background: #dfdfdf;
+  }
+
+  .bsod-button:active {
+    border: 2px inset #c0c0c0;
+  }
+
+  .bsod-footer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 12px;
+  }
+
+  /* Hide the main page content */
+  body:has(.bsod-container) > *:not(.bsod-container) {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 750px) {
+    .bsod-container {
+      font-size: 14px;
+      padding: 15px;
+    }
+    
+    .bsod-header {
+      font-size: 16px;
+    }
+    
+    .bsod-title {
+      font-size: 18px;
     }
   }
 </style>
 
-<div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
+<div class="bsod-container">
+  <div class="bsod-header">Microsoft Windows 98</div>
+  
+  <div class="bsod-content">
+    <div class="bsod-title">A fatal exception 404 has occurred at 0028:{{ 'now' | date: '%s' | slice: -8, 8 }}</div>
+    
+    <div class="bsod-instructions">
+      The current application will be terminated.
+      <br><br>
+      * Press any key to terminate the current application.
+      * Press CTRL+ALT+DEL to restart your computer. You will lose any unsaved information in all applications.
+      <br><br>
+      Error: PAGE_NOT_FOUND
+      <br>
+      The requested page could not be found in the system registry.
+    </div>
+
+    <div class="bsod-error-box">
+      Exception 404: Page Not Found
+      <br>
+      {{ request.path | default: '/missing-page' }}
+      <br><br>
+      Press any key to continue _
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="{{ routes.root_url }}" class="bsod-button">Restart System (Go Home)</a>
+      <a href="{{ routes.all_products_collection_url }}" class="bsod-button">Safe Mode (Browse Products)</a>
+    </div>
+  </div>
+
+  <div class="bsod-footer">
+    System halted. Contact your system administrator.
+  </div>
 </div>

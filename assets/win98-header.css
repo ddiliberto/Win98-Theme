@@ -1,0 +1,232 @@
+/**
+ * Win98 Header Component
+ * Makes all header text consistent at 11px with Win98 styling
+ */
+
+/* ===== MAIN HEADER CONTAINER ===== */
+.header {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  background: var(--win98-surface, #c0c0c0) !important;
+  border-bottom: 2px outset var(--win98-surface, #c0c0c0) !important;
+}
+
+/* ===== LOGO & BRAND TEXT ===== */
+.header__heading,
+.header__heading-logo,
+.header__heading-logo-wrapper,
+.header__heading h1 {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: var(--win98-text, #222222) !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  padding: 4px 8px !important;
+}
+
+.header__heading-link {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: var(--win98-text, #222222) !important;
+  text-decoration: none !important;
+}
+
+.header__heading-link:hover {
+  color: var(--win98-text, #222222) !important;
+  text-decoration: none !important;
+}
+
+/* ===== NAVIGATION MENU ===== */
+.header__menu,
+.list-menu,
+.list-menu__item {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+.list-menu__item a,
+.header__menu-item {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: var(--win98-text, #222222) !important;
+  text-decoration: none !important;
+  padding: 4px 8px !important;
+  display: block !important;
+  border: 1px solid transparent !important;
+}
+
+.list-menu__item a:hover,
+.header__menu-item:hover {
+  background: var(--win98-button-highlight, #ffffff) !important;
+  border: 1px outset var(--win98-surface, #c0c0c0) !important;
+  color: var(--win98-text, #222222) !important;
+}
+
+/* ===== SEARCH BAR ===== */
+.search,
+.search__input,
+.predictive-search,
+.predictive-search__input {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+.search__input {
+  border: 2px inset var(--win98-surface, #c0c0c0) !important;
+  background: white !important;
+  color: var(--win98-text, #222222) !important;
+  padding: 2px 4px !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+.search__button {
+  background: var(--win98-button-face, #dfdfdf) !important;
+  border: 2px outset var(--win98-button-face, #dfdfdf) !important;
+  color: var(--win98-text, #222222) !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  padding: 2px 8px !important;
+  cursor: pointer !important;
+}
+
+.search__button:hover {
+  background: var(--win98-button-highlight, #ffffff) !important;
+}
+
+.search__button:active {
+  border: 2px inset var(--win98-button-face, #dfdfdf) !important;
+}
+
+/* ===== CART ICON & COUNT ===== */
+.cart-count-bubble,
+.cart-icon {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+.cart-count-bubble {
+  background: var(--win98-dialog-blue, #000080) !important;
+  color: white !important;
+  border: 1px outset var(--win98-dialog-blue, #000080) !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 10px !important;
+  font-weight: bold !important;
+  padding: 1px 4px !important;
+  border-radius: 0 !important;
+}
+
+/* ===== DRAWER/MOBILE MENU ===== */
+.menu-drawer,
+.menu-drawer__menu {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  background: var(--win98-surface, #c0c0c0) !important;
+  border: 2px outset var(--win98-surface, #c0c0c0) !important;
+}
+
+.menu-drawer__menu-item {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: var(--win98-text, #222222) !important;
+  border-bottom: 1px solid var(--win98-button-shadow, #808080) !important;
+  padding: 8px 12px !important;
+}
+
+.menu-drawer__menu-item:hover {
+  background: var(--win98-button-highlight, #ffffff) !important;
+}
+
+/* ===== DROPDOWN/MEGA MENUS ===== */
+.header__submenu,
+.mega-menu {
+  background: var(--win98-surface, #c0c0c0) !important;
+  border: 2px outset var(--win98-surface, #c0c0c0) !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.header__submenu a,
+.mega-menu__link {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: var(--win98-text, #222222) !important;
+  padding: 4px 8px !important;
+  display: block !important;
+  text-decoration: none !important;
+}
+
+.header__submenu a:hover,
+.mega-menu__link:hover {
+  background: var(--win98-button-highlight, #ffffff) !important;
+  border: 1px outset var(--win98-surface, #c0c0c0) !important;
+}
+
+/* ===== UTILITY LINKS ===== */
+.header__icons,
+.header__icon {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+.header__icon {
+  color: var(--win98-text, #222222) !important;
+  text-decoration: none !important;
+  padding: 4px !important;
+  border: 1px solid transparent !important;
+}
+
+.header__icon:hover {
+  background: var(--win98-button-highlight, #ffffff) !important;
+  border: 1px outset var(--win98-surface, #c0c0c0) !important;
+  color: var(--win98-text, #222222) !important;
+}
+
+/* ===== ANNOUNCEMENT BAR ===== */
+.announcement-bar {
+  background: var(--win98-dialog-blue, #000080) !important;
+  color: white !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  text-align: center !important;
+  padding: 4px 8px !important;
+}
+
+.announcement-bar__message {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: white !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 749px) {
+  .header {
+    font-size: 10px !important;
+  }
+  
+  .header__heading,
+  .header__heading-logo,
+  .list-menu__item a,
+  .search__input,
+  .search__button {
+    font-size: 10px !important;
+  }
+}
+
+/* ===== FORCE OVERRIDES ===== */
+.header *,
+.header__menu *,
+.menu-drawer *,
+.header__submenu *,
+.mega-menu * {
+  font-family: "MS Sans Serif", sans-serif !important;
+}
+
+/* Remove any text transforms */
+.header * {
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
