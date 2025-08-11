@@ -1,0 +1,161 @@
+/**
+ * 98.css - Windows 98 CSS Framework
+ * Integrated for Win98 Shopify Theme
+ */
+
+:root {
+  /* Win98 Color Palette */
+  --text-color: #222222;
+  --surface: #c0c0c0;
+  --button-highlight: #ffffff;
+  --button-face: #dfdfdf;
+  --button-shadow: #808080;
+  --window-frame: #0a0a0a;
+  --dialog-blue: #000080;
+  --dialog-blue-light: #1084d0;
+  --dialog-gray: #808080;
+  --dialog-gray-light: #b5b5b5;
+  --link-blue: #0000ff;
+
+  /* Spacing */
+  --element-spacing: 8px;
+  --grouped-button-spacing: 4px;
+  --grouped-element-spacing: 6px;
+  --radio-width: 12px;
+  --checkbox-width: 13px;
+  --radio-label-spacing: 6px;
+  --range-track-height: 4px;
+  --range-spacing: 10px;
+
+  /* Borders */
+  --border-width: 1px;
+  --border-raised-outer: inset -1px -1px var(--window-frame),
+    inset 1px 1px var(--button-highlight);
+  --border-raised-inner: inset -2px -2px var(--button-shadow),
+    inset 2px 2px var(--button-face);
+  --border-sunken-outer: inset -1px -1px var(--button-highlight),
+    inset 1px 1px var(--window-frame);
+  --border-sunken-inner: inset -2px -2px var(--button-face),
+    inset 2px 2px var(--button-shadow);
+
+  /* Win98 Font Stack */
+  --font-family: "MS Sans Serif", sans-serif;
+  --font-size: 11px;
+  --font-size-title: 11px;
+}
+
+/* Font Face Declarations */
+@font-face {
+  font-family: "MS Sans Serif";
+  src: url("ms_sans_serif.woff2") format("woff2"),
+       url("ms_sans_serif.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MS Sans Serif";
+  src: url("ms_sans_serif_bold.woff2") format("woff2"),
+       url("ms_sans_serif_bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base Win98 Styling */
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  color: var(--text-color);
+  background-color: var(--surface);
+  margin: 0;
+  padding: 0;
+}
+
+/* Win98 Button Styles */
+.win98-button {
+  background: var(--surface);
+  box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+  border: none;
+  color: var(--text-color);
+  font: inherit;
+  font-size: var(--font-size);
+  padding: 0 12px;
+  min-height: 23px;
+  min-width: 75px;
+  cursor: pointer;
+}
+
+.win98-button:not(:disabled):active {
+  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+}
+
+.win98-button:focus {
+  outline: 1px dotted var(--text-color);
+  outline-offset: -4px;
+}
+
+.win98-button:disabled {
+  color: var(--button-shadow);
+}
+
+/* Win98 Window Styles */
+.win98-window {
+  background: var(--surface);
+  box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+  padding: 3px;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+.win98-window-body {
+  margin: var(--element-spacing);
+}
+
+.win98-title-bar {
+  background: linear-gradient(90deg, var(--dialog-blue), var(--dialog-blue-light));
+  padding: 3px 2px 3px 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.win98-title-bar-text {
+  font-weight: bold;
+  color: white;
+  letter-spacing: 0;
+  margin-right: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Win98 Form Elements */
+.win98-textbox {
+  box-sizing: border-box;
+  border: none;
+  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  background-color: white;
+  color: var(--text-color);
+  font: inherit;
+  font-size: var(--font-size);
+  padding: 3px 4px;
+}
+
+.win98-textbox:focus {
+  outline: none;
+}
+
+/* Win98 Utility Classes */
+.win98-sunken {
+  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  background-color: white;
+  padding: var(--element-spacing);
+}
+
+.win98-raised {
+  box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+  background-color: var(--surface);
+  padding: var(--element-spacing);
+}

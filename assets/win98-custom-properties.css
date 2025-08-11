@@ -1,0 +1,108 @@
+/**
+ * Win98 Theme Custom Properties
+ * Maps Shopify theme settings to Win98 CSS variables
+ */
+
+:root {
+  /* Win98 Theme Colors - can be customized via theme settings */
+  --win98-surface: {{ settings.win98_surface_color | default: '#c0c0c0' }};
+  --win98-text: {{ settings.win98_text_color | default: '#222222' }};
+  --win98-button-highlight: {{ settings.win98_button_highlight | default: '#ffffff' }};
+  --win98-button-face: {{ settings.win98_button_face | default: '#dfdfdf' }};
+  --win98-button-shadow: {{ settings.win98_button_shadow | default: '#808080' }};
+  --win98-window-frame: {{ settings.win98_window_frame | default: '#0a0a0a' }};
+  --win98-dialog-blue: {{ settings.win98_dialog_blue | default: '#000080' }};
+  --win98-dialog-blue-light: {{ settings.win98_dialog_blue_light | default: '#1084d0' }};
+  --win98-link-blue: {{ settings.win98_link_blue | default: '#0000ff' }};
+
+  /* Win98 Typography */
+  --win98-font-size-base: {{ settings.win98_font_size_base | default: 11 }}px;
+  --win98-font-size-title: {{ settings.win98_font_size_title | default: 11 }}px;
+  --win98-font-size-large: {{ settings.win98_font_size_large | default: 13 }}px;
+  
+  /* Win98 Spacing */
+  --win98-element-spacing: {{ settings.win98_element_spacing | default: 8 }}px;
+  --win98-grouped-spacing: {{ settings.win98_grouped_spacing | default: 4 }}px;
+  
+  /* Win98 Border Radius Override */
+  --win98-border-radius: {{ settings.win98_border_radius | default: 0 }}px;
+  
+  /* Override Dawn's default properties with Win98 values */
+  --color-background: var(--win98-surface);
+  --color-foreground: var(--win98-text);
+  --color-button: var(--win98-button-face);
+  --color-button-text: var(--win98-text);
+  --font-body-family: "MS Sans Serif", var(--font-body-family);
+  --font-heading-family: "MS Sans Serif", var(--font-heading-family);
+  --font-body-scale: 1;
+  --font-heading-scale: 1;
+}
+
+/* Win98 Global Overrides */
+* {
+  border-radius: var(--win98-border-radius) !important;
+}
+
+body {
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: var(--win98-font-size-base);
+  background-color: var(--win98-surface);
+  color: var(--win98-text);
+}
+
+/* Win98 Button Overrides */
+.btn,
+button,
+input[type="button"],
+input[type="submit"],
+.shopify-payment-button__button {
+  background: var(--win98-button-face);
+  border: 2px outset var(--win98-button-face);
+  color: var(--win98-text);
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: var(--win98-font-size-base);
+  padding: 2px 8px;
+  min-height: 21px;
+  border-radius: 0 !important;
+  cursor: pointer;
+}
+
+.btn:hover,
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+  background: var(--win98-button-highlight);
+}
+
+.btn:active,
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active {
+  border: 2px inset var(--win98-button-face);
+}
+
+/* Win98 Input Overrides */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+  background: white;
+  border: 2px inset var(--win98-surface);
+  color: var(--win98-text);
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: var(--win98-font-size-base);
+  padding: 2px 4px;
+  border-radius: 0 !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  outline: 1px dotted var(--win98-text);
+  outline-offset: -3px;
+}
