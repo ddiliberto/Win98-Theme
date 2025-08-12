@@ -1,5 +1,6 @@
 {{ 'video-section.css' | asset_url | stylesheet_tag }}
 {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+{{ 'win98-video-title-bar.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -51,18 +52,32 @@
         </div>
       {%- endunless -%}
     </div>
+    {% if section.settings.show_title_bar %}
+      <div class="video-title-bar-container{% if section.settings.full_width %} video-title-bar--full-width{% endif %}">
+        <div class="video-title-bar">
+          <div class="video-title-bar-text">{{ section.settings.title_bar_text | escape }}</div>
+          <div class="video-title-bar-controls">
+            <button class="video-title-bar-button" aria-label="Minimize"></button>
+            <button class="video-title-bar-button" aria-label="Maximize"></button>
+            <button class="video-title-bar-button" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    {% endif %}
     <deferred-media
-      class="video-section__media deferred-media gradient global-media-settings{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if fix_ratio %} media-fit-cover{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      class="video-section__media deferred-media gradient global-media-settings{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if fix_ratio %} media-fit-cover{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}{% if section.settings.show_title_bar %} video-section__media--with-title-bar{% endif %}"
       data-media-id="{{ video_id }}"
+      {% if section.settings.enable_autoplay %}data-autoplay="true"{% endif %}
       {% if poster != null %}
         style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
       {% endif %}
     >
       <button
         id="Deferred-Poster-Modal-{{ video_id }}"
-        class="video-section__poster media deferred-media__poster media--landscape"
+        class="video-section__poster media deferred-media__poster media--landscape{% if section.settings.enable_autoplay %} hidden{% endif %}"
         type="button"
         aria-label="{{ alt }}"
+        {% if section.settings.enable_autoplay %}style="display: none;"{% endif %}
       >
         {%- if poster != null -%}
           {{
@@ -73,13 +88,9 @@
         {%- else -%}
           {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
         {%- endif -%}
-        <span class="deferred-media__poster-button motion-reduce">
-          <span class="svg-wrapper">
-            {{- 'icon-play.svg' | inline_asset_content -}}
-          </span>
-        </span>
       </button>
-      <template>
+      {% if section.settings.enable_autoplay %}
+      <div class="video-section__media-content">
         {%- if section.settings.video == null and section.settings.video_url != null -%}
           {%- liquid
             assign loop = ''
@@ -87,9 +98,12 @@
               assign loop = '&loop=1&playlist=' | append: video_id
             endif
           -%}
+          {%- liquid
+            assign muted_param = '&mute=1'
+          -%}
           {%- if section.settings.video_url.type == 'youtube' -%}
             <iframe
-              src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
+              src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}{{ muted_param }}"
               class="js-youtube"
               allow="autoplay; encrypted-media"
               allowfullscreen
@@ -97,7 +111,7 @@
             ></iframe>
           {%- else -%}
             <iframe
-              src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
+              src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}{{ muted_param }}"
               class="js-vimeo"
               allow="autoplay; encrypted-media"
               allowfullscreen
@@ -112,7 +126,51 @@
               autoplay: true,
               loop: section.settings.enable_video_looping,
               controls: true,
-              muted: false
+              muted: true
+          }}
+        {%- endif -%}
+      </div>
+      {% endif %}
+      <template>
+        {%- if section.settings.video == null and section.settings.video_url != null -%}
+          {%- liquid
+            assign loop = ''
+            if section.settings.enable_video_looping
+              assign loop = '&loop=1&playlist=' | append: video_id
+            endif
+          -%}
+          {%- liquid
+            assign muted_param = ''
+            if section.settings.enable_autoplay
+              assign muted_param = '&mute=1'
+            endif
+          -%}
+          {%- if section.settings.video_url.type == 'youtube' -%}
+            <iframe
+              src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}{{ muted_param }}"
+              class="js-youtube"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              title="{{ section.settings.description | escape }}"
+            ></iframe>
+          {%- else -%}
+            <iframe
+              src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}{{ muted_param }}"
+              class="js-vimeo"
+              allow="autoplay; encrypted-media"
+              allowfullscreen
+              title="{{ section.settings.description | escape }}"
+            ></iframe>
+          {%- endif -%}
+        {%- else -%}
+          {{
+            section.settings.video
+            | video_tag:
+              image_size: '1100x',
+              autoplay: true,
+              loop: section.settings.enable_video_looping,
+              controls: true,
+              muted: section.settings.enable_autoplay
           }}
         {%- endif -%}
       </template>
@@ -168,6 +226,27 @@
       "id": "enable_video_looping",
       "label": "t:sections.video.settings.enable_video_looping.label",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable video autoplay",
+      "info": "Video will automatically start playing when the page loads. Note: Most browsers require videos to be muted for autoplay to work.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title_bar",
+      "label": "Show Win98 title bar",
+      "info": "Display an authentic Windows 98 style title bar above the video",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title_bar_text",
+      "label": "Title bar text",
+      "default": "Video Player",
+      "info": "Text to display in the Win98 title bar"
     },
     {
       "type": "header",
