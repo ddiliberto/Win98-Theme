@@ -38,10 +38,200 @@
   }
 
   /* Collection max width */
+  {% unless section.settings.edge_to_edge_with_padding %}
   .section-{{ section.id }}-padding .page-width,
   .section-{{ section.id }}-padding .page-width-desktop {
     max-width: {{ section.settings.collection_max_width }}px;
   }
+  {% endunless %}
+
+  {% if section.settings.edge_to_edge_with_padding %}
+  /* Edge-to-edge with padding layout */
+  .section-{{ section.id }}-padding .page-width,
+  .section-{{ section.id }}-padding .page-width-desktop {
+    max-width: none !important;
+    width: 100% !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding .page-width,
+    .section-{{ section.id }}-padding .page-width-desktop {
+      padding-left: 5rem !important;
+      padding-right: 5rem !important;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    .section-{{ section.id }}-padding .page-width,
+    .section-{{ section.id }}-padding .page-width-desktop {
+      padding-left: 6rem !important;
+      padding-right: 6rem !important;
+    }
+  }
+  {% endif %}
+
+  /* Product card spacing - remove default margins for precise grid control */
+  .section-{{ section.id }}-padding .product-card-wrapper {
+    margin: 0 !important;
+  }
+
+  /* Adjust grid gap for consistent spacing */
+  .section-{{ section.id }}-padding .grid {
+    gap: {{ section.settings.card_spacing }}px !important;
+  }
+
+  /* Ensure proper grid column sizing for higher column counts */
+  @media screen and (min-width: 990px) {
+    .section-{{ section.id }}-padding .grid--6-col-desktop .grid__item {
+      width: calc((100% - (5 * {{ section.settings.card_spacing }}px)) / 6) !important;
+      max-width: calc((100% - (5 * {{ section.settings.card_spacing }}px)) / 6) !important;
+    }
+    
+    .section-{{ section.id }}-padding .grid--5-col-desktop .grid__item {
+      width: calc((100% - (4 * {{ section.settings.card_spacing }}px)) / 5) !important;
+      max-width: calc((100% - (4 * {{ section.settings.card_spacing }}px)) / 5) !important;
+    }
+  }
+
+  /* Product card size controls */
+  {% case section.settings.card_size %}
+    {% when 'tiny' %}
+      .section-{{ section.id }}-padding .product-card-wrapper .window {
+        max-width: 160px !important;
+        font-size: 8px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar {
+        font-size: 7px !important;
+        min-height: 12px !important;
+        padding: 1px 1px 1px 2px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar-text {
+        font-size: 7px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar-controls button {
+        width: 10px !important;
+        height: 8px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .card__heading--body {
+        font-size: 8px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .price {
+        font-size: 8px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .card__information {
+        padding: 4px !important;
+      }
+    {% when 'extra_small' %}
+      .section-{{ section.id }}-padding .product-card-wrapper .window {
+        max-width: 180px !important;
+        font-size: 9px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar {
+        font-size: 8px !important;
+        min-height: 14px !important;
+        padding: 1px 1px 1px 2px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar-text {
+        font-size: 8px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar-controls button {
+        width: 12px !important;
+        height: 10px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .card__heading--body {
+        font-size: 9px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .price {
+        font-size: 9px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .card__information {
+        padding: 6px !important;
+      }
+    {% when 'small' %}
+      .section-{{ section.id }}-padding .product-card-wrapper .window {
+        max-width: 220px !important;
+        font-size: 10px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar {
+        font-size: 9px !important;
+        min-height: 16px !important;
+        padding: 1px 1px 1px 3px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar-text {
+        font-size: 9px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .card__heading--body {
+        font-size: 10px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .price {
+        font-size: 10px !important;
+      }
+    {% when 'large' %}
+      .section-{{ section.id }}-padding .product-card-wrapper .window {
+        max-width: 380px !important;
+        font-size: 12px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar {
+        font-size: 12px !important;
+        min-height: 20px !important;
+        padding: 3px 3px 3px 5px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar-text {
+        font-size: 12px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .card__heading--body {
+        font-size: 12px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .price {
+        font-size: 12px !important;
+      }
+    {% when 'extra_large' %}
+      .section-{{ section.id }}-padding .product-card-wrapper .window {
+        max-width: 450px !important;
+        font-size: 13px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar {
+        font-size: 13px !important;
+        min-height: 22px !important;
+        padding: 3px 3px 3px 6px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .title-bar-text {
+        font-size: 13px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .card__heading--body {
+        font-size: 13px !important;
+      }
+      .section-{{ section.id }}-padding .product-card-wrapper .price {
+        font-size: 13px !important;
+      }
+    {% else %}
+      /* Medium size - default styling */
+      .section-{{ section.id }}-padding .product-card-wrapper .window {
+        max-width: 320px !important;
+        font-size: 11px !important;
+      }
+  {% endcase %}
+
+  /* Toggle visibility of card elements */
+  {% unless section.settings.show_card_title_bar %}
+  .section-{{ section.id }}-padding .product-card-wrapper .title-bar {
+    display: none !important;
+  }
+  {% endunless %}
+
+  {% unless section.settings.show_card_title %}
+  .section-{{ section.id }}-padding .product-card-wrapper .card__heading--body {
+    display: none !important;
+  }
+  {% endunless %}
+
+  {% unless section.settings.show_card_price %}
+  .section-{{ section.id }}-padding .product-card-wrapper .price {
+    display: none !important;
+  }
+  {% endunless %}
 {%- endstyle -%}
 
 {%- liquid
@@ -133,7 +323,10 @@
                   show_rating: section.settings.show_rating,
                   skip_styles: skip_card_product_styles,
                   section_id: section.id,
-                  quick_add: section.settings.quick_add
+                  quick_add: section.settings.quick_add,
+                  show_card_title_bar: section.settings.show_card_title_bar,
+                  show_card_title: section.settings.show_card_title,
+                  show_card_price: section.settings.show_card_price
                 %}
               </li>
               {%- assign skip_card_product_styles = true -%}
@@ -163,7 +356,10 @@
                 media_aspect_ratio: section.settings.image_ratio,
                 image_shape: section.settings.image_shape,
                 lazy_load: false,
-                placeholder_image: placeholder_image
+                placeholder_image: placeholder_image,
+                show_card_title_bar: section.settings.show_card_title_bar,
+                show_card_title: section.settings.show_card_title,
+                show_card_price: section.settings.show_card_price
               %}
             </li>
           {%- endfor -%}
@@ -336,6 +532,71 @@
       "label": "Collection max width",
       "info": "Set a wider max width for this collection section to accommodate more columns"
     },
+    {
+      "type": "range",
+      "id": "card_spacing",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "default": 8,
+      "unit": "px",
+      "label": "Product card spacing",
+      "info": "Adjust the spacing between product cards"
+    },
+    {
+      "type": "select",
+      "id": "card_size",
+      "label": "Product card size",
+      "options": [
+        {
+          "value": "extra_small",
+          "label": "Extra Small"
+        },
+        {
+          "value": "tiny",
+          "label": "Tiny"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "extra_large",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "medium",
+      "info": "Control the overall size of product cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_card_title_bar",
+      "label": "Show Win98 title bar on cards",
+      "info": "Display the Windows 98 style title bar on product cards",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_card_title",
+      "label": "Show product title",
+      "info": "Display the product title in the card body",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_card_price",
+      "label": "Show product price",
+      "info": "Display the product price on cards",
+      "default": true
+    },
         {
       "type": "checkbox",
       "id": "enable_desktop_slider",
@@ -346,6 +607,13 @@
       "type": "checkbox",
       "id": "full_width",
       "label": "t:sections.featured-collection.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "edge_to_edge_with_padding",
+      "label": "Edge-to-edge with padding",
+      "info": "Extend collection to screen edges with padding, no max width constraint",
       "default": false
     },
     {
