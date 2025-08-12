@@ -157,10 +157,13 @@
 </div>
 
 {%- if section.settings.show_search -%}
+  <!-- Search Dialog Backdrop -->
+  <div class="search-dialog-backdrop" id="search-dialog-backdrop"></div>
+  
   <!-- Search Dialog -->
   <div class="search-dialog window" id="search-dialog" style="display: none;">
     <div class="title-bar">
-      <div class="title-bar-text">Search</div>
+      <div class="title-bar-text">Search for Products</div>
       <div class="title-bar-controls">
         <button aria-label="Close" id="close-search"></button>
       </div>

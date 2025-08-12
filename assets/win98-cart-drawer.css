@@ -1,0 +1,526 @@
+/**
+ * Win98 Cart Drawer Component
+ * Transforms Shopify cart drawer into authentic Win98 dialog window
+ */
+
+/* ===== CART DRAWER WINDOW CONTAINER ===== */
+.drawer {
+  position: fixed !important;
+  z-index: 1000 !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  transition: visibility var(--duration-default) ease !important;
+}
+
+.drawer.active {
+  visibility: visible !important;
+}
+
+/* ===== WIN98 DIALOG WINDOW ===== */
+.drawer__inner {
+  width: 480px !important;
+  max-width: calc(100vw - 40px) !important;
+  max-height: calc(100vh - 40px) !important;
+  height: auto !important;
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  transform: none !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0 !important;
+}
+
+.drawer__inner-empty {
+  width: 480px !important;
+  max-width: calc(100vw - 40px) !important;
+  max-height: calc(100vh - 40px) !important;
+  height: auto !important;
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0 !important;
+}
+
+/* ===== WIN98 TITLE BAR ===== */
+.drawer__header {
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%) !important;
+  color: white !important;
+  padding: 2px 4px 2px 6px !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  min-height: 20px !important;
+  border-bottom: 1px solid #000040 !important;
+  margin: 0 !important;
+}
+
+.drawer__heading {
+  color: white !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  margin: 0 !important;
+  flex: 1 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+/* ===== WIN98 CLOSE BUTTON ===== */
+.drawer__close {
+  width: 16px !important;
+  height: 16px !important;
+  background: #c0c0c0 !important;
+  border: 1px outset #c0c0c0 !important;
+  font-size: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.drawer__close:hover {
+  background: #dfdfdf !important;
+  border: 1px outset #c0c0c0 !important;
+}
+
+.drawer__close:active {
+  border: 1px inset #c0c0c0 !important;
+  background: #c0c0c0 !important;
+}
+
+.drawer__close::after {
+  content: "✕" !important;
+  position: absolute !important;
+  top: 0px !important;
+  left: 0 !important;
+  right: 0 !important;
+  text-align: center !important;
+  font-size: 10px !important;
+  line-height: 16px !important;
+  color: #000 !important;
+  font-weight: bold !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  display: block !important;
+}
+
+.drawer__close .svg-wrapper,
+.drawer__close svg {
+  display: none !important;
+}
+
+/* ===== WINDOW BODY ===== */
+.drawer__inner > cart-drawer-items,
+.drawer__inner-empty > .cart-drawer__warnings {
+  background: #c0c0c0 !important;
+  padding: 8px !important;
+  flex: 1 !important;
+  overflow-y: auto !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+/* ===== WIN98 LISTVIEW STYLING ===== */
+.drawer__contents {
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  margin-bottom: 8px !important;
+  max-height: 300px !important;
+  overflow-y: auto !important;
+}
+
+.cart-items {
+  width: 100% !important;
+  border: none !important;
+  background: white !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+.cart-items thead tr {
+  background: #c0c0c0 !important;
+  border-bottom: 1px solid #808080 !important;
+}
+
+.cart-items thead th {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  padding: 4px 6px !important;
+  text-align: left !important;
+  border-right: 1px solid #808080 !important;
+  background: #c0c0c0 !important;
+}
+
+.cart-items thead th:last-child {
+  border-right: none !important;
+}
+
+.cart-items tbody tr {
+  background: white !important;
+  border-bottom: 1px solid #dfdfdf !important;
+}
+
+.cart-items tbody tr:hover {
+  background: #000080 !important;
+  color: white !important;
+}
+
+.cart-items tbody td {
+  padding: 4px 6px !important;
+  border-right: 1px solid #dfdfdf !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  vertical-align: top !important;
+}
+
+.cart-items tbody td:last-child {
+  border-right: none !important;
+}
+
+.cart-items tbody tr:hover td {
+  color: white !important;
+}
+
+/* ===== PRODUCT IMAGES ===== */
+.cart-item__image {
+  width: 40px !important;
+  height: 40px !important;
+  border: 1px inset #c0c0c0 !important;
+  object-fit: cover !important;
+  background: white !important;
+}
+
+/* ===== PRODUCT DETAILS ===== */
+.cart-item__name {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: inherit !important;
+  text-decoration: none !important;
+  display: block !important;
+  margin: 0 0 2px 0 !important;
+}
+
+.cart-item__name:hover {
+  color: inherit !important;
+  text-decoration: underline !important;
+}
+
+.product-option {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: inherit !important;
+  margin: 2px 0 !important;
+}
+
+.price {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: inherit !important;
+}
+
+/* ===== QUANTITY CONTROLS ===== */
+.quantity {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+}
+
+.quantity__button {
+  width: 20px !important;
+  height: 20px !important;
+  background: #dfdfdf !important;
+  border: 1px outset #dfdfdf !important;
+  font-size: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+}
+
+.quantity__button:hover {
+  background: #ffffff !important;
+}
+
+.quantity__button:active {
+  border: 1px inset #dfdfdf !important;
+}
+
+.quantity__button .svg-wrapper {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.quantity__input {
+  width: 40px !important;
+  height: 20px !important;
+  border: 1px inset #c0c0c0 !important;
+  background: white !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  text-align: center !important;
+  padding: 2px !important;
+  color: #000 !important;
+}
+
+.cart-remove-button button {
+  background: #dfdfdf !important;
+  border: 1px outset #dfdfdf !important;
+  padding: 2px 4px !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  cursor: pointer !important;
+  margin-left: 4px !important;
+}
+
+.cart-remove-button button:hover {
+  background: #ffffff !important;
+}
+
+.cart-remove-button button:active {
+  border: 1px inset #dfdfdf !important;
+}
+
+/* ===== FOOTER SECTION ===== */
+.drawer__footer {
+  background: #c0c0c0 !important;
+  padding: 8px !important;
+  border-top: 1px solid #808080 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+/* ===== TOTALS SECTION ===== */
+.totals {
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  padding: 6px !important;
+  margin: 8px 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.totals__total {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  margin: 0 !important;
+}
+
+.totals__total-value {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: #000080 !important;
+  margin: 0 !important;
+}
+
+/* ===== CHECKOUT BUTTON ===== */
+.cart__checkout-button {
+  width: 100% !important;
+  background: #dfdfdf !important;
+  border: 2px outset #dfdfdf !important;
+  color: #000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  padding: 6px 12px !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  margin: 8px 0 0 0 !important;
+}
+
+.cart__checkout-button:hover {
+  background: #ffffff !important;
+}
+
+.cart__checkout-button:active {
+  border: 2px inset #dfdfdf !important;
+}
+
+.cart__checkout-button:disabled {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #808080 !important;
+  cursor: not-allowed !important;
+}
+
+/* ===== CART NOTE SECTION ===== */
+.cart__note .text-area {
+  width: 100% !important;
+  min-height: 60px !important;
+  border: 2px inset #c0c0c0 !important;
+  background: white !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  padding: 4px !important;
+  resize: vertical !important;
+}
+
+.summary__title {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  margin: 8px 0 4px 0 !important;
+}
+
+/* ===== EMPTY CART STATE ===== */
+.cart__empty-text {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  text-align: center !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.cart-drawer__empty-content {
+  text-align: center !important;
+  padding: 20px !important;
+}
+
+.cart-drawer__empty-content .button {
+  background: #dfdfdf !important;
+  border: 2px outset #dfdfdf !important;
+  color: #000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  padding: 6px 12px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  margin: 8px 0 !important;
+}
+
+.cart-drawer__empty-content .button:hover {
+  background: #ffffff !important;
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+.cart-drawer__empty-content .button:active {
+  border: 2px inset #dfdfdf !important;
+}
+
+/* ===== TAX NOTE ===== */
+.tax-note {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 10px !important;
+  color: #666 !important;
+  margin: 4px 0 0 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 749px) {
+  .drawer__inner,
+  .drawer__inner-empty {
+    width: calc(100vw - 20px) !important;
+    max-width: none !important;
+  }
+  
+  .cart-items {
+    font-size: 10px !important;
+  }
+  
+  .cart-items thead th,
+  .cart-items tbody td {
+    padding: 2px 4px !important;
+    font-size: 10px !important;
+  }
+  
+  .cart-item__image {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  .quantity__button {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  
+  .quantity__input {
+    width: 35px !important;
+    height: 18px !important;
+  }
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+.drawer__contents::-webkit-scrollbar {
+  width: 16px !important;
+  background: #c0c0c0 !important;
+}
+
+.drawer__contents::-webkit-scrollbar-thumb {
+  background: #dfdfdf !important;
+  border: 1px outset #dfdfdf !important;
+}
+
+.drawer__contents::-webkit-scrollbar-track {
+  background: #808080 !important;
+  border: 1px inset #c0c0c0 !important;
+}
+
+/* Firefox scrollbar */
+.drawer__contents {
+  scrollbar-width: thin !important;
+  scrollbar-color: #dfdfdf #c0c0c0 !important;
+}
+
+/* ===== FORCE OVERRIDES ===== */
+.drawer *,
+.drawer__inner *,
+.cart-drawer * {
+  font-family: "MS Sans Serif", sans-serif !important;
+  box-sizing: border-box !important;
+}
+
+/* Remove Dawn's default transforms and transitions for Win98 style */
+.drawer__inner {
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Ensure proper stacking order */
+.drawer {
+  z-index: 1000 !important;
+}
+
+.cart-drawer__overlay {
+  display: none !important;
+}

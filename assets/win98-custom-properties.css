@@ -50,6 +50,19 @@ body {
   color: var(--win98-text);
 }
 
+/* ===== ALL HEADINGS 11PX ===== */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: var(--win98-text, #222222) !important;
+  line-height: 1.2 !important;
+  margin: 0 0 8px 0 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
 /* Win98 Button Overrides */
 .btn,
 button,

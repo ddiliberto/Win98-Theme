@@ -34,6 +34,7 @@
     <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'win98-search-enhancements.js' | asset_url }}" defer="defer"></script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
@@ -260,10 +261,14 @@
     {{ 'win98-custom-properties.css' | asset_url | stylesheet_tag }}
     {{ 'win98-header.css' | asset_url | stylesheet_tag }}
     {{ 'win98-product-cards.css' | asset_url | stylesheet_tag }}
+    {{ 'win98-buttons.css' | asset_url | stylesheet_tag }}
+    {{ 'win98-title-bar-controls.css' | asset_url | stylesheet_tag }}
+    {{ 'win98-search-dialog.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+      {{ 'win98-cart-drawer.css' | asset_url | stylesheet_tag }}
       {{ 'component-cart.css' | asset_url | stylesheet_tag }}
       {{ 'component-totals.css' | asset_url | stylesheet_tag }}
       {{ 'component-price.css' | asset_url | stylesheet_tag }}

@@ -8,7 +8,7 @@
 /* Base title bar control styling */
 .title-bar-controls button {
   width: 16px !important;
-  height: 14px !important;
+  height: 16px !important;
   background: #c0c0c0 !important;
   border: 1px outset #c0c0c0 !important;
   font-size: 0 !important;
@@ -64,12 +64,12 @@
 .title-bar-controls .close-button::after {
   content: "✕";
   position: absolute;
-  top: -1px;
+  top: 0px;
   left: 0;
   right: 0;
   text-align: center;
   font-size: 10px;
-  line-height: 14px;
+  line-height: 16px;
   color: #000;
   font-weight: bold;
   font-family: "MS Sans Serif", sans-serif;
@@ -80,12 +80,12 @@
 .title-bar-controls button:only-child::after {
   content: "✕";
   position: absolute;
-  top: -1px;
+  top: 0px;
   left: 0;
   right: 0;
   text-align: center;
   font-size: 10px;
-  line-height: 14px;
+  line-height: 16px;
   color: #000;
   font-weight: bold;
   font-family: "MS Sans Serif", sans-serif;
@@ -129,7 +129,7 @@
 @media (max-width: 749px) {
   .title-bar-controls button {
     width: 18px !important;
-    height: 16px !important;
+    height: 18px !important;
   }
   
   .title-bar-controls button:nth-child(1)::after,
@@ -151,7 +151,7 @@
   .title-bar-controls button[aria-label*="Close"]::after,
   .title-bar-controls button:only-child::after {
     font-size: 11px;
-    line-height: 16px;
+    line-height: 18px;
     top: 0px;
   }
 }
