@@ -1,0 +1,350 @@
+{% comment %}
+  Win98 Taskbar Section
+  Renders an authentic Windows 98 taskbar at the bottom of the page
+{% endcomment %}
+
+{{ 'win98-taskbar.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'win98-taskbar.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign current_page_name = 'Desktop'
+  case request.page_type
+    when 'index'
+      assign current_page_name = 'Home'
+    when 'collection'
+      assign current_page_name = collection.title
+    when 'product'
+      assign current_page_name = product.title
+    when 'page'
+      assign current_page_name = page.title
+    when 'blog'
+      assign current_page_name = blog.title
+    when 'article'
+      assign current_page_name = article.title
+    when 'cart'
+      assign current_page_name = 'Shopping Cart'
+    when 'search'
+      assign current_page_name = 'Search'
+  endcase
+-%}
+
+<div class="win98-taskbar" id="win98-taskbar">
+  <!-- Start Button -->
+  <div class="taskbar-start">
+    <button class="start-button" id="start-button" type="button" aria-expanded="false" aria-haspopup="true">
+      <span class="start-icon">🏁</span>
+      <span class="start-text">Start</span>
+    </button>
+  </div>
+
+  <!-- Start Menu -->
+  <div class="start-menu" id="start-menu" role="menu" aria-hidden="true">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'menu_item' -%}
+          <div class="menu-item" role="menuitem">
+            <a href="{{ block.settings.link | default: '#' }}" class="menu-link">
+              {%- case block.settings.icon -%}
+                {%- when 'win98-folder-icon.png' -%}
+                  <span class="menu-icon">📁</span>
+                {%- when 'win98-applications-icon.png' -%}
+                  <span class="menu-icon">💻</span>
+                {%- when 'win98-document-icon.png' -%}
+                  <span class="menu-icon">📄</span>
+                {%- when 'win98-settings-icon.png' -%}
+                  <span class="menu-icon">⚙️</span>
+                {%- when 'win98-help-icon.png' -%}
+                  <span class="menu-icon">❓</span>
+                {%- when 'win98-search-icon.png' -%}
+                  <span class="menu-icon">🔍</span>
+                {%- when 'win98-user-icon.png' -%}
+                  <span class="menu-icon">👤</span>
+                {%- else -%}
+                  <span class="menu-icon">📁</span>
+              {%- endcase -%}
+              <span class="menu-text">{{ block.settings.title | default: 'Menu Item' }}</span>
+              {%- if block.settings.submenu_items != blank -%}
+                <span class="menu-arrow">▶</span>
+              {%- endif -%}
+            </a>
+            
+            {%- if block.settings.submenu_items != blank -%}
+              <div class="submenu" role="menu">
+                {%- assign submenu_items = block.settings.submenu_items | split: '||' -%}
+                {%- for submenu_item in submenu_items -%}
+                  {%- assign item_parts = submenu_item | split: '|' -%}
+                  {%- if item_parts.size >= 2 -%}
+                    <div class="menu-item" role="menuitem">
+                      <a href="{{ item_parts[1] }}" class="menu-link">
+                        <span class="menu-icon">📄</span>
+                        <span class="menu-text">{{ item_parts[0] }}</span>
+                      </a>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          </div>
+          
+        {%- when 'separator' -%}
+          <div class="menu-separator"></div>
+          
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+
+  <!-- Application Area -->
+  <div class="taskbar-apps">
+    {%- if section.settings.show_current_page -%}
+      <div class="taskbar-app active" title="{{ current_page_name }}">
+        <span class="app-icon">🪟</span>
+        <span class="app-text">{{ current_page_name | truncate: 20 }}</span>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <!-- System Tray -->
+  <div class="system-tray">
+    {%- if section.settings.show_search -%}
+      <button class="tray-item" id="search-button" type="button" title="Search">
+        <span class="tray-icon">🔍</span>
+      </button>
+    {%- endif -%}
+
+    {%- if section.settings.show_cart -%}
+      <a href="{{ routes.cart_url }}" class="tray-item" title="Shopping Cart">
+        <span class="tray-icon">🛒</span>
+        {%- if cart.item_count > 0 -%}
+          <span class="cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+    {%- endif -%}
+
+    {%- if section.settings.show_account -%}
+      <a href="{{ routes.account_url }}" class="tray-item" title="Account">
+        <span class="tray-icon">👤</span>
+      </a>
+    {%- endif -%}
+
+    {%- if section.settings.show_clock -%}
+      <div class="system-clock" id="system-clock">
+        <div class="clock-time">12:00</div>
+        <div class="clock-date">1/1</div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- if section.settings.show_search -%}
+  <!-- Search Dialog -->
+  <div class="search-dialog window" id="search-dialog" style="display: none;">
+    <div class="title-bar">
+      <div class="title-bar-text">Search</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" id="close-search"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <div class="field-row">
+          <label for="search-input">Search products:</label>
+          <input type="search" id="search-input" name="q" value="{{ search.terms | escape }}" placeholder="Enter search terms...">
+        </div>
+        <div class="field-row" style="justify-content: flex-end;">
+          <button type="submit" class="search-submit">Search</button>
+          <button type="button" id="cancel-search">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Win98 Taskbar",
+  "class": "win98-taskbar-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Taskbar Settings"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "top", 
+          "label": "Top"
+        }
+      ],
+      "default": "bottom"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_current_page",
+      "label": "Show current page as active application",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "System Tray"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show shopping cart",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_clock",
+      "label": "Show system clock",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "select",
+      "id": "mobile_behavior",
+      "label": "Mobile behavior",
+      "options": [
+        {
+          "value": "mini",
+          "label": "Mini taskbar"
+        },
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "drawer",
+          "label": "Drawer menu"
+        }
+      ],
+      "default": "mini"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_item",
+      "name": "Menu Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Menu Item"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "win98-folder-icon.png",
+              "label": "Folder"
+            },
+            {
+              "value": "win98-applications-icon.png", 
+              "label": "Applications"
+            },
+            {
+              "value": "win98-document-icon.png",
+              "label": "Document"  
+            },
+            {
+              "value": "win98-settings-icon.png",
+              "label": "Settings"
+            },
+            {
+              "value": "win98-help-icon.png",
+              "label": "Help"
+            },
+            {
+              "value": "win98-search-icon.png",
+              "label": "Search"
+            },
+            {
+              "value": "win98-user-icon.png",
+              "label": "User"
+            }
+          ],
+          "default": "win98-folder-icon.png"
+        },
+        {
+          "type": "textarea",
+          "id": "submenu_items",
+          "label": "Submenu Items",
+          "info": "Format: Title|URL||Title|URL (separate items with ||)",
+          "placeholder": "All Products|/collections/all||Sale Items|/collections/sale"
+        }
+      ]
+    },
+    {
+      "type": "separator",
+      "name": "Menu Separator"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Win98 Taskbar",
+      "blocks": [
+        {
+          "type": "menu_item",
+          "settings": {
+            "title": "Shop",
+            "link": "/collections/all",
+            "icon": "win98-folder-icon.png",
+            "submenu_items": "All Products|/collections/all||Featured|/collections/featured"
+          }
+        },
+        {
+          "type": "menu_item", 
+          "settings": {
+            "title": "Account",
+            "link": "/account",
+            "icon": "win98-user-icon.png",
+            "submenu_items": "Sign In|/account/login||My Orders|/account||Settings|/account/addresses"
+          }
+        },
+        {
+          "type": "separator"
+        },
+        {
+          "type": "menu_item",
+          "settings": {
+            "title": "Help",
+            "link": "/pages/help",
+            "icon": "win98-help-icon.png",
+            "submenu_items": "Contact Us|/pages/contact||FAQ|/pages/faq||Shipping|/pages/shipping"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,455 @@
+/**
+ * Win98 Taskbar Component
+ * Authentic Windows 98 taskbar with Start menu and system tray
+ */
+
+/* ===== MAIN TASKBAR ===== */
+.win98-taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: #c0c0c0;
+  border-top: 2px outset #c0c0c0;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.win98-taskbar-section[data-position="top"] .win98-taskbar {
+  bottom: auto;
+  top: 0;
+  border-top: none;
+  border-bottom: 2px outset #c0c0c0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== START BUTTON ===== */
+.taskbar-start {
+  flex-shrink: 0;
+}
+
+.start-button {
+  height: 22px;
+  min-width: 50px;
+  padding: 2px 6px 2px 4px;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 2px 4px 2px 2px;
+  box-sizing: border-box;
+}
+
+.start-button:hover {
+  background: #dfdfdf;
+}
+
+.start-button:active,
+.start-button[aria-expanded="true"] {
+  border: 2px inset #c0c0c0;
+}
+
+.start-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-text {
+  white-space: nowrap;
+}
+
+/* ===== START MENU ===== */
+.start-menu {
+  position: absolute;
+  bottom: 28px;
+  left: 2px;
+  width: 200px;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  box-shadow: 2px -2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  display: none;
+}
+
+.start-menu[aria-hidden="false"] {
+  display: block;
+}
+
+/* ===== MENU ITEMS ===== */
+.menu-item {
+  position: relative;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  color: #000;
+  text-decoration: none;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  border: 1px solid transparent;
+  gap: 8px;
+  min-height: 24px;
+  box-sizing: border-box;
+}
+
+.menu-link:hover {
+  background: #0000ff;
+  color: white;
+  border: 1px solid #000040;
+}
+
+.menu-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-arrow {
+  font-size: 8px;
+  color: #000;
+}
+
+.menu-link:hover .menu-arrow {
+  color: white;
+}
+
+/* ===== SUBMENU ===== */
+.submenu {
+  position: absolute;
+  left: 198px;
+  top: 0;
+  width: 180px;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  display: none;
+  z-index: 1002;
+}
+
+.menu-item:hover .submenu {
+  display: block;
+}
+
+/* ===== MENU SEPARATOR ===== */
+.menu-separator {
+  height: 1px;
+  background: #808080;
+  margin: 2px 8px;
+  border-bottom: 1px solid #ffffff;
+}
+
+/* ===== APPLICATION AREA ===== */
+.taskbar-apps {
+  flex: 1;
+  display: flex;
+  gap: 2px;
+  padding: 0 4px;
+  overflow: hidden;
+}
+
+.taskbar-app {
+  height: 22px;
+  min-width: 120px;
+  max-width: 160px;
+  padding: 2px 6px;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  color: #000;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.taskbar-app.active {
+  border: 2px inset #c0c0c0;
+  background: #dfdfdf;
+}
+
+.taskbar-app:not(.active):hover {
+  background: #dfdfdf;
+}
+
+.app-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-text {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== SYSTEM TRAY ===== */
+.system-tray {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 4px;
+  border-left: 2px inset #c0c0c0;
+  margin-left: 4px;
+  height: 24px;
+}
+
+.tray-item {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+  position: relative;
+}
+
+.tray-item:hover {
+  border: 1px outset #c0c0c0;
+  background: #dfdfdf;
+}
+
+.tray-item:active {
+  border: 1px inset #c0c0c0;
+}
+
+.tray-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== CART COUNT ===== */
+.cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ff0000;
+  color: white;
+  border: 1px outset #ff0000;
+  font-size: 9px;
+  font-weight: bold;
+  min-width: 12px;
+  height: 12px;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2px;
+}
+
+/* ===== SYSTEM CLOCK ===== */
+.system-clock {
+  background: #c0c0c0;
+  border: 2px inset #c0c0c0;
+  padding: 2px 6px;
+  margin-left: 2px;
+  text-align: center;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 10px;
+  color: #000;
+  min-width: 50px;
+  cursor: pointer;
+}
+
+.system-clock:hover {
+  background: #dfdfdf;
+}
+
+.clock-time {
+  font-weight: bold;
+  line-height: 1;
+}
+
+.clock-date {
+  line-height: 1;
+  font-size: 9px;
+}
+
+/* ===== SEARCH DIALOG ===== */
+.search-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  z-index: 1003;
+}
+
+.search-dialog .window-body {
+  padding: 12px;
+}
+
+.field-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.field-row label {
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.field-row input[type="search"] {
+  flex: 1;
+  border: 2px inset #c0c0c0;
+  padding: 2px 4px;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  background: white;
+}
+
+.search-submit,
+#cancel-search {
+  background: #dfdfdf;
+  border: 2px outset #dfdfdf;
+  padding: 4px 12px;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.search-submit:hover,
+#cancel-search:hover {
+  background: #ffffff;
+}
+
+.search-submit:active,
+#cancel-search:active {
+  border: 2px inset #dfdfdf;
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 749px) {
+  .win98-taskbar[data-mobile="hidden"] {
+    display: none;
+  }
+  
+  .win98-taskbar[data-mobile="mini"] {
+    height: 32px;
+  }
+  
+  .win98-taskbar[data-mobile="mini"] .start-text {
+    display: none;
+  }
+  
+  .win98-taskbar[data-mobile="mini"] .app-text {
+    display: none;
+  }
+  
+  .win98-taskbar[data-mobile="mini"] .start-menu {
+    width: 250px;
+    bottom: 32px;
+  }
+  
+  .win98-taskbar[data-mobile="mini"] .system-clock .clock-date {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .win98-taskbar[data-mobile="mini"] .taskbar-apps {
+    display: none;
+  }
+  
+  .win98-taskbar[data-mobile="mini"] .system-tray {
+    gap: 1px;
+    padding: 0 2px;
+  }
+  
+  .win98-taskbar[data-mobile="mini"] .system-clock {
+    min-width: 35px;
+    padding: 2px 4px;
+  }
+}
+
+/* ===== BODY PADDING FOR TASKBAR ===== */
+body {
+  padding-bottom: 30px;
+}
+
+.win98-taskbar-section[data-position="top"] ~ * body {
+  padding-bottom: 0;
+  padding-top: 30px;
+}
+
+/* ===== HOVER ANIMATIONS ===== */
+.menu-item {
+  transition: none;
+}
+
+.tray-item {
+  transition: none;
+}
+
+.taskbar-app {
+  transition: none;
+}
+
+/* ===== WIN98 WINDOW OVERRIDES FOR SEARCH ===== */
+.search-dialog .title-bar-controls button {
+  width: 16px;
+  height: 14px;
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  cursor: pointer;
+}
+
+.search-dialog .title-bar-controls button::after {
+  content: "×";
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
