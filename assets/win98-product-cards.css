@@ -237,32 +237,14 @@
   color: #000080 !important;
 }
 
-/* ===== WIN98 BUTTONS ===== */
+/* ===== WIN98 BUTTONS IN PRODUCT CARDS ===== */
 .product-card-wrapper .button,
 .product-card-wrapper .quick-add__submit {
-  background: #dfdfdf !important;
-  border: 2px outset #dfdfdf !important;
-  color: #000 !important;
-  font-family: "MS Sans Serif", sans-serif !important;
-  font-size: 11px !important;
-  padding: 4px 8px !important;
   margin: 4px 0 0 0 !important;
-  cursor: pointer !important;
   width: 100% !important;
   box-sizing: border-box !important;
   text-align: center !important;
-  text-decoration: none !important;
   display: block !important;
-}
-
-.product-card-wrapper .button:hover,
-.product-card-wrapper .quick-add__submit:hover {
-  background: #ffffff !important;
-}
-
-.product-card-wrapper .button:active,
-.product-card-wrapper .quick-add__submit:active {
-  border: 2px inset #dfdfdf !important;
 }
 
 /* ===== BADGES ===== */

@@ -1,0 +1,433 @@
+/**
+ * Win98 Button Component System
+ * Comprehensive button styling for authentic Windows 98 appearance
+ */
+
+/* ===== BASE BUTTON STYLES ===== */
+.button,
+button:not(.unstyled),
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #000000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: normal !important;
+  padding: 4px 12px !important;
+  min-height: 23px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  white-space: nowrap !important;
+  line-height: 1 !important;
+  text-transform: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+/* ===== BUTTON HOVER STATES ===== */
+.button:hover,
+button:not(.unstyled):hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="reset"]:hover {
+  background: #dfdfdf !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #000000 !important;
+}
+
+/* ===== BUTTON ACTIVE/PRESSED STATES ===== */
+.button:active,
+button:not(.unstyled):active,
+input[type="submit"]:active,
+input[type="button"]:active,
+input[type="reset"]:active,
+.button:focus,
+button:not(.unstyled):focus,
+input[type="submit"]:focus,
+input[type="button"]:focus,
+input[type="reset"]:focus {
+  background: #c0c0c0 !important;
+  border: 2px inset #c0c0c0 !important;
+  color: #000000 !important;
+  outline: none !important;
+}
+
+/* ===== BUTTON DISABLED STATES ===== */
+.button:disabled,
+button:disabled,
+input[type="submit"]:disabled,
+input[type="button"]:disabled,
+input[type="reset"]:disabled,
+.button[aria-disabled="true"],
+button[aria-disabled="true"] {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #808080 !important;
+  cursor: not-allowed !important;
+}
+
+.button:disabled:hover,
+button:disabled:hover,
+input:disabled:hover,
+.button[aria-disabled="true"]:hover,
+button[aria-disabled="true"]:hover {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #808080 !important;
+}
+
+/* ===== BUTTON SIZE VARIANTS ===== */
+.button--small {
+  padding: 2px 8px !important;
+  min-height: 19px !important;
+  font-size: 10px !important;
+}
+
+.button--full-width {
+  width: 100% !important;
+}
+
+/* ===== PRIMARY BUTTON STYLING ===== */
+.button--primary {
+  background: #000080 !important;
+  border: 2px outset #000080 !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+.button--primary:hover {
+  background: #0000a0 !important;
+  border: 2px outset #000080 !important;
+  color: #ffffff !important;
+}
+
+.button--primary:active,
+.button--primary:focus {
+  background: #000060 !important;
+  border: 2px inset #000080 !important;
+  color: #ffffff !important;
+}
+
+.button--primary:disabled,
+.button--primary[aria-disabled="true"] {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #808080 !important;
+}
+
+/* ===== SECONDARY BUTTON STYLING ===== */
+.button--secondary {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #000000 !important;
+}
+
+/* ===== TERTIARY/MINIMAL BUTTON STYLING ===== */
+.button--tertiary {
+  background: #c0c0c0 !important;
+  border: 1px solid #808080 !important;
+  color: #000000 !important;
+}
+
+.button--tertiary:hover {
+  background: #dfdfdf !important;
+  border: 1px solid #808080 !important;
+}
+
+.button--tertiary:active,
+.button--tertiary:focus {
+  background: #c0c0c0 !important;
+  border: 1px inset #808080 !important;
+}
+
+/* ===== SPECIFIC COMPONENT BUTTONS ===== */
+
+/* Product Form Buttons */
+.product-form__submit {
+  font-weight: bold !important;
+  min-width: 120px !important;
+}
+
+/* Quantity Control Buttons */
+.quantity__button {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #000000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  border-radius: 0 !important;
+}
+
+.quantity__button:hover {
+  background: #dfdfdf !important;
+  border: 2px outset #c0c0c0 !important;
+}
+
+.quantity__button:active,
+.quantity__button:focus {
+  background: #c0c0c0 !important;
+  border: 2px inset #c0c0c0 !important;
+  outline: none !important;
+}
+
+/* Search and Field Buttons */
+.field__button,
+.search__button {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #000000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 4px 8px !important;
+  border-radius: 0 !important;
+}
+
+.field__button:hover,
+.search__button:hover {
+  background: #dfdfdf !important;
+  border: 2px outset #c0c0c0 !important;
+}
+
+.field__button:active,
+.search__button:active,
+.field__button:focus,
+.search__button:focus {
+  background: #c0c0c0 !important;
+  border: 2px inset #c0c0c0 !important;
+  outline: none !important;
+}
+
+/* ===== PAGINATION BUTTONS ===== */
+.pagination__item {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #000000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  padding: 4px 8px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 28px !important;
+  height: 28px !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.pagination__item:hover {
+  background: #dfdfdf !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #000000 !important;
+  text-decoration: none !important;
+}
+
+.pagination__item:active,
+.pagination__item:focus {
+  background: #c0c0c0 !important;
+  border: 2px inset #c0c0c0 !important;
+  color: #000000 !important;
+  outline: none !important;
+}
+
+.pagination__item--current {
+  background: #000080 !important;
+  border: 2px inset #000080 !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+.pagination__item--current:hover {
+  background: #000080 !important;
+  border: 2px inset #000080 !important;
+  color: #ffffff !important;
+}
+
+/* ===== CLOSE BUTTONS AND MODAL CONTROLS ===== */
+.modal__close-button,
+.drawer__close,
+.menu-drawer__close-button {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #000000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  width: 24px !important;
+  height: 24px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  border-radius: 0 !important;
+  text-decoration: none !important;
+}
+
+.modal__close-button:hover,
+.drawer__close:hover,
+.menu-drawer__close-button:hover {
+  background: #dfdfdf !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #000000 !important;
+  text-decoration: none !important;
+}
+
+.modal__close-button:active,
+.drawer__close:active,
+.menu-drawer__close-button:active,
+.modal__close-button:focus,
+.drawer__close:focus,
+.menu-drawer__close-button:focus {
+  background: #c0c0c0 !important;
+  border: 2px inset #c0c0c0 !important;
+  color: #000000 !important;
+  outline: none !important;
+}
+
+/* ===== LINK BUTTONS ===== */
+.link--text {
+  color: #000080 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  text-decoration: underline !important;
+}
+
+.link--text:hover {
+  color: #0000a0 !important;
+  text-decoration: underline !important;
+}
+
+.link--text:active,
+.link--text:focus {
+  color: #000060 !important;
+  outline: 1px dotted #000000 !important;
+  outline-offset: 2px !important;
+}
+
+/* ===== CART DRAWER BUTTONS ===== */
+.cart-drawer .button {
+  margin: 8px 0 !important;
+}
+
+/* ===== NEWSLETTER SIGNUP BUTTONS ===== */
+.newsletter-form__submit,
+.footer .button[type="submit"] {
+  background: #008000 !important;
+  border: 2px outset #008000 !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+.newsletter-form__submit:hover,
+.footer .button[type="submit"]:hover {
+  background: #00a000 !important;
+  border: 2px outset #008000 !important;
+  color: #ffffff !important;
+}
+
+.newsletter-form__submit:active,
+.footer .button[type="submit"]:active,
+.newsletter-form__submit:focus,
+.footer .button[type="submit"]:focus {
+  background: #006000 !important;
+  border: 2px inset #008000 !important;
+  color: #ffffff !important;
+}
+
+/* ===== CONTACT FORM BUTTONS ===== */
+.contact-form .button[type="submit"] {
+  background: #800080 !important;
+  border: 2px outset #800080 !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+}
+
+.contact-form .button[type="submit"]:hover {
+  background: #a000a0 !important;
+  border: 2px outset #800080 !important;
+  color: #ffffff !important;
+}
+
+.contact-form .button[type="submit"]:active,
+.contact-form .button[type="submit"]:focus {
+  background: #600060 !important;
+  border: 2px inset #800080 !important;
+  color: #ffffff !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 749px) {
+  .button,
+  button:not(.unstyled),
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"] {
+    min-height: 32px !important;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+  }
+  
+  .button--small {
+    min-height: 28px !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+  }
+  
+  .quantity__button {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .pagination__item {
+    min-width: 32px !important;
+    height: 32px !important;
+  }
+}
+
+/* ===== BUTTON ICONS ===== */
+.button svg,
+button svg,
+.quantity__button svg,
+.field__button svg,
+.search__button svg {
+  width: 12px !important;
+  height: 12px !important;
+  fill: currentColor !important;
+}
+
+/* ===== BUTTON FOCUS OUTLINES ===== */
+.button:focus-visible,
+button:focus-visible,
+input[type="submit"]:focus-visible,
+input[type="button"]:focus-visible,
+input[type="reset"]:focus-visible {
+  outline: 1px dotted #000000 !important;
+  outline-offset: 2px !important;
+}
+
+/* ===== OVERRIDE ANY CONFLICTING STYLES ===== */
+.button *,
+button *,
+input[type="submit"] *,
+input[type="button"] *,
+input[type="reset"] * {
+  font-family: inherit !important;
+  color: inherit !important;
+}
