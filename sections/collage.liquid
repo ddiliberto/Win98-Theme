@@ -16,6 +16,150 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Media height controls - respects aspect ratio */
+  {% case section.settings.media_height %}
+    {% when 'small' %}
+      .section-{{ section.id }}-padding .collage__item .media {
+        height: 200px !important;
+        object-fit: cover !important;
+      }
+      .section-{{ section.id }}-padding .collage__item .media img,
+      .section-{{ section.id }}-padding .collage__item .media video {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+      }
+    {% when 'medium' %}
+      .section-{{ section.id }}-padding .collage__item .media {
+        height: 300px !important;
+        object-fit: cover !important;
+      }
+      .section-{{ section.id }}-padding .collage__item .media img,
+      .section-{{ section.id }}-padding .collage__item .media video {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+      }
+    {% when 'large' %}
+      .section-{{ section.id }}-padding .collage__item .media {
+        height: 400px !important;
+        object-fit: cover !important;
+      }
+      .section-{{ section.id }}-padding .collage__item .media img,
+      .section-{{ section.id }}-padding .collage__item .media video {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+      }
+    {% when 'extra_large' %}
+      .section-{{ section.id }}-padding .collage__item .media {
+        height: 500px !important;
+        object-fit: cover !important;
+      }
+      .section-{{ section.id }}-padding .collage__item .media img,
+      .section-{{ section.id }}-padding .collage__item .media video {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: cover !important;
+      }
+    {% when 'adapt' %}
+      /* Use natural aspect ratio - maintain original ratio */
+      .section-{{ section.id }}-padding .collage__item .media {
+        height: auto !important;
+      }
+      .section-{{ section.id }}-padding .collage__item .media img,
+      .section-{{ section.id }}-padding .collage__item .media video {
+        width: 100% !important;
+        height: auto !important;
+        object-fit: contain !important;
+      }
+  {% endcase %}
+
+  /* Spacing between items */
+  .section-{{ section.id }}-padding .collage {
+    gap: {{ section.settings.media_spacing }}px !important;
+  }
+
+  .section-{{ section.id }}-padding .collage__item {
+    margin: 0 !important;
+  }
+
+  /* Overall scale */
+  .section-{{ section.id }}-padding .collage {
+    transform: scale({{ section.settings.media_scale | divided_by: 100.0 }}) !important;
+    transform-origin: center top !important;
+  }
+
+  /* Adjust container for scaling */
+  {% unless section.settings.media_scale == 100 %}
+  .section-{{ section.id }}-padding .page-width {
+    overflow: hidden !important;
+  }
+  {% endunless %}
+
+  /* Win98.css button styling for media containers */
+  .section-{{ section.id }}-padding .collage .collage__item .media,
+  .section-{{ section.id }}-padding .collage .collage__item .collage-card .media,
+  .section-{{ section.id }}-padding .collage__item .media,
+  .section-{{ section.id }}-padding .collage__item .collage-card .media,
+  .section-{{ section.id }}-padding .media {
+    background: #c0c0c0 !important;
+    border: none !important;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff !important;
+    box-sizing: border-box !important;
+    padding: 2px !important;
+  }
+
+  /* Win98.css button styling for AI media buttons */
+  .section-{{ section.id }}-padding .ai-media-button-acwhfowrhbwjtsevlcaigenblockaafc7e4juf3qr,
+  .section-{{ section.id }}-padding a[class*="ai-media-button"] {
+    background: #c0c0c0 !important;
+    border: none !important;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff !important;
+    box-sizing: border-box !important;
+    padding: 8px 16px !important;
+    font-family: "MS Sans Serif", sans-serif !important;
+    font-size: 11px !important;
+    color: #000 !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    cursor: pointer !important;
+  }
+
+  /* Button hover state */
+  .section-{{ section.id }}-padding .ai-media-button-acwhfowrhbwjtsevlcaigenblockaafc7e4juf3qr:hover,
+  .section-{{ section.id }}-padding a[class*="ai-media-button"]:hover {
+    background: #dfdfdf !important;
+  }
+
+  /* Button active/pressed state */
+  .section-{{ section.id }}-padding .ai-media-button-acwhfowrhbwjtsevlcaigenblockaafc7e4juf3qr:active,
+  .section-{{ section.id }}-padding a[class*="ai-media-button"]:active {
+    box-shadow: inset -1px -1px #dfdfdf, inset 1px 1px #0a0a0a, inset -2px -2px #fff, inset 2px 2px grey !important;
+  }
+
+  /* Ensure images and videos respect the button styling */
+  .section-{{ section.id }}-padding .collage .collage__item .media img,
+  .section-{{ section.id }}-padding .collage .collage__item .media video,
+  .section-{{ section.id }}-padding .collage .collage__item .collage-card .media img,
+  .section-{{ section.id }}-padding .collage .collage__item .collage-card .media video {
+    border: none !important;
+    display: block !important;
+    width: calc(100% - 4px) !important;
+    height: calc(100% - 4px) !important;
+  }
+
+  /* Override for adapt mode to maintain aspect ratio */
+  {% if section.settings.media_height == 'adapt' %}
+  .section-{{ section.id }}-padding .collage .collage__item .media img,
+  .section-{{ section.id }}-padding .collage .collage__item .media video,
+  .section-{{ section.id }}-padding .collage .collage__item .collage-card .media img,
+  .section-{{ section.id }}-padding .collage .collage__item .collage-card .media video {
+    width: 100% !important;
+    height: auto !important;
+  }
+  {% endif %}
 {%- endstyle -%}
 
 <div class="color-{{ section.settings.color_scheme }} gradient isolate">
@@ -310,6 +454,61 @@
       "default": "product-card-wrapper",
       "info": "t:sections.collage.settings.card_styles.info",
       "label": "t:sections.collage.settings.card_styles.label"
+    },
+    {
+      "type": "header",
+      "content": "Layout Controls"
+    },
+    {
+      "type": "select",
+      "id": "media_height",
+      "label": "Image and video height",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to media"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "extra_large",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "medium",
+      "info": "Control the height of images and videos in the collage"
+    },
+    {
+      "type": "range",
+      "id": "media_spacing",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "unit": "px",
+      "label": "Spacing between items",
+      "info": "Adjust the gap between collage items"
+    },
+    {
+      "type": "range",
+      "id": "media_scale",
+      "min": 50,
+      "max": 150,
+      "step": 10,
+      "default": 100,
+      "unit": "%",
+      "label": "Overall scale",
+      "info": "Scale the entire collage section size"
     },
     {
       "type": "color_scheme",
