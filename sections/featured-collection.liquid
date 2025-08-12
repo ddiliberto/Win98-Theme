@@ -36,6 +36,12 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Collection max width */
+  .section-{{ section.id }}-padding .page-width,
+  .section-{{ section.id }}-padding .page-width-desktop {
+    max-width: {{ section.settings.collection_max_width }}px;
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -318,6 +324,17 @@
       "step": 1,
       "default": 4,
       "label": "t:sections.featured-collection.settings.columns_desktop.label"
+    },
+    {
+      "type": "range",
+      "id": "collection_max_width",
+      "min": 1200,
+      "max": 2000,
+      "step": 100,
+      "default": 1600,
+      "unit": "px",
+      "label": "Collection max width",
+      "info": "Set a wider max width for this collection section to accommodate more columns"
     },
         {
       "type": "checkbox",

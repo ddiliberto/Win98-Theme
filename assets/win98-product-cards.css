@@ -9,6 +9,11 @@
   display: block;
 }
 
+/* Remove height constraint from card wrapper */
+.card-wrapper {
+  height: auto !important;
+}
+
 /* ===== WINDOWS 98 WINDOW STYLING ===== */
 .product-card-wrapper .window {
   width: 100% !important;
@@ -17,7 +22,6 @@
   font-family: "MS Sans Serif", sans-serif !important;
   background: #c0c0c0 !important;
   border: 2px outset #c0c0c0 !important;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* ===== TITLE BAR PERFECTION ===== */
@@ -131,17 +135,43 @@
 
 /* ===== WINDOW BODY ===== */
 .product-card-wrapper .window-body {
-  padding: 8px !important;
+  padding: 0 !important;
   background: #c0c0c0 !important;
   font-family: "MS Sans Serif", sans-serif !important;
   font-size: 11px !important;
+}
+
+/* ===== PRODUCT TITLE IN BODY ===== */
+.product-card-wrapper .card__heading--body {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  margin: 0 0 8px 0 !important;
+  padding: 0 !important;
+  color: #000000 !important;
+  line-height: 1.2 !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+.product-card-wrapper .card__heading--body a {
+  color: #000000 !important;
+  text-decoration: none !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+}
+
+.product-card-wrapper .card__heading--body a:hover {
+  color: #000000 !important;
+  text-decoration: underline !important;
 }
 
 /* ===== PRODUCT IMAGE STYLING ===== */
 .product-card-wrapper .card__media {
   border: 2px inset #c0c0c0 !important;
   background: white !important;
-  padding: 2px !important;
+  padding: 0 !important;
   margin: 0 0 8px 0 !important;
   box-sizing: border-box !important;
   display: block !important;
@@ -210,11 +240,11 @@
 
 .product-card-wrapper .card__information {
   background: transparent !important;
-  padding: 0 !important;
+  padding: 8px !important;
 }
 
-/* Hide duplicate product titles since they're in the title bar */
-.product-card-wrapper .card__heading {
+/* Hide duplicate product titles since they're in the title bar (but not the body title) */
+.product-card-wrapper .card__heading:not(.card__heading--body) {
   display: none !important;
 }
 
@@ -232,8 +262,8 @@
   font-family: "MS Sans Serif", sans-serif !important;
   font-size: 11px !important;
   color: #000 !important;
-  font-weight: bold !important;
-  margin: 4px 0 8px 0 !important;
+  font-weight: normal !important;
+  margin: 4px 0 0 0 !important;
 }
 
 .product-card-wrapper .price__sale {
@@ -278,7 +308,7 @@
   }
   
   .product-card-wrapper .window-body {
-    padding: 6px !important;
+    padding: 0 !important;
   }
   
   .product-card-wrapper .title-bar {

@@ -14,6 +14,11 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Collection list max width */
+  .section-{{ section.id }}-padding .page-width {
+    max-width: {{ section.settings.collection_max_width }}px;
+  }
 {%- endstyle -%}
 
 {%- liquid
@@ -209,6 +214,17 @@
       "step": 1,
       "default": 3,
       "label": "t:sections.collection-list.settings.columns_desktop.label"
+    },
+    {
+      "type": "range",
+      "id": "collection_max_width",
+      "min": 1200,
+      "max": 2000,
+      "step": 100,
+      "default": 1600,
+      "unit": "px",
+      "label": "Collection list max width",
+      "info": "Set a wider max width for this collection list to accommodate more columns"
     },
     {
       "type": "color_scheme",

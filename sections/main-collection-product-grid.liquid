@@ -34,6 +34,11 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  /* Collection page custom max width */
+  .section-{{ section.id }}-padding .page-width {
+    max-width: {{ section.settings.collection_max_width }}px;
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
@@ -217,6 +222,17 @@
       "step": 1,
       "default": 4,
       "label": "t:sections.main-collection-product-grid.settings.columns_desktop.label"
+    },
+    {
+      "type": "range",
+      "id": "collection_max_width",
+      "min": 1200,
+      "max": 2000,
+      "step": 100,
+      "default": 1600,
+      "unit": "px",
+      "label": "Collection page max width",
+      "info": "Set a wider max width for collection pages to accommodate more columns"
     },
     {
       "type": "select",

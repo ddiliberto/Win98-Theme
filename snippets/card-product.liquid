@@ -210,6 +210,12 @@
               </p>
             {%- endif -%}
 
+            <h4 class="card__heading card__heading--body">
+              <a href="{{ card_product.url }}" class="full-unstyled-link">
+                {{ card_product.title | escape }}
+              </a>
+            </h4>
+
             {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
             {%- if card_product.quantity_price_breaks_configured? -%}
               {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
