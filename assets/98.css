@@ -100,6 +100,62 @@ body {
   color: var(--button-shadow);
 }
 
+/* Win98 Radio Button Labels (Variant Pills) */
+.product-form__input--pill input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.product-form__input--pill label.win98-button {
+  display: inline-block;
+  margin: 2px;
+  padding: 4px 8px;
+  min-width: auto;
+  min-height: auto;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: none;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 11px;
+  font-family: var(--font-family);
+}
+
+.product-form__input--pill input[type="radio"]:checked + label.win98-button {
+  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  background: var(--surface) !important;
+}
+
+.product-form__input--pill input[type="radio"]:disabled + label.win98-button,
+.product-form__input--pill label.win98-button.disabled {
+  color: var(--button-shadow);
+  cursor: not-allowed;
+  box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+}
+
+.product-form__input--pill input[type="radio"]:focus + label.win98-button {
+  outline: 1px dotted var(--text-color);
+  outline-offset: -4px;
+}
+
+/* Override existing variant pill background colors with higher specificity */
+.product-form__input--pill input[type="radio"] + label,
+.product-form__input--pill label {
+  background-color: transparent !important;
+  background: transparent !important;
+  font-size: 11px !important;
+}
+
+.product-form__input--pill input[type="radio"]:checked + label {
+  background-color: var(--surface) !important;
+  background: var(--surface) !important;
+}
+
 /* Win98 Window Styles */
 .win98-window {
   background: var(--surface);
@@ -145,6 +201,143 @@ body {
 
 .win98-textbox:focus {
   outline: none;
+}
+
+/* Win98 Dropdown/Select Styles */
+.win98-dropdown {
+  position: relative;
+  display: inline-block;
+  font: inherit;
+  font-size: var(--font-size);
+}
+
+.win98-dropdown select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: white;
+  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  border: none;
+  color: var(--text-color);
+  font: inherit;
+  font-size: var(--font-size);
+  padding: 3px 20px 3px 4px;
+  margin: 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: none;
+}
+
+.win98-dropdown select:focus {
+  outline: 1px dotted var(--text-color);
+  outline-offset: -3px;
+}
+
+.win98-dropdown:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 17px;
+  background: var(--surface);
+  box-shadow: var(--border-raised-outer);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.win98-dropdown:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 3px solid var(--text-color);
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Win98 Quantity Input Styling */
+.quantity {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+.quantity__button {
+  background: var(--surface);
+  box-shadow: var(--border-raised-outer), var(--border-raised-inner);
+  border: none;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: bold;
+  width: 21px;
+  height: 21px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.quantity__button:hover {
+  background: var(--button-face);
+}
+
+.quantity__button:active {
+  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+}
+
+.quantity__button:focus {
+  outline: 1px dotted var(--text-color);
+  outline-offset: -3px;
+}
+
+.quantity__input {
+  background-color: white;
+  box-shadow: var(--border-sunken-outer), var(--border-sunken-inner);
+  border: none;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  text-align: center;
+  width: 40px;
+  height: 17px;
+  margin: 0 1px;
+  padding: 1px 2px;
+  outline: none;
+}
+
+.quantity__input:focus {
+  outline: 1px dotted var(--text-color);
+  outline-offset: -2px;
+}
+
+/* Hide SVG icons in quantity buttons and use text */
+.quantity__button .svg-wrapper {
+  display: none;
+}
+
+.quantity__button[name="minus"]::after {
+  content: "−";
+  font-weight: bold;
+  line-height: 1;
+}
+
+.quantity__button[name="plus"]::after {
+  content: "+";
+  font-weight: bold;
+  line-height: 1;
 }
 
 /* Win98 Utility Classes */

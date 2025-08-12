@@ -1,0 +1,236 @@
+/**
+ * Win98 Product Info Window Styling
+ * Transforms the product info container into an authentic Windows 98 window
+ */
+
+/* ===== PRODUCT INFO WINDOW CONTAINER ===== */
+.product__info-container {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 16px 0 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  position: relative !important;
+}
+
+/* ===== PRODUCT INFO TITLE BAR ===== */
+.product__info-container::before {
+  content: "Product Information";
+  display: block;
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%) !important;
+  color: white !important;
+  padding: 2px 4px !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  border-bottom: 1px solid #000040 !important;
+  margin: 0 !important;
+  min-height: 16px !important;
+  line-height: 14px !important;
+}
+
+/* ===== PRODUCT INFO WINDOW BODY ===== */
+.product__info-container > * {
+  margin: 12px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* First child margin adjustment */
+.product__info-container > *:first-child {
+  margin-top: 16px !important;
+}
+
+/* Last child margin adjustment */
+.product__info-container > *:last-child {
+  margin-bottom: 16px !important;
+}
+
+/* ===== SPECIFIC COMPONENT STYLING ===== */
+
+/* Product Title in Window */
+.product__info-container .product__title {
+  background: #c0c0c0 !important;
+  color: #000000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  margin: 12px !important;
+  padding: 0 !important;
+}
+
+/* Product Description */
+.product__info-container .product__description {
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  padding: 8px !important;
+  margin: 12px !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: #000000 !important;
+}
+
+/* Price Area */
+.product__info-container .price {
+  background: #c0c0c0 !important;
+  padding: 8px !important;
+  margin: 0 !important;
+  border: 1px solid #808080 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+}
+
+/* Sale Price Regular Item (crossed out price) */
+.product__info-container .price--on-sale .price-item--regular {
+  font-size: 11px !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+}
+
+/* Product Form Container */
+.product__info-container .product-form {
+  background: #c0c0c0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* Variant Picker Styling */
+.product__info-container .product-form__input {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.product__info-container .product-form__input .form__label {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: #000000 !important;
+  margin: 0 0 4px 0 !important;
+  padding: 0 !important;
+}
+
+/* Quantity Input Alignment */
+.product__info-container .product-form__input--dropdown,
+.product__info-container .product-form__input--pill,
+.product__info-container .product-form__input--swatch,
+.product__info-container .product-form__quantity {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure buttons align flush */
+.product__info-container .product-form__buttons button {
+  margin: 4px 0 !important;
+}
+
+/* Form Buttons Container */
+.product__info-container .product-form__buttons {
+  margin: 0 !important;
+  background: #c0c0c0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media screen and (max-width: 749px) {
+  .product__info-container {
+    margin: 8px 0 !important;
+    border-width: 1px !important;
+  }
+  
+  .product__info-container::before {
+    padding: 1px 2px !important;
+    font-size: 10px !important;
+    min-height: 14px !important;
+    line-height: 12px !important;
+  }
+  
+  .product__info-container > * {
+    margin: 8px !important;
+  }
+  
+  .product__info-container > *:first-child {
+    margin-top: 12px !important;
+  }
+  
+  .product__info-container > *:last-child {
+    margin-bottom: 12px !important;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .product__info-container {
+    max-width: none !important;
+  }
+}
+
+/* ===== SALE BADGE STYLING ===== */
+.badge.price__badge-sale {
+  background: #000080 !important;
+  color: white !important;
+  border: 1px outset #000080 !important;
+  padding: 2px 4px !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 10px !important;
+  margin: 0 !important;
+  display: inline-block !important;
+  font-weight: normal !important;
+}
+
+/* Position badge relative to product info container */
+.product__info-container {
+  position: relative !important;
+}
+
+.product__info-container .badge.price__badge-sale {
+  position: absolute !important;
+  top: 6px !important;
+  right: 6px !important;
+  z-index: 3 !important;
+}
+
+/* ===== OVERRIDE EXISTING MARGINS ===== */
+.product__info-container .product-form,
+.product__info-container .product__description,
+.product__info-container .icon-with-text {
+  margin: 12px !important;
+}
+
+/* ===== VARIANT PILLS OVERRIDE ===== */
+.product__info-container .product-form__input--pill input[type="radio"] + label,
+.product__info-container .product-form__input--pill label {
+  background-color: transparent !important;
+  background: transparent !important;
+  font-size: 11px !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+}
+
+.product__info-container .product-form__input--pill input[type="radio"]:checked + label {
+  background-color: #c0c0c0 !important;
+  background: #c0c0c0 !important;
+}
+
+/* ===== TEXT STYLING CONSISTENCY ===== */
+.product__info-container * {
+  font-family: "MS Sans Serif", sans-serif !important;
+}
+
+.product__info-container h1,
+.product__info-container h2,
+.product__info-container h3,
+.product__info-container h4,
+.product__info-container h5,
+.product__info-container h6 {
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: #000000 !important;
+}
+
+.product__info-container p,
+.product__info-container span,
+.product__info-container div {
+  font-size: 11px !important;
+  color: #000000 !important;
+}

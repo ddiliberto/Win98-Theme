@@ -177,9 +177,51 @@ button[aria-disabled="true"]:hover {
 /* ===== SPECIFIC COMPONENT BUTTONS ===== */
 
 /* Product Form Buttons */
-.product-form__submit {
+.product-form__submit,
+button.product-form__submit,
+.button.product-form__submit {
   font-weight: bold !important;
   min-width: 120px !important;
+  min-height: 4.6rem !important; /* Match Shopify payment button height */
+  height: 4.6rem !important; /* Ensure exact height match */
+}
+
+/* Shopify Payment Buttons - Win98 Styling */
+.shopify-payment-button__button {
+  background: #c0c0c0 !important;
+  border-top: 2px solid #ffffff !important;
+  border-left: 2px solid #ffffff !important;
+  border-right: 2px solid #808080 !important;
+  border-bottom: 2px solid #808080 !important;
+  color: #000000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  min-height: 4.6rem !important;
+  height: 4.6rem !important; /* Ensure exact height match */
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-transform: none !important;
+}
+
+.shopify-payment-button__button:hover {
+  background: #dfdfdf !important;
+  border-top: 2px solid #ffffff !important;
+  border-left: 2px solid #ffffff !important;
+  border-right: 2px solid #808080 !important;
+  border-bottom: 2px solid #808080 !important;
+  color: #000000 !important;
+}
+
+.shopify-payment-button__button:active,
+.shopify-payment-button__button:focus {
+  background: #c0c0c0 !important;
+  border-top: 2px solid #808080 !important;
+  border-left: 2px solid #808080 !important;
+  border-right: 2px solid #ffffff !important;
+  border-bottom: 2px solid #ffffff !important;
+  color: #000000 !important;
+  outline: none !important;
 }
 
 /* Quantity Control Buttons */
