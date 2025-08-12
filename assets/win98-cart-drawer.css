@@ -140,7 +140,15 @@
 }
 
 /* ===== WINDOW BODY ===== */
-.drawer__inner > cart-drawer-items,
+.drawer__inner > cart-drawer-items {
+  background: #c0c0c0 !important;
+  padding: 8px !important;
+  flex: 0 0 auto !important;
+  overflow: visible !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
 .drawer__inner-empty > .cart-drawer__warnings {
   background: #c0c0c0 !important;
   padding: 8px !important;
@@ -156,7 +164,7 @@ cart-drawer-items {
   display: flex !important;
   flex-direction: column !important;
   min-height: 0 !important;
-  flex: 1 !important;
+  flex: 0 0 auto !important;
 }
 
 /* ===== WIN98 LISTVIEW STYLING ===== */
@@ -164,8 +172,10 @@ cart-drawer-items {
   background: white !important;
   border: 2px inset #c0c0c0 !important;
   margin-bottom: 8px !important;
+  height: 300px !important;
   max-height: 300px !important;
   overflow-y: auto !important;
+  flex-shrink: 0 !important;
 }
 
 .cart-items {
@@ -333,6 +343,9 @@ cart-drawer-items {
   border-top: 1px solid #808080 !important;
   font-family: "MS Sans Serif", sans-serif !important;
   font-size: 11px !important;
+  flex: 1 !important;
+  overflow-y: auto !important;
+  min-height: 0 !important;
 }
 
 /* ===== TOTALS SECTION ===== */
@@ -471,6 +484,11 @@ cart-drawer-items {
     width: calc(100vw - 20px) !important;
     max-width: 360px !important;
     height: 100vh !important;
+  }
+  
+  .drawer__contents {
+    height: 250px !important;
+    max-height: 250px !important;
   }
   
   .cart-items {
