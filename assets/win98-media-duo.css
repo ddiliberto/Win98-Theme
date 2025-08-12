@@ -1,0 +1,250 @@
+/**
+ * Win98 Media Duo Section
+ * 2-up media display using 98.css classes and styling
+ */
+
+/* ===== SECTION LAYOUT ===== */
+.media-duo-wrapper-title {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  margin: 0 0 24px 0 !important;
+  text-align: center !important;
+}
+
+.media-duo {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 20px !important;
+  width: 100% !important;
+}
+
+.media-duo--mobile-stack {
+  grid-template-columns: 1fr !important;
+}
+
+@media (max-width: 749px) {
+  .media-duo--mobile-stack {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .media-duo:not(.media-duo--mobile-stack) {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+}
+
+/* ===== MEDIA ITEM CONTAINER ===== */
+.media-duo__item {
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Use 98.css window styling - override any conflicting styles */
+.media-duo__item .window {
+  width: 100% !important;
+  margin: 0 !important;
+  font-size: 11px !important;
+}
+
+.media-duo__item .window-body {
+  padding: 0 !important;
+  font-size: 11px !important;
+}
+
+/* ===== MEDIA CONTAINER ===== */
+.media-duo__media {
+  position: relative !important;
+  background: #c0c0c0 !important;
+  border: none !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff !important;
+  box-sizing: border-box !important;
+  padding: 2px !important;
+  margin: 0 0 8px 0 !important;
+}
+
+.media-duo__media .media {
+  display: block !important;
+  position: relative !important;
+  background: white !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  /* Default height - will be overridden by individual block settings */
+  height: 300px !important;
+}
+
+.media-duo__media .media img,
+.media-duo__media .media video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  border: none !important;
+}
+
+/* Adapt mode - maintain aspect ratio */
+.media-duo__media .media--transparent {
+  background: white !important;
+}
+
+/* Placeholder styling */
+.media-duo__media .media--placeholder {
+  background: #f0f0f0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 200px !important;
+}
+
+.media-duo__media .placeholder-svg {
+  width: 100px !important;
+  height: 100px !important;
+  opacity: 0.5 !important;
+}
+
+/* ===== VIDEO PLAY BUTTON ===== */
+.media-duo__media .deferred-media__poster {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+.media-duo__media .deferred-media__poster-button {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  border-radius: 50% !important;
+  width: 60px !important;
+  height: 60px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 2 !important;
+}
+
+.media-duo__media .deferred-media__poster-button .svg-wrapper {
+  width: 24px !important;
+  height: 24px !important;
+  color: white !important;
+}
+
+.media-duo__media .deferred-media__poster:hover .deferred-media__poster-button {
+  background: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* ===== BLOCK LINK ===== */
+.media-duo__block-link {
+  display: block !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  cursor: pointer !important;
+}
+
+.media-duo__block-link:hover {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+/* ===== CONTENT SECTION ===== */
+.media-duo__content {
+  padding: 8px !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+.media-duo__content--center {
+  text-align: center !important;
+}
+
+/* ===== HEADING ===== */
+.media-duo__heading {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  margin: 0 0 8px 0 !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* ===== TEXT ===== */
+.media-duo__text {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  line-height: 1.3 !important;
+  margin: 0 0 12px 0 !important;
+  padding: 0 !important;
+}
+
+.media-duo__text p {
+  margin: 0 0 8px 0 !important;
+  font-family: inherit !important;
+  font-size: 11px !important;
+  color: inherit !important;
+}
+
+.media-duo__text p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* ===== BUTTONS - Use 98.css styling ===== */
+.media-duo__content button {
+  font-size: 11px !important;
+  margin: 0 !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 749px) {
+  .media-duo-wrapper-title {
+    font-size: 14px !important;
+    margin-bottom: 16px !important;
+  }
+  
+  .media-duo__content {
+    padding: 6px !important;
+  }
+  
+  .media-duo__heading {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .media-duo__text {
+    font-size: 11px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .media-duo__content button {
+    font-size: 11px !important;
+  }
+  
+  .media-duo__media .deferred-media__poster-button {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  
+  .media-duo__media .deferred-media__poster-button .svg-wrapper {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+
+/* ===== ANIMATION SUPPORT ===== */
+.media-duo__item.scroll-trigger {
+  opacity: 0 !important;
+  transform: translateY(50px) !important;
+  transition: opacity 0.5s ease, transform 0.5s ease !important;
+}
+
+.media-duo__item.scroll-trigger.animate--slide-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}

@@ -1,0 +1,102 @@
+/**
+ * Win98 Collage Content Styling
+ * Styles for text and button content below images and videos in collage sections
+ */
+
+/* ===== COLLAGE CONTENT CONTAINER ===== */
+.collage-content {
+  padding: 12px 8px 8px 8px !important;
+  background: #c0c0c0 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  border-top: 1px solid #808080 !important;
+}
+
+/* ===== COLLAGE HEADING ===== */
+.collage-content__heading {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  margin: 0 0 8px 0 !important;
+  padding: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* ===== COLLAGE TEXT ===== */
+.collage-content__text {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  line-height: 1.3 !important;
+  margin: 0 0 12px 0 !important;
+  padding: 0 !important;
+}
+
+.collage-content__text p {
+  margin: 0 0 8px 0 !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  color: inherit !important;
+}
+
+.collage-content__text p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* ===== COLLAGE BUTTON ===== */
+.collage-content__button {
+  background: #c0c0c0 !important;
+  border: none !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff !important;
+  box-sizing: border-box !important;
+  color: #000 !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: normal !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 4px 8px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  min-width: 75px !important;
+}
+
+.collage-content__button:hover {
+  background: #dfdfdf !important;
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+.collage-content__button:active {
+  box-shadow: inset -1px -1px #dfdfdf, inset 1px 1px #0a0a0a, inset -2px -2px #fff, inset 2px 2px grey !important;
+}
+
+.collage-content__button:focus {
+  outline: 1px dotted #000 !important;
+  outline-offset: -4px !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 749px) {
+  .collage-content {
+    padding: 8px 6px 6px 6px !important;
+  }
+  
+  .collage-content__heading {
+    font-size: 11px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .collage-content__text {
+    font-size: 10px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .collage-content__button {
+    font-size: 10px !important;
+    padding: 3px 6px !important;
+    min-width: 60px !important;
+  }
+}
