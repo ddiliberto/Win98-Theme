@@ -466,29 +466,11 @@ cart-drawer-items {
 
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 749px) {
-  .drawer {
-    justify-content: center !important;
-    align-items: center !important;
-  }
-  
   .drawer__inner,
   .drawer__inner-empty {
-    width: calc(100vw - 40px) !important;
-    max-width: 400px !important;
-    height: auto !important;
-    max-height: calc(100vh - 40px) !important;
-    border: 2px outset #c0c0c0 !important;
-    border-radius: 0 !important;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
-    transform: scale(0.8) !important;
-    opacity: 0 !important;
-    transition: transform var(--duration-default) ease, opacity var(--duration-default) ease !important;
-  }
-  
-  .drawer.active .drawer__inner,
-  .drawer.active .drawer__inner-empty {
-    transform: scale(1) !important;
-    opacity: 1 !important;
+    width: calc(100vw - 20px) !important;
+    max-width: 360px !important;
+    height: 100vh !important;
   }
   
   .cart-items {
