@@ -457,16 +457,17 @@
 }
 
 .search-dialog .title-bar-controls button::after {
-  content: "×";
+  content: "✕";
   position: absolute;
-  top: -2px;
+  top: -1px;
   left: 0;
   right: 0;
   text-align: center;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 14px;
   color: #000;
   font-weight: bold;
+  font-family: "MS Sans Serif", sans-serif;
 }
 
 .search-dialog .window-body {
