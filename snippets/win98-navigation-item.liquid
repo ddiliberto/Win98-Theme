@@ -1,0 +1,78 @@
+{% comment %}
+  Win98 Navigation Item Snippet
+  Recursively renders navigation menu items with Win98 styling
+  
+  Parameters:
+  - link: The navigation link object
+  - show_icons: Boolean to show/hide icons
+  - level: Current nesting level (for styling)
+{% endcomment %}
+
+{%- liquid
+  assign level = level | default: 0
+  assign show_icons = show_icons | default: true
+  
+  # Assign icons based on link type/name
+  assign link_icon = '📁'
+  assign link_name_lower = link.title | downcase
+  
+  if link_name_lower contains 'shop' or link_name_lower contains 'products' or link_name_lower contains 'catalog'
+    assign link_icon = '🛍️'
+  elsif link_name_lower contains 'collection' or link_name_lower contains 'category'
+    assign link_icon = '📂'
+  elsif link_name_lower contains 'sale' or link_name_lower contains 'discount'
+    assign link_icon = '🏷️'
+  elsif link_name_lower contains 'new' or link_name_lower contains 'latest'
+    assign link_icon = '✨'
+  elsif link_name_lower contains 'account' or link_name_lower contains 'profile' or link_name_lower contains 'login'
+    assign link_icon = '👤'
+  elsif link_name_lower contains 'help' or link_name_lower contains 'support' or link_name_lower contains 'faq'
+    assign link_icon = '❓'
+  elsif link_name_lower contains 'contact' or link_name_lower contains 'about'
+    assign link_icon = '📞'
+  elsif link_name_lower contains 'search'
+    assign link_icon = '🔍'
+  elsif link_name_lower contains 'cart' or link_name_lower contains 'checkout'
+    assign link_icon = '🛒'
+  elsif link_name_lower contains 'blog' or link_name_lower contains 'news'
+    assign link_icon = '📰'
+  elsif link_name_lower contains 'home'
+    assign link_icon = '🏠'
+  elsif link_name_lower contains 'settings' or link_name_lower contains 'preferences'
+    assign link_icon = '⚙️'
+  elsif link.type == 'collection_link'
+    assign link_icon = '📂'
+  elsif link.type == 'product_link'
+    assign link_icon = '📦'
+  elsif link.type == 'page_link'
+    assign link_icon = '📄'
+  elsif link.type == 'blog_link'
+    assign link_icon = '📰'
+  elsif link.type == 'policy_link'
+    assign link_icon = '📋'
+  endif
+-%}
+
+<div class="menu-item" role="menuitem" data-level="{{ level }}">
+  <a href="{{ link.url }}" class="menu-link" 
+     {%- if link.current %} aria-current="page"{% endif -%}>
+    {%- if show_icons -%}
+      <span class="menu-icon">{{ link_icon }}</span>
+    {%- endif -%}
+    <span class="menu-text">{{ link.title | escape }}</span>
+    {%- if link.links.size > 0 -%}
+      <span class="menu-arrow">▶</span>
+    {%- endif -%}
+  </a>
+  
+  {%- if link.links.size > 0 -%}
+    <div class="submenu" role="menu" data-level="{{ level | plus: 1 }}">
+      {%- for child_link in link.links -%}
+        {%- render 'win98-navigation-item', 
+            link: child_link, 
+            show_icons: show_icons, 
+            level: level | plus: 1 -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>

@@ -28,69 +28,90 @@
   endcase
 -%}
 
-<div class="win98-taskbar" id="win98-taskbar">
+<div class="win98-taskbar" id="win98-taskbar" style="--taskbar-height: {{ section.settings.taskbar_height | default: 28 }}px;">
   <!-- Start Button -->
   <div class="taskbar-start">
     <button class="start-button" id="start-button" type="button" aria-expanded="false" aria-haspopup="true">
-      <span class="start-icon">🏁</span>
-      <span class="start-text">Start</span>
+      {%- if section.settings.start_logo != blank -%}
+        <img src="{{ section.settings.start_logo | image_url: width: 16, height: 16 }}" alt="{{ section.settings.start_text | default: 'Start' }}" class="start-logo">
+      {%- else -%}
+        <span class="start-icon">🏁</span>
+      {%- endif -%}
+      <span class="start-text">{{ section.settings.start_text | default: 'Start' }}</span>
     </button>
   </div>
 
+  {%- if section.settings.show_quick_launch and section.blocks.size > 0 -%}
+    <!-- Quick Launch Separator -->
+    <div class="quick-launch-separator"></div>
+    
+    <!-- Quick Launch Bar -->
+    <div class="quick-launch-bar">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'quick_launch_item' -%}
+          <a 
+            href="{{ block.settings.link }}" 
+            class="quick-launch-item" 
+            title="{{ block.settings.title | escape }}"
+            {%- if block.settings.open_in_new_tab %} target="_blank" rel="noopener"{% endif -%}
+            {{ block.shopify_attributes }}
+          >
+            <span class="quick-launch-icon">{{ block.settings.icon }}</span>
+            {%- unless section.settings.quick_launch_icons_only -%}
+              <span class="quick-launch-text">{{ block.settings.title | escape }}</span>
+            {%- endunless -%}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
   <!-- Start Menu -->
   <div class="start-menu" id="start-menu" role="menu" aria-hidden="true">
-    {%- for block in section.blocks -%}
-      {%- case block.type -%}
-        {%- when 'menu_item' -%}
-          <div class="menu-item" role="menuitem">
-            <a href="{{ block.settings.link | default: '#' }}" class="menu-link">
-              {%- case block.settings.icon -%}
-                {%- when 'win98-folder-icon.png' -%}
-                  <span class="menu-icon">📁</span>
-                {%- when 'win98-applications-icon.png' -%}
-                  <span class="menu-icon">💻</span>
-                {%- when 'win98-document-icon.png' -%}
-                  <span class="menu-icon">📄</span>
-                {%- when 'win98-settings-icon.png' -%}
-                  <span class="menu-icon">⚙️</span>
-                {%- when 'win98-help-icon.png' -%}
-                  <span class="menu-icon">❓</span>
-                {%- when 'win98-search-icon.png' -%}
-                  <span class="menu-icon">🔍</span>
-                {%- when 'win98-user-icon.png' -%}
-                  <span class="menu-icon">👤</span>
-                {%- else -%}
-                  <span class="menu-icon">📁</span>
-              {%- endcase -%}
-              <span class="menu-text">{{ block.settings.title | default: 'Menu Item' }}</span>
-              {%- if block.settings.submenu_items != blank -%}
-                <span class="menu-arrow">▶</span>
-              {%- endif -%}
-            </a>
-            
-            {%- if block.settings.submenu_items != blank -%}
-              <div class="submenu" role="menu">
-                {%- assign submenu_items = block.settings.submenu_items | split: '||' -%}
-                {%- for submenu_item in submenu_items -%}
-                  {%- assign item_parts = submenu_item | split: '|' -%}
-                  {%- if item_parts.size >= 2 -%}
-                    <div class="menu-item" role="menuitem">
-                      <a href="{{ item_parts[1] }}" class="menu-link">
-                        <span class="menu-icon">📄</span>
-                        <span class="menu-text">{{ item_parts[0] }}</span>
-                      </a>
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
-              </div>
-            {%- endif -%}
-          </div>
-          
-        {%- when 'separator' -%}
-          <div class="menu-separator"></div>
-          
-      {%- endcase -%}
-    {%- endfor -%}
+    {%- if section.settings.main_menu != blank -%}
+      {%- for link in linklists[section.settings.main_menu].links -%}
+        {%- render 'win98-navigation-item', 
+            link: link, 
+            show_icons: section.settings.show_icons, 
+            level: 0 -%}
+      {%- endfor -%}
+    {%- else -%}
+      <!-- Fallback navigation if no menu selected -->
+      <div class="menu-item" role="menuitem">
+        <a href="/" class="menu-link">
+          <span class="menu-icon">🏠</span>
+          <span class="menu-text">Home</span>
+        </a>
+      </div>
+      <div class="menu-item" role="menuitem">
+        <a href="/collections/all" class="menu-link">
+          <span class="menu-icon">🛍️</span>
+          <span class="menu-text">Shop All</span>
+        </a>
+      </div>
+      <div class="menu-separator"></div>
+      <div class="menu-item" role="menuitem">
+        <a href="/account" class="menu-link">
+          <span class="menu-icon">👤</span>
+          <span class="menu-text">Account</span>
+        </a>
+      </div>
+      <div class="menu-item" role="menuitem">
+        <a href="/pages/contact" class="menu-link">
+          <span class="menu-icon">❓</span>
+          <span class="menu-text">Help</span>
+        </a>
+      </div>
+    {%- endif -%}
+    
+    <!-- Always show separator and search at bottom -->
+    <div class="menu-separator"></div>
+    <div class="menu-item" role="menuitem">
+      <button type="button" class="menu-link" onclick="document.getElementById('search-button')?.click()" role="button">
+        <span class="menu-icon">🔍</span>
+        <span class="menu-text">Search...</span>
+      </button>
+    </div>
   </div>
 
   <!-- Application Area -->
@@ -112,12 +133,12 @@
     {%- endif -%}
 
     {%- if section.settings.show_cart -%}
-      <a href="{{ routes.cart_url }}" class="tray-item" title="Shopping Cart">
+      <button class="tray-item" id="cart-button" type="button" title="Shopping Cart" onclick="document.querySelector('cart-drawer')?.open()">
         <span class="tray-icon">🛒</span>
         {%- if cart.item_count > 0 -%}
           <span class="cart-count">{{ cart.item_count }}</span>
         {%- endif -%}
-      </a>
+      </button>
     {%- endif -%}
 
     {%- if section.settings.show_account -%}
@@ -166,6 +187,59 @@
   "settings": [
     {
       "type": "header",
+      "content": "Start Button"
+    },
+    {
+      "type": "image_picker",
+      "id": "start_logo",
+      "label": "Start button logo",
+      "info": "Upload your logo for the Start button. If no logo is uploaded, a Windows flag icon will be shown."
+    },
+    {
+      "type": "text",
+      "id": "start_text",
+      "label": "Start button text",
+      "default": "Start",
+      "info": "Customize the text shown on the Start button"
+    },
+    {
+      "type": "header",
+      "content": "Start Menu Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Main navigation menu",
+      "default": "main-menu",
+      "info": "Select the navigation menu to display in the Start menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icons",
+      "label": "Show navigation icons",
+      "default": true,
+      "info": "Display icons next to navigation items"
+    },
+    {
+      "type": "header",
+      "content": "Quick Launch Bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_launch",
+      "label": "Show quick launch bar",
+      "default": true,
+      "info": "Display quick launch buttons next to the Start button"
+    },
+    {
+      "type": "checkbox",
+      "id": "quick_launch_icons_only",
+      "label": "Show icons only",
+      "default": false,
+      "info": "Hide text labels and show only icons in quick launch"
+    },
+    {
+      "type": "header",
       "content": "Taskbar Settings"
     },
     {
@@ -183,6 +257,17 @@
         }
       ],
       "default": "bottom"
+    },
+    {
+      "type": "range",
+      "id": "taskbar_height",
+      "label": "Taskbar height",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 28,
+      "info": "Adjust the height of the taskbar. Default is 28px for authentic Win98 size."
     },
     {
       "type": "checkbox",
@@ -245,19 +330,20 @@
   ],
   "blocks": [
     {
-      "type": "menu_item",
-      "name": "Menu Item",
+      "type": "quick_launch_item",
+      "name": "Quick Launch Item",
       "settings": [
         {
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Menu Item"
+          "default": "Quick Link",
+          "info": "Text shown on hover and as button label"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Link"
+          "label": "Link URL"
         },
         {
           "type": "select",
@@ -265,82 +351,109 @@
           "label": "Icon",
           "options": [
             {
-              "value": "win98-folder-icon.png",
-              "label": "Folder"
+              "value": "🛍️",
+              "label": "Shop"
             },
             {
-              "value": "win98-applications-icon.png", 
-              "label": "Applications"
+              "value": "📂",
+              "label": "Collections"
             },
             {
-              "value": "win98-document-icon.png",
-              "label": "Document"  
+              "value": "🏷️", 
+              "label": "Sale"
             },
             {
-              "value": "win98-settings-icon.png",
-              "label": "Settings"
+              "value": "✨",
+              "label": "New"
             },
             {
-              "value": "win98-help-icon.png",
+              "value": "👤",
+              "label": "Account"
+            },
+            {
+              "value": "❓",
               "label": "Help"
             },
             {
-              "value": "win98-search-icon.png",
+              "value": "📞",
+              "label": "Contact"
+            },
+            {
+              "value": "🔍",
               "label": "Search"
             },
             {
-              "value": "win98-user-icon.png",
-              "label": "User"
+              "value": "🛒",
+              "label": "Cart"
+            },
+            {
+              "value": "📰",
+              "label": "Blog"
+            },
+            {
+              "value": "🏠",
+              "label": "Home"
+            },
+            {
+              "value": "⚙️",
+              "label": "Settings"
+            },
+            {
+              "value": "📦",
+              "label": "Products"
+            },
+            {
+              "value": "📄",
+              "label": "Page"
             }
           ],
-          "default": "win98-folder-icon.png"
+          "default": "🛍️"
         },
         {
-          "type": "textarea",
-          "id": "submenu_items",
-          "label": "Submenu Items",
-          "info": "Format: Title|URL||Title|URL (separate items with ||)",
-          "placeholder": "All Products|/collections/all||Sale Items|/collections/sale"
+          "type": "checkbox",
+          "id": "open_in_new_tab",
+          "label": "Open in new tab",
+          "default": false
         }
       ]
-    },
-    {
-      "type": "separator",
-      "name": "Menu Separator"
     }
   ],
   "presets": [
     {
       "name": "Win98 Taskbar",
+      "settings": {
+        "main_menu": "main-menu",
+        "show_icons": true,
+        "show_quick_launch": true,
+        "show_current_page": true,
+        "show_search": true,
+        "show_cart": true,
+        "show_account": true,
+        "show_clock": true
+      },
       "blocks": [
         {
-          "type": "menu_item",
+          "type": "quick_launch_item",
           "settings": {
-            "title": "Shop",
+            "title": "Shop All",
             "link": "/collections/all",
-            "icon": "win98-folder-icon.png",
-            "submenu_items": "All Products|/collections/all||Featured|/collections/featured"
+            "icon": "🛍️"
           }
         },
         {
-          "type": "menu_item", 
+          "type": "quick_launch_item",
           "settings": {
             "title": "Account",
             "link": "/account",
-            "icon": "win98-user-icon.png",
-            "submenu_items": "Sign In|/account/login||My Orders|/account||Settings|/account/addresses"
+            "icon": "👤"
           }
         },
         {
-          "type": "separator"
-        },
-        {
-          "type": "menu_item",
+          "type": "quick_launch_item",
           "settings": {
             "title": "Help",
-            "link": "/pages/help",
-            "icon": "win98-help-icon.png",
-            "submenu_items": "Contact Us|/pages/contact||FAQ|/pages/faq||Shipping|/pages/shipping"
+            "link": "/pages/contact",
+            "icon": "❓"
           }
         }
       ]

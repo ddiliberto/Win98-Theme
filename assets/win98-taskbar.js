@@ -11,6 +11,7 @@ class Win98Taskbar {
     this.searchDialog = document.getElementById('search-dialog');
     this.closeSearchButton = document.getElementById('close-search');
     this.cancelSearchButton = document.getElementById('cancel-search');
+    this.cartButton = document.getElementById('cart-button');
     this.systemClock = document.getElementById('system-clock');
     
     this.init();
@@ -19,10 +20,12 @@ class Win98Taskbar {
   init() {
     this.setupStartMenu();
     this.setupSearchDialog();
+    this.setupCartButton();
     this.setupSystemClock();
     this.setupClickOutside();
     this.setupKeyboardNavigation();
     this.updateMobileAttribute();
+    this.updateBodyPadding();
   }
   
   setupStartMenu() {
@@ -86,6 +89,15 @@ class Win98Taskbar {
         this.closeSearchDialog();
       }
     });
+  }
+  
+  setupCartButton() {
+    if (this.cartButton) {
+      this.cartButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.openCartDrawer();
+      });
+    }
   }
   
   setupSystemClock() {
@@ -153,6 +165,24 @@ class Win98Taskbar {
     }
   }
   
+  updateBodyPadding() {
+    const taskbar = document.getElementById('win98-taskbar');
+    const section = taskbar?.closest('.win98-taskbar-section');
+    
+    if (taskbar) {
+      const taskbarHeight = taskbar.style.getPropertyValue('--taskbar-height') || '28px';
+      const position = section?.dataset.position || 'bottom';
+      
+      if (position === 'top') {
+        document.body.style.paddingTop = `calc(${taskbarHeight} + 2px)`;
+        document.body.style.paddingBottom = '';
+      } else {
+        document.body.style.paddingBottom = `calc(${taskbarHeight} + 2px)`;
+        document.body.style.paddingTop = '';
+      }
+    }
+  }
+  
   toggleStartMenu() {
     if (this.isStartMenuOpen()) {
       this.closeStartMenu();
@@ -216,6 +246,33 @@ class Win98Taskbar {
     if (searchInput) {
       searchInput.value = '';
     }
+  }
+  
+  openCartDrawer() {
+    // Try multiple methods to open cart drawer
+    const cartDrawer = document.querySelector('cart-drawer');
+    if (cartDrawer) {
+      // Method 1: Call open method if it exists
+      if (typeof cartDrawer.open === 'function') {
+        cartDrawer.open();
+        return;
+      }
+      
+      // Method 2: Dispatch custom event
+      cartDrawer.dispatchEvent(new CustomEvent('cart:open'));
+      
+      // Method 3: Click cart icon if it exists
+      const cartIcon = document.querySelector('[data-cart-drawer]') || 
+                       document.querySelector('.cart-icon-bubble') ||
+                       document.querySelector('[href="/cart"]');
+      if (cartIcon) {
+        cartIcon.click();
+        return;
+      }
+    }
+    
+    // Fallback: Navigate to cart page
+    window.location.href = '/cart';
   }
   
   updateClock() {
