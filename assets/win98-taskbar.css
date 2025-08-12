@@ -312,7 +312,7 @@
   gap: 2px;
   padding: 0 4px;
   border-left: 2px inset #c0c0c0;
-  margin-left: 4px;
+  margin-left: auto;
   height: calc(var(--taskbar-height, 28px) - 4px);
 }
 
@@ -542,7 +542,7 @@
   }
   
   .win98-taskbar[data-mobile="mini"] {
-    height: 32px;
+    height: var(--mobile-taskbar-height, 32px);
   }
   
   .win98-taskbar[data-mobile="mini"] .start-text {

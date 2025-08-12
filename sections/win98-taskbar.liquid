@@ -28,7 +28,7 @@
   endcase
 -%}
 
-<div class="win98-taskbar" id="win98-taskbar" style="--taskbar-height: {{ section.settings.taskbar_height | default: 28 }}px;">
+<div class="win98-taskbar" id="win98-taskbar" style="--taskbar-height: {{ section.settings.taskbar_height | default: 28 }}px; --mobile-taskbar-height: {{ section.settings.mobile_taskbar_height | default: 32 }}px;">
   <!-- Start Button -->
   <div class="taskbar-start">
     <button class="start-button" id="start-button" type="button" aria-expanded="false" aria-haspopup="true">
@@ -271,6 +271,17 @@
       "unit": "px",
       "default": 28,
       "info": "Adjust the height of the taskbar. Default is 28px for authentic Win98 size."
+    },
+    {
+      "type": "range",
+      "id": "mobile_taskbar_height",
+      "label": "Mobile taskbar height",
+      "min": 24,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32,
+      "info": "Adjust the height of the taskbar on mobile devices."
     },
     {
       "type": "checkbox",
