@@ -343,9 +343,7 @@ cart-drawer-items {
   border-top: 1px solid #808080 !important;
   font-family: "MS Sans Serif", sans-serif !important;
   font-size: 11px !important;
-  flex: 1 !important;
-  overflow-y: auto !important;
-  min-height: 0 !important;
+  flex: 0 0 auto !important;
 }
 
 /* ===== TOTALS SECTION ===== */
