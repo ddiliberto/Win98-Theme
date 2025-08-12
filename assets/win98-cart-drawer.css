@@ -12,8 +12,8 @@
   width: 100vw !important;
   height: 100vh !important;
   display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
+  justify-content: flex-end !important;
+  align-items: stretch !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
   transition: visibility var(--duration-default) ease !important;
 }
@@ -25,15 +25,16 @@
 /* ===== WIN98 DIALOG WINDOW ===== */
 .drawer__inner {
   width: 480px !important;
-  max-width: calc(100vw - 40px) !important;
-  max-height: calc(100vh - 40px) !important;
-  height: auto !important;
+  max-width: calc(100vw - 20px) !important;
+  height: 100vh !important;
   background: #c0c0c0 !important;
   border: 2px outset #c0c0c0 !important;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
+  border-right: none !important;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3) !important;
   font-family: "MS Sans Serif", sans-serif !important;
   font-size: 11px !important;
-  transform: none !important;
+  transform: translateX(100%) !important;
+  transition: transform var(--duration-default) ease !important;
   overflow: hidden !important;
   display: flex !important;
   flex-direction: column !important;
@@ -42,18 +43,26 @@
 
 .drawer__inner-empty {
   width: 480px !important;
-  max-width: calc(100vw - 40px) !important;
-  max-height: calc(100vh - 40px) !important;
-  height: auto !important;
+  max-width: calc(100vw - 20px) !important;
+  height: 100vh !important;
   background: #c0c0c0 !important;
   border: 2px outset #c0c0c0 !important;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
+  border-right: none !important;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.3) !important;
   font-family: "MS Sans Serif", sans-serif !important;
   font-size: 11px !important;
+  transform: translateX(100%) !important;
+  transition: transform var(--duration-default) ease !important;
   overflow: hidden !important;
   display: flex !important;
   flex-direction: column !important;
   padding: 0 !important;
+}
+
+/* ===== ACTIVE STATE - SLIDE IN ===== */
+.drawer.active .drawer__inner,
+.drawer.active .drawer__inner-empty {
+  transform: translateX(0) !important;
 }
 
 /* ===== WIN98 TITLE BAR ===== */
@@ -139,6 +148,15 @@
   overflow-y: auto !important;
   font-family: "MS Sans Serif", sans-serif !important;
   font-size: 11px !important;
+  min-height: 0 !important;
+}
+
+/* Ensure cart drawer items container can scroll */
+cart-drawer-items {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 0 !important;
+  flex: 1 !important;
 }
 
 /* ===== WIN98 LISTVIEW STYLING ===== */
@@ -448,10 +466,29 @@
 
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 749px) {
+  .drawer {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
   .drawer__inner,
   .drawer__inner-empty {
-    width: calc(100vw - 20px) !important;
-    max-width: none !important;
+    width: calc(100vw - 40px) !important;
+    max-width: 400px !important;
+    height: auto !important;
+    max-height: calc(100vh - 40px) !important;
+    border: 2px outset #c0c0c0 !important;
+    border-radius: 0 !important;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
+    transform: scale(0.8) !important;
+    opacity: 0 !important;
+    transition: transform var(--duration-default) ease, opacity var(--duration-default) ease !important;
+  }
+  
+  .drawer.active .drawer__inner,
+  .drawer.active .drawer__inner-empty {
+    transform: scale(1) !important;
+    opacity: 1 !important;
   }
   
   .cart-items {
@@ -510,10 +547,10 @@
   box-sizing: border-box !important;
 }
 
-/* Remove Dawn's default transforms and transitions for Win98 style */
-.drawer__inner {
-  transform: none !important;
-  transition: none !important;
+/* Ensure slide animations work properly */
+.drawer__inner,
+.drawer__inner-empty {
+  /* Transform and transition are handled above in main styles */
 }
 
 /* Ensure proper stacking order */
