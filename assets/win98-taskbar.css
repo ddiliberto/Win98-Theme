@@ -89,7 +89,7 @@
   width: 200px;
   background: #c0c0c0;
   border: 2px outset #c0c0c0;
-  box-shadow: 2px -2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: none;
   z-index: 1001;
   display: none;
 }
