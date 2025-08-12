@@ -1,0 +1,462 @@
+/**
+ * Win98 File Search Dialog Component
+ * Transforms search modal into authentic Windows 98 "Search for Files or Folders" dialog
+ */
+
+/* ===== SEARCH MODAL OVERLAY ===== */
+.search-modal.modal__content {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 1000 !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+}
+
+/* Remove gradient background */
+.search-modal.modal__content.gradient {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+.modal-overlay {
+  display: none !important;
+}
+
+/* ===== WIN98 SEARCH DIALOG WINDOW ===== */
+.search-modal__content {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5) !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  max-height: 80vh !important;
+  min-height: 400px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  position: relative !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+}
+
+/* ===== WIN98 TITLE BAR ===== */
+.search-modal__content::before {
+  content: "Search for Products";
+  display: block;
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  color: white;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-bottom: 1px solid #000040;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== CLOSE BUTTON IN TITLE BAR ===== */
+.search-modal__close-button {
+  position: absolute !important;
+  top: 2px !important;
+  right: 2px !important;
+  width: 16px !important;
+  height: 14px !important;
+  background: #c0c0c0 !important;
+  border: 1px outset #c0c0c0 !important;
+  color: #000 !important;
+  font-size: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  z-index: 2 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+.search-modal__close-button:hover {
+  background: #dfdfdf !important;
+  border: 1px outset #c0c0c0 !important;
+}
+
+.search-modal__close-button:active {
+  border: 1px inset #c0c0c0 !important;
+  background: #c0c0c0 !important;
+}
+
+.search-modal__close-button::after {
+  content: "×";
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+  line-height: 1;
+}
+
+.search-modal__close-button .svg-wrapper {
+  display: none !important;
+}
+
+/* ===== DIALOG BODY ===== */
+.search-modal__form {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: #c0c0c0 !important;
+  padding: 12px !important;
+  overflow: hidden !important;
+}
+
+/* ===== WIN98 SEARCH FORM LAYOUT ===== */
+.search-modal__form .search {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  height: 100% !important;
+}
+
+/* ===== SEARCH CRITERIA SECTION ===== */
+.search-modal__form .field {
+  background: #c0c0c0 !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
+/* Create Win98 form layout */
+.search-modal__form .field::before {
+  content: "Search for:";
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+/* ===== SEARCH INPUT STYLING ===== */
+.search__input.field__input {
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  color: #000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  padding: 2px 4px !important;
+  height: 20px !important;
+  line-height: 16px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  margin: 0 !important;
+}
+
+.search__input.field__input:focus {
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  outline: none !important;
+}
+
+.search__input.field__input::placeholder {
+  color: #808080 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+/* ===== HIDE ORIGINAL LABEL ===== */
+.field__label {
+  display: none !important;
+}
+
+/* ===== BUTTON CONTAINER ===== */
+.search-modal__form .field {
+  position: relative !important;
+}
+
+/* Create button row */
+.search-modal__form .field::after {
+  content: "";
+  display: block;
+  height: 32px;
+  margin-top: 12px;
+}
+
+/* ===== SEARCH BUTTONS ===== */
+.search__button,
+.reset__button {
+  position: absolute !important;
+  bottom: -44px !important;
+  height: 23px !important;
+  padding: 4px 12px !important;
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  color: #000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+.search__button {
+  right: 0 !important;
+  min-width: 80px !important;
+}
+
+.reset__button {
+  right: 90px !important;
+  min-width: 70px !important;
+}
+
+.search__button:hover,
+.reset__button:hover {
+  background: #dfdfdf !important;
+  border: 2px outset #c0c0c0 !important;
+}
+
+.search__button:active,
+.reset__button:active {
+  background: #c0c0c0 !important;
+  border: 2px inset #c0c0c0 !important;
+}
+
+/* Button text */
+.search__button::after {
+  content: "Search Now";
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  color: #000;
+}
+
+.reset__button::after {
+  content: "Clear";
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  color: #000;
+}
+
+.search__button .svg-wrapper,
+.reset__button .svg-wrapper {
+  display: none !important;
+}
+
+/* ===== PREDICTIVE SEARCH RESULTS ===== */
+.predictive-search {
+  flex: 1 !important;
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  margin-top: 60px !important;
+  overflow: auto !important;
+  min-height: 200px !important;
+  max-height: 300px !important;
+  position: relative !important;
+}
+
+/* Add results header */
+.predictive-search::before {
+  content: "Search Results";
+  display: block;
+  background: #c0c0c0;
+  color: #000;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-bottom: 1px solid #808080;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* ===== PREDICTIVE SEARCH LOADING STATE ===== */
+.predictive-search__loading-state {
+  display: block !important;
+  text-align: center !important;
+  padding: 20px !important;
+  color: #000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+}
+
+/* ===== SEARCH RESULTS LIST STYLING ===== */
+.predictive-search .predictive-search__results-groups-wrapper {
+  background: white !important;
+  padding: 8px !important;
+}
+
+.predictive-search .predictive-search__results-group {
+  margin-bottom: 12px !important;
+}
+
+.predictive-search .predictive-search__results-group:last-child {
+  margin-bottom: 0 !important;
+}
+
+.predictive-search .predictive-search__results-group-title {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 10px !important;
+  font-weight: bold !important;
+  color: #000080 !important;
+  text-transform: uppercase !important;
+  margin-bottom: 4px !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+
+.predictive-search .predictive-search__result-group {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.predictive-search .predictive-search__result {
+  display: flex !important;
+  align-items: center !important;
+  padding: 2px 4px !important;
+  margin: 1px 0 !important;
+  background: white !important;
+  border: 1px solid transparent !important;
+  color: #000 !important;
+  text-decoration: none !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  cursor: pointer !important;
+  gap: 8px !important;
+}
+
+.predictive-search .predictive-search__result:hover {
+  background: #0000ff !important;
+  color: white !important;
+  border: 1px solid #000040 !important;
+}
+
+/* Result icons */
+.predictive-search .predictive-search__result::before {
+  content: "📄";
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+/* Different icons for different result types */
+.predictive-search .predictive-search__result[href*="/products/"]::before {
+  content: "🛍️";
+}
+
+.predictive-search .predictive-search__result[href*="/collections/"]::before {
+  content: "📂";
+}
+
+.predictive-search .predictive-search__result[href*="/pages/"]::before {
+  content: "📄";
+}
+
+.predictive-search .predictive-search__result[href*="/blogs/"]::before {
+  content: "📰";
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 749px) {
+  .search-modal__content {
+    width: 95vw !important;
+    max-width: none !important;
+    max-height: 90vh !important;
+    min-height: 350px !important;
+  }
+
+  .search__button,
+  .reset__button {
+    height: 28px !important;
+    font-size: 12px !important;
+  }
+
+  .search__button {
+    min-width: 90px !important;
+  }
+
+  .reset__button {
+    right: 100px !important;
+    min-width: 80px !important;
+  }
+
+  .predictive-search {
+    max-height: 250px !important;
+  }
+}
+
+/* ===== STATUS BAR ===== */
+.predictive-search-status {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  background: #c0c0c0 !important;
+  border-top: 1px solid #808080 !important;
+  padding: 2px 8px !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 10px !important;
+  color: #000 !important;
+  height: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  visibility: visible !important;
+  position: relative !important;
+}
+
+.predictive-search-status::before {
+  content: "Ready";
+  color: #000;
+}
+
+/* ===== HIDE MODERN ELEMENTS ===== */
+.search-modal .field__button svg,
+.search-modal .modal__close-button svg {
+  display: none !important;
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+.predictive-search::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.predictive-search::-webkit-scrollbar-track {
+  background: #c0c0c0;
+  border: 2px inset #c0c0c0;
+}
+
+.predictive-search::-webkit-scrollbar-thumb {
+  background: #dfdfdf;
+  border: 2px outset #dfdfdf;
+}
+
+.predictive-search::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+
+.predictive-search::-webkit-scrollbar-corner {
+  background: #c0c0c0;
+}

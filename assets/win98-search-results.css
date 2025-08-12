@@ -1,0 +1,287 @@
+/**
+ * Win98 Search Results Page Styling
+ * Styles the main search results page to match Win98 file browser aesthetic
+ */
+
+/* ===== MAIN SEARCH LAYOUT ===== */
+.template-search {
+  padding: 20px !important;
+  background: #c0c0c0 !important;
+  min-height: calc(100vh - 100px) !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+}
+
+/* ===== SEARCH HEADER ===== */
+.template-search__header {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  padding: 12px !important;
+  margin-bottom: 16px !important;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.template-search__header h1 {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  margin: 0 0 8px 0 !important;
+  text-transform: none !important;
+}
+
+.template-search__header p {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  margin: 0 !important;
+}
+
+/* ===== SEARCH FORM IN RESULTS PAGE ===== */
+.template-search__search {
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  padding: 12px !important;
+  margin: 0 auto 20px auto !important;
+  max-width: 600px !important;
+}
+
+.template-search__search .search {
+  margin: 0 !important;
+  display: flex !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
+
+.template-search__search .field {
+  flex: 1 !important;
+  margin: 0 !important;
+}
+
+.template-search__search .search__input {
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  color: #000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  padding: 4px 8px !important;
+  height: 24px !important;
+  line-height: 16px !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.template-search__search .search__input:focus {
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  outline: none !important;
+}
+
+/* ===== FILTERS AND SORTING ===== */
+.facets-container {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  padding: 12px !important;
+  margin-bottom: 16px !important;
+}
+
+.facet-checkbox,
+.facet__item {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+}
+
+.facets__disclosure summary {
+  background: #dfdfdf !important;
+  border: 2px outset #dfdfdf !important;
+  color: #000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  padding: 4px 8px !important;
+  cursor: pointer !important;
+  border-radius: 0 !important;
+}
+
+.facets__disclosure summary:hover {
+  background: #ffffff !important;
+  border: 2px outset #dfdfdf !important;
+}
+
+.facets__disclosure[open] summary {
+  background: #c0c0c0 !important;
+  border: 2px inset #dfdfdf !important;
+}
+
+/* ===== SEARCH RESULTS GRID ===== */
+.collection {
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  padding: 12px !important;
+  min-height: 400px !important;
+}
+
+.collection__title {
+  background: #c0c0c0 !important;
+  color: #000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  padding: 4px 8px !important;
+  margin: -12px -12px 12px -12px !important;
+  border-bottom: 1px solid #808080 !important;
+}
+
+/* ===== PRODUCT GRID IN SEARCH RESULTS ===== */
+.grid.product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+  gap: 16px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: white !important;
+}
+
+/* ===== PAGINATION ===== */
+.pagination-wrapper {
+  background: #c0c0c0 !important;
+  border: 2px outset #c0c0c0 !important;
+  padding: 12px !important;
+  margin-top: 20px !important;
+  text-align: center !important;
+}
+
+.pagination {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+}
+
+/* ===== EMPTY SEARCH STATE ===== */
+.template-search--empty {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 60px 20px !important;
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  min-height: 300px !important;
+}
+
+.template-search--empty h2 {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  color: #000 !important;
+  margin: 0 0 12px 0 !important;
+}
+
+.template-search--empty p {
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+  margin: 0 !important;
+  max-width: 400px !important;
+}
+
+/* ===== SEARCH RESULTS COUNT ===== */
+.search-results-count {
+  background: #c0c0c0 !important;
+  color: #000 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 10px !important;
+  padding: 4px 8px !important;
+  margin-bottom: 12px !important;
+  border: 1px solid #808080 !important;
+  border-bottom: 1px solid #ffffff !important;
+  text-align: left !important;
+}
+
+.search-results-count::before {
+  content: "📄 ";
+  font-size: 10px;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 749px) {
+  .template-search {
+    padding: 12px !important;
+  }
+
+  .grid.product-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .template-search__search {
+    padding: 8px !important;
+  }
+
+  .template-search__search .search {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .template-search__header {
+    padding: 8px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .template-search__header h1 {
+    font-size: 14px !important;
+  }
+}
+
+/* ===== LOADING STATE ===== */
+.search-loading {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 40px !important;
+  background: white !important;
+  border: 2px inset #c0c0c0 !important;
+  font-family: "MS Sans Serif", sans-serif !important;
+  font-size: 11px !important;
+  color: #000 !important;
+}
+
+.search-loading::before {
+  content: "🔍 ";
+  margin-right: 4px;
+}
+
+/* ===== SEARCH TERM HIGHLIGHTING ===== */
+.search-highlight {
+  background: yellow !important;
+  color: #000 !important;
+  padding: 0 2px !important;
+  font-weight: bold !important;
+}
+
+/* ===== WIN98 SCROLLBAR FOR SEARCH RESULTS ===== */
+.collection::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.collection::-webkit-scrollbar-track {
+  background: #c0c0c0;
+  border: 2px inset #c0c0c0;
+}
+
+.collection::-webkit-scrollbar-thumb {
+  background: #dfdfdf;
+  border: 2px outset #dfdfdf;
+}
+
+.collection::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+
+.collection::-webkit-scrollbar-corner {
+  background: #c0c0c0;
+}
