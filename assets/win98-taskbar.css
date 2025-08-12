@@ -401,12 +401,94 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
+  width: 400px;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  font-family: "MS Sans Serif", sans-serif;
   z-index: 1003;
+}
+
+.search-dialog .title-bar {
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  color: white;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-bottom: 1px solid #000040;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 18px;
+}
+
+.search-dialog .title-bar-text {
+  color: white;
+  font-family: "MS Sans Serif", sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.search-dialog .title-bar-controls {
+  display: flex;
+  gap: 0;
+}
+
+.search-dialog .title-bar-controls button {
+  width: 16px;
+  height: 14px;
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  font-size: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.search-dialog .title-bar-controls button:hover {
+  background: #dfdfdf;
+}
+
+.search-dialog .title-bar-controls button:active {
+  border: 1px inset #c0c0c0;
+}
+
+.search-dialog .title-bar-controls button::after {
+  content: "×";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  line-height: 14px;
+  color: #000;
+  font-weight: bold;
 }
 
 .search-dialog .window-body {
   padding: 12px;
+  background: #c0c0c0;
+}
+
+/* Add backdrop overlay when search dialog is open */
+.search-dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1002;
+  display: none;
+}
+
+.search-dialog:not([style*="display: none"]) + .search-dialog-backdrop,
+.search-dialog[style*="display: block"] + .search-dialog-backdrop {
+  display: block;
 }
 
 .field-row {
@@ -532,23 +614,3 @@ body:has(.win98-taskbar) {
   transition: none;
 }
 
-/* ===== WIN98 WINDOW OVERRIDES FOR SEARCH ===== */
-.search-dialog .title-bar-controls button {
-  width: 16px;
-  height: 14px;
-  background: #c0c0c0;
-  border: 1px outset #c0c0c0;
-  cursor: pointer;
-}
-
-.search-dialog .title-bar-controls button::after {
-  content: "×";
-  font-size: 12px;
-  font-weight: bold;
-  color: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}

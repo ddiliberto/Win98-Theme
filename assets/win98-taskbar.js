@@ -89,6 +89,14 @@ class Win98Taskbar {
         this.closeSearchDialog();
       }
     });
+    
+    // Close search when clicking backdrop
+    const backdrop = document.getElementById('search-dialog-backdrop');
+    if (backdrop) {
+      backdrop.addEventListener('click', () => {
+        this.closeSearchDialog();
+      });
+    }
   }
   
   setupCartButton() {
@@ -226,7 +234,12 @@ class Win98Taskbar {
   openSearchDialog() {
     if (!this.searchDialog) return;
     
+    // Show dialog and backdrop
     this.searchDialog.style.display = 'block';
+    const backdrop = document.getElementById('search-dialog-backdrop');
+    if (backdrop) {
+      backdrop.style.display = 'block';
+    }
     
     // Focus search input
     const searchInput = this.searchDialog.querySelector('#search-input');
@@ -239,7 +252,12 @@ class Win98Taskbar {
   closeSearchDialog() {
     if (!this.searchDialog) return;
     
+    // Hide dialog and backdrop
     this.searchDialog.style.display = 'none';
+    const backdrop = document.getElementById('search-dialog-backdrop');
+    if (backdrop) {
+      backdrop.style.display = 'none';
+    }
     
     // Clear search input
     const searchInput = this.searchDialog.querySelector('#search-input');
