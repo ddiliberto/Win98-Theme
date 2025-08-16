@@ -114,27 +114,29 @@
                   {%- for item in cart.items -%}
                     <div class="win98-cart-item" id="CartDrawer-Item-{{ item.index | plus: 1 }}">
                       
-                      <!-- Product Image -->
-                      <div class="win98-item-image">
-                        {% if item.image %}
-                          <a href="{{ item.url }}" class="win98-item-link" tabindex="-1" aria-hidden="true">
-                            <img
-                              src="{{ item.image | image_url: width: 80 }}"
-                              alt="{{ item.image.alt | escape }}"
-                              loading="lazy"
-                              width="60"
-                              height="{{ 60 | divided_by: item.image.aspect_ratio | ceil }}"
-                            >
-                          </a>
-                        {% else %}
-                          <div class="win98-item-placeholder">
-                            <span>📦</span>
-                          </div>
-                        {% endif %}
-                      </div>
-                      
-                      <!-- Product Details -->
-                      <div class="win98-item-details">
+                      <!-- Product Column (Image + Details) -->
+                      <div class="win98-item-product">
+                        <!-- Product Image -->
+                        <div class="win98-item-image">
+                          {% if item.image %}
+                            <a href="{{ item.url }}" class="win98-item-link" tabindex="-1" aria-hidden="true">
+                              <img
+                                src="{{ item.image | image_url: width: 80 }}"
+                                alt="{{ item.image.alt | escape }}"
+                                loading="lazy"
+                                width="60"
+                                height="{{ 60 | divided_by: item.image.aspect_ratio | ceil }}"
+                              >
+                            </a>
+                          {% else %}
+                            <div class="win98-item-placeholder">
+                              <span>📦</span>
+                            </div>
+                          {% endif %}
+                        </div>
+                        
+                        <!-- Product Details -->
+                        <div class="win98-item-details">
                         <div class="win98-item-info">
                           {%- if settings.show_vendor -%}
                             <div class="win98-item-vendor">{{ item.product.vendor }}</div>
@@ -184,6 +186,7 @@
                               <span class="win98-price">{{ item.original_price | money }}</span>
                             {%- endif -%}
                           </div>
+                        </div>
                         </div>
                       </div>
                       
