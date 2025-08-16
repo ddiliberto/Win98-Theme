@@ -442,15 +442,17 @@
 .win98-quantity-controls {
   display: flex !important;
   align-items: center !important;
-  gap: 2px !important;
+  gap: 1px !important;
   background: var(--win98-surface) !important;
   border: 2px inset var(--win98-surface) !important;
-  padding: 2px !important;
+  padding: 1px !important;
+  width: fit-content !important;
+  margin: 0 auto !important;
 }
 
 .win98-quantity-button {
-  width: 20px !important;
-  height: 20px !important;
+  width: 18px !important;
+  height: 18px !important;
   background: var(--win98-button-face) !important;
   box-shadow: var(--win98-border-raised) !important;
   border: none !important;
@@ -474,8 +476,8 @@
 }
 
 .win98-quantity-input {
-  width: 40px !important;
-  height: 20px !important;
+  width: 32px !important;
+  height: 18px !important;
   border: 2px inset var(--win98-surface) !important;
   background: white !important;
   font-family: "MS Sans Serif", Arial, sans-serif !important;
@@ -813,13 +815,13 @@
   }
   
   .win98-quantity-button {
-    width: 18px !important;
-    height: 18px !important;
+    width: 16px !important;
+    height: 16px !important;
   }
   
   .win98-quantity-input {
-    width: 35px !important;
-    height: 18px !important;
+    width: 28px !important;
+    height: 16px !important;
     font-size: 9px !important;
   }
   
