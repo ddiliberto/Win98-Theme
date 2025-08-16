@@ -247,7 +247,7 @@
 /* ===== ITEMS HEADER ===== */
 .win98-items-header {
   display: grid !important;
-  grid-template-columns: 200px 1fr 100px !important;
+  grid-template-columns: 200px 80px 100px !important;
   background: var(--win98-button-face) !important;
   border: 2px inset var(--win98-surface) !important;
   margin-bottom: 2px !important;
@@ -288,7 +288,7 @@
 
 .win98-cart-item {
   display: grid !important;
-  grid-template-columns: 200px 1fr 100px !important;
+  grid-template-columns: 200px 80px 100px !important;
   border-bottom: 1px solid #e0e0e0 !important;
   padding: 8px !important;
   align-items: start !important;
@@ -436,7 +436,9 @@
   flex-direction: column !important;
   align-items: center !important;
   gap: 4px !important;
-  padding: 4px !important;
+  padding: 2px !important;
+  width: 70px !important;
+  max-width: 70px !important;
 }
 
 .win98-quantity-controls {
@@ -781,13 +783,18 @@
   }
   
   .win98-items-header {
-    grid-template-columns: 180px 1fr 80px !important;
+    grid-template-columns: 180px 60px 80px !important;
   }
   
   .win98-cart-item {
-    grid-template-columns: 180px 1fr 80px !important;
+    grid-template-columns: 180px 60px 80px !important;
     padding: 6px !important;
     gap: 6px !important;
+  }
+  
+  .win98-item-quantity {
+    width: 60px !important;
+    max-width: 60px !important;
   }
   
   .win98-item-image {
