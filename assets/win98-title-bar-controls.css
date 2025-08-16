@@ -5,107 +5,147 @@
 
 /* ===== GENERAL WIN98 TITLE BAR CONTROLS ===== */
 
-/* Base title bar control styling */
-.title-bar-controls button {
-  width: 16px !important;
-  height: 16px !important;
+/* Base title bar control styling - Authentic 98.css Implementation */
+.title-bar-controls button,
+.product-card-wrapper .title-bar-controls button,
+.video-title-bar-controls button {
+  box-sizing: border-box !important;
+  border: none !important;
+  color: transparent !important;
+  text-shadow: 0 0 #222222 !important;
   background: #c0c0c0 !important;
-  border: 1px outset #c0c0c0 !important;
-  font-size: 0 !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
+  border-radius: 0 !important;
+  /* Window control specifics */
   padding: 0 !important;
-  margin: 0 !important;
+  display: block !important;
+  min-width: 16px !important;
+  min-height: 14px !important;
+  width: 16px !important;
+  height: 14px !important;
+  font-family: "MS Sans Serif", Arial !important;
+  font-size: 0 !important;
   cursor: pointer !important;
   position: relative !important;
-  box-sizing: border-box !important;
+  margin: 0 !important;
 }
 
-.title-bar-controls button:hover {
-  background: #dfdfdf !important;
-  border: 1px outset #c0c0c0 !important;
+.title-bar-controls button:not(:disabled):active,
+.product-card-wrapper .title-bar-controls button:not(:disabled):active,
+.video-title-bar-controls button:not(:disabled):active {
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080 !important;
+  text-shadow: 1px 1px #222222 !important;
+  padding: 0 !important;
 }
 
-.title-bar-controls button:active {
-  border: 1px inset #c0c0c0 !important;
-  background: #c0c0c0 !important;
+.title-bar-controls button:disabled,
+.product-card-wrapper .title-bar-controls button:disabled,
+.video-title-bar-controls button:disabled {
+  color: #808080 !important;
+  text-shadow: 1px 1px 0 #ffffff !important;
 }
 
 /* ===== MINIMIZE BUTTON (First button) ===== */
+.title-bar-controls button:nth-child(1),
+.title-bar-controls button[aria-label*="Minimize"],
+.title-bar-controls .minimize-button,
+.video-title-bar-controls .video-title-bar-button:nth-child(1),
+.video-title-bar-controls .video-title-bar-button[aria-label*="Minimize"] {
+  background-image: url('minimize.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center bottom 3px !important;
+  background-size: 6px 2px !important;
+}
+
 .title-bar-controls button:nth-child(1)::after,
 .title-bar-controls button[aria-label*="Minimize"]::after,
-.title-bar-controls .minimize-button::after {
-  content: "";
-  position: absolute;
-  bottom: 4px;
-  left: 2px;
-  right: 2px;
-  height: 2px;
-  background: #000;
-  display: block;
+.title-bar-controls .minimize-button::after,
+.video-title-bar-controls .video-title-bar-button:nth-child(1)::after,
+.video-title-bar-controls .video-title-bar-button[aria-label*="Minimize"]::after {
+  display: none !important;
 }
 
 /* ===== MAXIMIZE BUTTON (Second button) ===== */
+.title-bar-controls button:nth-child(2),
+.title-bar-controls button[aria-label*="Maximize"],
+.title-bar-controls .maximize-button,
+.video-title-bar-controls .video-title-bar-button:nth-child(2),
+.video-title-bar-controls .video-title-bar-button[aria-label*="Maximize"] {
+  background-image: url('maximize.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 9px 9px !important;
+}
+
 .title-bar-controls button:nth-child(2)::after,
 .title-bar-controls button[aria-label*="Maximize"]::after,
-.title-bar-controls .maximize-button::after {
-  content: "";
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  right: 3px;
-  bottom: 4px;
-  border: 1px solid #000;
-  border-top-width: 2px;
-  display: block;
+.title-bar-controls .maximize-button::after,
+.video-title-bar-controls .video-title-bar-button:nth-child(2)::after,
+.video-title-bar-controls .video-title-bar-button[aria-label*="Maximize"]::after {
+  display: none !important;
 }
 
 /* ===== CLOSE BUTTON (Third button) ===== */
+.title-bar-controls button:nth-child(3),
+.title-bar-controls button[aria-label*="Close"],
+.title-bar-controls .close-button,
+.video-title-bar-controls .video-title-bar-button:nth-child(3),
+.video-title-bar-controls .video-title-bar-button[aria-label*="Close"] {
+  background-image: url('icon-close.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 8px 7px !important;
+}
+
 .title-bar-controls button:nth-child(3)::after,
 .title-bar-controls button[aria-label*="Close"]::after,
-.title-bar-controls .close-button::after {
-  content: "✕";
-  position: absolute;
-  top: 0px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 10px;
-  line-height: 16px;
-  color: #000;
-  font-weight: bold;
-  font-family: "MS Sans Serif", sans-serif;
+.title-bar-controls .close-button::after,
+.video-title-bar-controls .video-title-bar-button:nth-child(3)::after,
+.video-title-bar-controls .video-title-bar-button[aria-label*="Close"]::after {
+  display: none !important;
 }
 
 /* ===== SPECIAL CASES FOR SINGLE CLOSE BUTTON ===== */
 /* When there's only one button, it should be a close button */
+.title-bar-controls button:only-child {
+  background-image: url('icon-close.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 8px 7px !important;
+}
+
 .title-bar-controls button:only-child::after {
-  content: "✕";
-  position: absolute;
-  top: 0px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 10px;
-  line-height: 16px;
-  color: #000;
-  font-weight: bold;
-  font-family: "MS Sans Serif", sans-serif;
+  display: none !important;
 }
 
 /* ===== FOCUS STATES FOR ACCESSIBILITY ===== */
-.title-bar-controls button:focus {
-  outline: 1px dotted #000;
-  outline-offset: -2px;
+.title-bar-controls button:focus,
+.product-card-wrapper .title-bar-controls button:focus,
+.video-title-bar-controls button:focus {
+  outline: none !important;
 }
 
 /* ===== DISABLED STATES ===== */
 .title-bar-controls button:disabled::after {
-  color: #808080;
+  display: none !important;
 }
 
 .title-bar-controls button:disabled {
   background: #c0c0c0 !important;
   border: 1px outset #c0c0c0 !important;
   cursor: not-allowed !important;
+}
+
+/* Disabled maximize button uses special disabled icon */
+.title-bar-controls button:nth-child(2):disabled,
+.title-bar-controls button[aria-label*="Maximize"]:disabled,
+.title-bar-controls .maximize-button:disabled,
+.video-title-bar-controls .video-title-bar-button:nth-child(2):disabled,
+.video-title-bar-controls .video-title-bar-button[aria-label*="Maximize"]:disabled {
+  background-image: url('maximize-disabled.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 10px 10px !important;
 }
 
 /* ===== HIGH SPECIFICITY OVERRIDES ===== */

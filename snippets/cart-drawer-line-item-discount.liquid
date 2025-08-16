@@ -1,0 +1,50 @@
+{% comment %}
+  Renders a line item discount for the Win98 cart drawer
+  
+  Accepts:
+  - discount_allocation: discount allocation object
+  - cart_drawer_line_item_key: the key of the line item
+{% endcomment %}
+
+<div class="win98-discount-item" id="CartDrawer-LineItemDiscount-{{ forloop.index }}-{{ cart_drawer_line_item_key }}">
+  <div class="win98-discount-details">
+    <div class="win98-discount-title">
+      {{ discount_allocation.discount_application.title }}
+    </div>
+    <div class="win98-discount-amount">
+      -{{ discount_allocation.amount | money }}
+    </div>
+  </div>
+</div>
+
+<style>
+.win98-discount-item {
+  display: grid !important;
+  grid-template-columns: 1fr 80px 100px !important;
+  padding: 4px 8px !important;
+  background: #f0f8ff !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+  font-size: 10px !important;
+}
+
+.win98-discount-details {
+  grid-column: 1 / -1 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.win98-discount-title {
+  font-family: "MS Sans Serif", Arial, sans-serif !important;
+  font-size: 10px !important;
+  color: var(--win98-dialog-blue, #000080) !important;
+  font-style: italic !important;
+}
+
+.win98-discount-amount {
+  font-family: "MS Sans Serif", Arial, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: bold !important;
+  color: var(--win98-dialog-blue, #000080) !important;
+}
+</style>

@@ -55,74 +55,50 @@
   margin: 0 !important;
 }
 
-/* ===== TITLE BAR CONTROLS ===== */
+/* ===== TITLE BAR CONTROLS - Authentic 98.css Implementation ===== */
 .video-title-bar-controls {
   display: flex !important;
-  gap: 0 !important;
   flex-shrink: 0 !important;
 }
 
 .video-title-bar-button {
+  box-sizing: border-box !important;
+  border: none !important;
+  color: transparent !important;
+  text-shadow: 0 0 #222222 !important;
+  background: #c0c0c0 !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
+  border-radius: 0 !important;
+  /* Window control specifics */
+  padding: 0 !important;
+  display: block !important;
+  min-width: 16px !important;
+  min-height: 14px !important;
   width: 16px !important;
   height: 14px !important;
-  background: #c0c0c0 !important;
-  border: 1px outset #c0c0c0 !important;
+  font-family: "MS Sans Serif", Arial !important;
   font-size: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
   cursor: pointer !important;
   position: relative !important;
-  box-sizing: border-box !important;
 }
 
-.video-title-bar-button:hover {
-  background: #dfdfdf !important;
+.video-title-bar-button:not(:disabled):active {
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080 !important;
+  text-shadow: 1px 1px #222222 !important;
+  padding: 0 !important;
 }
 
-.video-title-bar-button:active {
-  border: 1px inset #c0c0c0 !important;
+.video-title-bar-button:focus {
+  outline: none !important;
+}
+
+.video-title-bar-button:disabled {
+  color: #808080 !important;
+  text-shadow: 1px 1px 0 #ffffff !important;
 }
 
 /* ===== BUTTON ICONS ===== */
-/* Minimize button - horizontal line at bottom */
-.video-title-bar-button:nth-child(1)::after {
-  content: "";
-  position: absolute;
-  bottom: 4px;
-  left: 2px;
-  right: 2px;
-  height: 2px;
-  background: #000;
-  display: block;
-}
-
-/* Maximize button - small rectangle outline */
-.video-title-bar-button:nth-child(2)::after {
-  content: "";
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  right: 3px;
-  bottom: 4px;
-  border: 1px solid #000;
-  border-top-width: 2px;
-  display: block;
-}
-
-/* Close button - X mark */
-.video-title-bar-button:nth-child(3)::after {
-  content: "✕";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 10px;
-  line-height: 14px;
-  color: #000;
-  font-weight: bold;
-  font-family: "MS Sans Serif", sans-serif;
-}
+/* Icons are now handled by the universal win98-title-bar-controls.css using authentic 98.css SVG icons */
 
 /* ===== VIDEO MEDIA WITH TITLE BAR ===== */
 .video-section__media--with-title-bar {

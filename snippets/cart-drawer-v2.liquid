@@ -1,0 +1,377 @@
+{% comment %}
+  Rebuilt Win98 Cart Drawer - Authentic Windows 98 Shopping Cart
+  
+  Features:
+  - True Win98 window with proper title bar
+  - List view instead of table for better mobile support
+  - Cleaner structure and improved accessibility
+  - Better empty state handling
+  - More authentic Win98 visual hierarchy
+
+  Usage:
+  {% render 'cart-drawer-v2' %}
+{% endcomment %}
+
+{{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'win98-cart-drawer-v2.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  .drawer {
+    visibility: hidden;
+  }
+</style>
+
+<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
+  <div id="CartDrawer" class="cart-drawer">
+    <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
+    
+    <!-- Win98 Window Container -->
+    <div class="win98-cart-window" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
+      
+      <!-- Win98 Title Bar -->
+      <div class="win98-title-bar">
+        <div class="win98-title-bar-text">
+          <span class="win98-cart-icon">🛒</span>
+          {{ 'sections.cart.title' | t }}
+          {% unless cart == empty %}
+            ({{ cart.item_count }})
+          {% endunless %}
+        </div>
+        <div class="win98-title-bar-controls">
+          <button 
+            class="win98-title-bar-button" 
+            type="button"
+            onclick="this.closest('cart-drawer').close()"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            <span class="svg-wrapper">
+              {{- 'icon-close.svg' | inline_asset_content -}}
+            </span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Win98 Window Body -->
+      <div class="win98-window-body">
+        
+        {% if cart == empty %}
+          <!-- Empty Cart State -->
+          <div class="win98-cart-empty">
+            <div class="win98-empty-content">
+              <div class="win98-empty-icon">
+                <span>🛒</span>
+              </div>
+              <h3 class="win98-empty-title">{{ 'sections.cart.empty' | t }}</h3>
+              <p class="win98-empty-text">{{ 'sections.cart.empty_text' | t | default: 'Your cart is currently empty.' }}</p>
+              
+              <div class="win98-empty-actions">
+                <a href="{{ routes.all_products_collection_url }}" class="win98-button win98-button--primary">
+                  {{ 'general.continue_shopping' | t }}
+                </a>
+              </div>
+              
+              {%- if shop.customer_accounts_enabled and customer == null -%}
+                <div class="win98-login-prompt">
+                  <h4 class="win98-login-title">{{ 'sections.cart.login.title' | t }}</h4>
+                  <p class="win98-login-text">
+                    {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
+                  </p>
+                </div>
+              {%- endif -%}
+            </div>
+            
+            {%- if settings.cart_drawer_collection != blank -%}
+              <div class="win98-recommended-products">
+                <h4 class="win98-section-title">{{ 'sections.cart.recommended_products' | t | default: 'You might like' }}</h4>
+                <div class="win98-product-suggestions">
+                  {% render 'card-collection', card_collection: settings.cart_drawer_collection, columns: 1 %}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+          
+        {% else %}
+          <!-- Cart with Items -->
+          <div class="win98-cart-content">
+            
+            <!-- Cart Items List -->
+            <div class="win98-cart-items-container">
+              <form action="{{ routes.cart_url }}" id="CartDrawer-Form" class="win98-cart-form" method="post">
+                
+                <!-- Items Header -->
+                <div class="win98-items-header">
+                  <div class="win98-header-item">Product</div>
+                  <div class="win98-header-qty">Qty</div>
+                  <div class="win98-header-total">Total</div>
+                </div>
+                
+                <!-- Cart Items -->
+                <div class="win98-cart-items" id="CartDrawer-CartItems">
+                  {%- for item in cart.items -%}
+                    <div class="win98-cart-item" id="CartDrawer-Item-{{ item.index | plus: 1 }}">
+                      
+                      <!-- Product Image -->
+                      <div class="win98-item-image">
+                        {% if item.image %}
+                          <a href="{{ item.url }}" class="win98-item-link" tabindex="-1" aria-hidden="true">
+                            <img
+                              src="{{ item.image | image_url: width: 80 }}"
+                              alt="{{ item.image.alt | escape }}"
+                              loading="lazy"
+                              width="60"
+                              height="{{ 60 | divided_by: item.image.aspect_ratio | ceil }}"
+                            >
+                          </a>
+                        {% else %}
+                          <div class="win98-item-placeholder">
+                            <span>📦</span>
+                          </div>
+                        {% endif %}
+                      </div>
+                      
+                      <!-- Product Details -->
+                      <div class="win98-item-details">
+                        <div class="win98-item-info">
+                          {%- if settings.show_vendor -%}
+                            <div class="win98-item-vendor">{{ item.product.vendor }}</div>
+                          {%- endif -%}
+                          
+                          <a href="{{ item.url }}" class="win98-item-name">
+                            {{ item.product.title | escape }}
+                          </a>
+                          
+                          <!-- Variant Options -->
+                          {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != null -%}
+                            <div class="win98-item-options">
+                              {%- if item.product.has_only_default_variant == false -%}
+                                {%- for option in item.options_with_values -%}
+                                  <div class="win98-option">
+                                    <span class="win98-option-name">{{ option.name }}:</span>
+                                    <span class="win98-option-value">{{ option.value }}</span>
+                                  </div>
+                                {%- endfor -%}
+                              {%- endif -%}
+                              
+                              {%- for property in item.properties -%}
+                                {%- assign property_first_char = property.first | slice: 0 -%}
+                                {%- unless property.last == blank or property_first_char == '_' -%}
+                                  <div class="win98-option">
+                                    <span class="win98-option-name">{{ property.first }}:</span>
+                                    <span class="win98-option-value">{{ property.last }}</span>
+                                  </div>
+                                {%- endunless -%}
+                              {%- endfor -%}
+                              
+                              {%- if item.selling_plan_allocation != null -%}
+                                <div class="win98-option">
+                                  <span class="win98-option-name">{{ 'products.product.subscription' | t }}:</span>
+                                  <span class="win98-option-value">{{ item.selling_plan_allocation.selling_plan.name }}</span>
+                                </div>
+                              {%- endif -%}
+                            </div>
+                          {%- endif -%}
+                          
+                          <!-- Unit Price -->
+                          <div class="win98-item-price">
+                            {%- if item.original_price != item.final_price -%}
+                              <span class="win98-price-sale">{{ item.final_price | money }}</span>
+                              <span class="win98-price-compare">{{ item.original_price | money }}</span>
+                            {%- else -%}
+                              <span class="win98-price">{{ item.original_price | money }}</span>
+                            {%- endif -%}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- Quantity Controls -->
+                      <div class="win98-item-quantity">
+                        <div class="win98-quantity-controls">
+                          <cart-remove-button
+                            id="CartDrawer-Remove-{{ item.index | plus: 1 }}"
+                            data-index="{{ item.index | plus: 1 }}"
+                          >
+                            <button
+                              type="button"
+                              class="win98-quantity-button win98-quantity-minus"
+                              name="minus"
+                              aria-label="{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}"
+                            >
+                              <span class="svg-wrapper">
+                                {{- 'icon-minus.svg' | inline_asset_content -}}
+                              </span>
+                            </button>
+                          </cart-remove-button>
+                          
+                          <quantity-input class="quantity cart-quantity">
+                            <input
+                              class="win98-quantity-input"
+                              data-quantity-variant-id="{{ item.variant.id }}"
+                              type="number"
+                              name="updates[]"
+                              value="{{ item.quantity }}"
+                              {%# theme-check-disable-next-line LiquidTag %}
+                              {% if item.variant.quantity_rule.min %}
+                                min="{{ item.variant.quantity_rule.min }}"
+                              {% else %}
+                                min="0"
+                              {% endif %}
+                              {% if item.variant.quantity_rule.max %}
+                                max="{{ item.variant.quantity_rule.max }}"
+                              {% endif %}
+                              {% if item.variant.quantity_rule.increment > 1 %}
+                                step="{{ item.variant.quantity_rule.increment }}"
+                              {% endif %}
+                              aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                              id="Drawer-quantity-{{ item.index | plus: 1 }}"
+                              data-index="{{ item.index | plus: 1 }}"
+                            >
+                          </quantity-input>
+                          
+                          <button
+                            type="button"
+                            class="win98-quantity-button win98-quantity-plus"
+                            name="plus"
+                            aria-label="{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}"
+                          >
+                            <span class="svg-wrapper">
+                              {{- 'icon-plus.svg' | inline_asset_content -}}
+                            </span>
+                          </button>
+                        </div>
+                        
+                        <!-- Remove Item Button -->
+                        <cart-remove-button
+                          id="CartDrawer-Remove-{{ item.index | plus: 1 }}"
+                          data-index="{{ item.index | plus: 1 }}"
+                        >
+                          <button
+                            type="button"
+                            class="win98-remove-button"
+                            aria-label="{{ 'sections.cart.remove_title' | t: title: item.title }}"
+                          >
+                            Remove
+                          </button>
+                        </cart-remove-button>
+                      </div>
+                      
+                      <!-- Line Total -->
+                      <div class="win98-item-total">
+                        <div class="win98-total-price">
+                          {%- if item.original_line_price != item.final_line_price -%}
+                            <span class="win98-total-sale">{{ item.final_line_price | money }}</span>
+                            <span class="win98-total-compare">{{ item.original_line_price | money }}</span>
+                          {%- else -%}
+                            <span class="win98-total">{{ item.original_line_price | money }}</span>
+                          {%- endif -%}
+                        </div>
+                        
+                        {%- if item.variant.available and item.unit_price_measurement -%}
+                          <div class="win98-unit-price">
+                            <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                            {{ item.variant.unit_price | money }}
+                            <span aria-hidden="true">/</span>
+                            <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+                            {%- if item.variant.unit_price_measurement.reference_value != 1 -%}
+                              {{- item.variant.unit_price_measurement.reference_value -}}
+                            {%- endif -%}
+                            {{ item.variant.unit_price_measurement.reference_unit }}
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                    
+                    {%- liquid
+                      assign cart_drawer_line_item_key = item.key
+                      for discount_allocation in item.discounts
+                        render 'cart-drawer-line-item-discount', discount_allocation: discount_allocation, cart_drawer_line_item_key: cart_drawer_line_item_key
+                      endfor
+                    -%}
+                  {%- endfor -%}
+                </div>
+              </form>
+            </div>
+            
+            <!-- Cart Footer -->
+            <div class="win98-cart-footer">
+              
+              <!-- Cart Note -->
+              {%- if settings.cart_notes_enable -%}
+                <div class="win98-cart-note">
+                  <details class="win98-cart-note-details">
+                    <summary class="win98-cart-note-summary">
+                      <span>{{ 'sections.cart.note' | t }}</span>
+                      <span class="win98-caret">▼</span>
+                    </summary>
+                    <div class="win98-cart-note-content">
+                      <cart-note class="cart__note field">
+                        <label class="win98-note-label" for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
+                        <textarea
+                          class="win98-note-textarea"
+                          name="note"
+                          id="CartDrawer-Note"
+                          placeholder="{{ 'sections.cart.note' | t }}"
+                        >{{ cart.note }}</textarea>
+                      </cart-note>
+                    </div>
+                  </details>
+                </div>
+              {%- endif -%}
+              
+              <!-- Subtotal -->
+              <div class="win98-cart-subtotal">
+                <div class="win98-subtotal-label">{{ 'sections.cart.subtotal' | t }}</div>
+                <div class="win98-subtotal-amount">{{ cart.total_price | money_with_currency }}</div>
+              </div>
+              
+              <!-- Shipping Notice -->
+              {%- if cart.total_price == 0 or cart.taxes_included and shop.shipping_policy.body != blank -%}
+                <div class="win98-cart-notice">
+                  {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                    {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                  {%- elsif cart.taxes_included -%}
+                    {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+                  {%- elsif shop.shipping_policy.body != blank -%}
+                    {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+                  {%- else -%}
+                    {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+              
+              <!-- Checkout Button -->
+              <div class="win98-cart-actions">
+                <button
+                  type="submit"
+                  id="CartDrawer-Checkout"
+                  class="win98-button win98-button--checkout"
+                  name="add"
+                  form="CartDrawer-Form"
+                  formaction="{{ routes.cart_url }}"
+                  {% if cart == empty %}disabled{% endif %}
+                >
+                  {{ 'sections.cart.checkout' | t }}
+                </button>
+              </div>
+              
+              <!-- Payment Buttons -->
+              {%- if additional_checkout_buttons -%}
+                <div class="win98-additional-checkout">
+                  <div class="win98-additional-checkout-separator">
+                    <span>{{ 'sections.cart.or' | t }}</span>
+                  </div>
+                  <div class="additional-checkout-buttons">
+                    {{ content_for_additional_checkout_buttons }}
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</cart-drawer>
