@@ -867,6 +867,10 @@
   border: 0 !important;
 }
 
+.cart__status {
+  display: none !important;
+}
+
 /* ===== FORCE FONT CONSISTENCY ===== */
 .win98-cart-window *,
 .win98-cart-window *::before,

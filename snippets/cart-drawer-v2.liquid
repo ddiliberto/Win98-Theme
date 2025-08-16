@@ -30,7 +30,7 @@
     <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
     
     <!-- Win98 Window Container -->
-    <div class="win98-cart-window" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
+    <div class="win98-cart-window drawer__inner" role="dialog" aria-modal="true" aria-label="{{ 'sections.cart.title' | t }}" tabindex="-1">
       
       <!-- Win98 Title Bar -->
       <div class="win98-title-bar">
@@ -43,7 +43,7 @@
         </div>
         <div class="win98-title-bar-controls">
           <button 
-            class="win98-title-bar-button" 
+            class="win98-title-bar-button drawer__close" 
             type="button"
             onclick="this.closest('cart-drawer').close()"
             aria-label="{{ 'accessibility.close' | t }}"
@@ -60,7 +60,7 @@
         
         {% if cart == empty %}
           <!-- Empty Cart State -->
-          <div class="win98-cart-empty">
+          <div class="win98-cart-empty drawer__inner-empty">
             <div class="win98-empty-content">
               <div class="win98-empty-icon">
                 <span>🛒</span>
@@ -110,7 +110,10 @@
                 </div>
                 
                 <!-- Cart Items -->
-                <div class="win98-cart-items" id="CartDrawer-CartItems">
+                <cart-drawer-items class="win98-cart-items" id="CartDrawer-CartItems">
+                  <div id="CartDrawer-LineItemStatus" class="cart__status" aria-hidden="true" role="status">
+                    {{ 'accessibility.loading' | t }}
+                  </div>
                   {%- for item in cart.items -%}
                     <div class="win98-cart-item" id="CartDrawer-Item-{{ item.index | plus: 1 }}">
                       
@@ -294,7 +297,7 @@
                       endfor
                     -%}
                   {%- endfor -%}
-                </div>
+                </cart-drawer-items>
               </form>
             </div>
             
