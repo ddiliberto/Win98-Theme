@@ -70,88 +70,70 @@
   box-sizing: border-box;
 }
 
-/* Title Bar - Use standard classes that match existing title-bar-controls.css */
-.win98-window .title-bar {
-  background: var(--win98-titlebar-bg);
+/* ===== REBUILT TITLE BAR - Simple & Clean ===== */
+
+.cart-titlebar {
+  background: linear-gradient(90deg, #000080 0%, #1084d0 100%);
   height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 4px 4px 4px 6px;
-  flex-shrink: 0;
-  border-bottom: 1px solid var(--win98-surface-darker);
+  width: 100%;
+  padding: 3px 6px;
+  font-family: var(--win98-font);
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+  border-bottom: 1px solid #000040;
   box-sizing: border-box;
-  position: relative;
 }
 
-.win98-window .title-bar-text {
+.cart-titlebar-content {
   display: flex;
   align-items: center;
   gap: 6px;
-  color: var(--win98-titlebar-text);
-  font-size: 11px;
-  font-weight: bold;
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
-/* Inline close button within title text */
-.win98-inline-close {
-  box-sizing: border-box !important;
-  width: 16px !important;
-  height: 14px !important;
-  background: #c0c0c0 !important;
-  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
-  border: none !important;
-  cursor: pointer !important;
-  padding: 0 !important;
-  margin: 0 0 0 8px !important;
-  font-size: 0 !important;
-  color: transparent !important;
-  display: inline-block !important;
-  vertical-align: middle !important;
-  flex-shrink: 0 !important;
-  
-  /* Close button icon */
-  background-image: url('icon-close.svg') !important;
-  background-repeat: no-repeat !important;
-  background-position: center center !important;
-  background-size: 8px 7px !important;
-}
-
-.win98-inline-close:active {
-  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080 !important;
-}
-
-.win98-inline-close:focus {
-  outline: none !important;
-}
-
-.win98-inline-close .svg-wrapper {
-  display: none !important;
-}
-
-.win98-icon {
+.cart-icon {
   font-size: 12px;
-  line-height: 1;
   flex-shrink: 0;
 }
 
-.win98-title {
+.cart-title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  flex: 1;
-  min-width: 0;
 }
 
-.win98-count {
+.cart-count {
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* Remove old title-bar-controls styling since we moved to inline button */
+.cart-close-btn {
+  width: 16px;
+  height: 14px;
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  color: #000000;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.cart-close-btn:hover {
+  background: #dfdfdf;
+}
+
+.cart-close-btn:active {
+  border: 1px inset #c0c0c0;
+  background: #808080;
+}
 
 /* ===== COMPONENT 2: WINDOW CONTENT AREA ===== */
 
@@ -182,18 +164,18 @@
     max-width: 350px;
   }
   
-  .win98-window .title-bar-text {
+  .cart-titlebar-content {
     gap: 4px;
   }
   
-  .win98-title,
-  .win98-count {
+  .cart-title,
+  .cart-count {
     font-size: 10px;
   }
   
-  .win98-inline-close {
-    width: 18px !important;
-    height: 18px !important;
-    background-size: 9px 8px !important;
+  .cart-close-btn {
+    width: 18px;
+    height: 18px;
+    font-size: 9px;
   }
 }
