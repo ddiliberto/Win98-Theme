@@ -1,0 +1,10 @@
+# Prevent overwriting theme editor changes
+config/settings_data.json
+config/settings_schema.json
+
+# Prevent overwriting custom assets
+assets/98.css
+
+# Prevent overwriting template customizations made in theme editor
+templates/*.json
+sections/*.json

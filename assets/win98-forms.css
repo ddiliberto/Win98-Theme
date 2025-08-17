@@ -1,0 +1,294 @@
+/**
+ * Win98 Forms Component
+ * Authentic Windows 98 form field and button styling based on 98.css
+ */
+
+/* ===== WIN98 CSS VARIABLES ===== */
+:root {
+  /* Win98 Color Variables */
+  --win98-text-color: #222222;
+  --win98-surface: #c0c0c0;
+  --win98-button-highlight: #ffffff;
+  --win98-button-face: #dfdfdf;
+  --win98-button-shadow: #808080;
+  --win98-window-frame: #0a0a0a;
+  
+  /* Win98 Border Variables */
+  --win98-border-raised-outer: inset -1px -1px var(--win98-window-frame), inset 1px 1px var(--win98-button-highlight);
+  --win98-border-raised-inner: inset -2px -2px var(--win98-button-shadow), inset 2px 2px var(--win98-button-face);
+  --win98-border-sunken-outer: inset -1px -1px var(--win98-button-highlight), inset 1px 1px var(--win98-window-frame);
+  --win98-border-sunken-inner: inset -2px -2px var(--win98-button-face), inset 2px 2px var(--win98-button-shadow);
+  --win98-border-field: inset -1px -1px var(--win98-button-highlight), inset 1px 1px var(--win98-button-shadow), inset -2px -2px var(--win98-button-face), inset 2px 2px var(--win98-window-frame);
+}
+
+/* ===== FORM INPUT FIELDS - SUNKEN STYLE ===== */
+.field__input,
+.select__select,
+.customer .field input,
+.customer select,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+select,
+textarea {
+  /* Reset existing styles */
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  
+  /* Win98 Authentic Styling */
+  padding: 3px 4px !important;
+  box-shadow: var(--win98-border-field) !important;
+  background-color: var(--win98-button-highlight) !important;
+  box-sizing: border-box !important;
+  
+  /* Typography */
+  font-family: "MS Sans Serif", Arial !important;
+  font-size: 11px !important;
+  color: var(--win98-text-color) !important;
+  line-height: 1.2 !important;
+}
+
+/* ===== INPUT HEIGHT SPECIFICATIONS ===== */
+.field__input,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="search"],
+select {
+  height: 21px !important;
+  min-height: 21px !important;
+}
+
+input[type="number"] {
+  /* Need this 1 pixel to fit the spinner controls in box */
+  height: 22px !important;
+  min-height: 22px !important;
+}
+
+textarea {
+  min-height: 60px !important;
+  resize: both !important;
+  line-height: 1.3 !important;
+}
+
+/* ===== REMOVE FIELD WRAPPER STYLING ===== */
+.field:before,
+.field:after,
+.select:before,
+.select:after,
+.customer .field:before,
+.customer .field:after,
+.customer select:before,
+.customer select:after,
+.localization-form__select:before,
+.localization-form__select:after {
+  display: none !important;
+}
+
+/* ===== FIELD FOCUS STATES ===== */
+.field__input:focus,
+.select__select:focus,
+.customer .field input:focus,
+.customer select:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+  box-shadow: var(--win98-border-field) !important;
+}
+
+/* ===== DISABLED INPUT FIELDS ===== */
+.field__input:disabled,
+.select__select:disabled,
+.customer .field input:disabled,
+.customer select:disabled,
+input[type="text"]:disabled,
+input[type="password"]:disabled,
+input[type="email"]:disabled,
+input[type="url"]:disabled,
+input[type="tel"]:disabled,
+input[type="number"]:disabled,
+input[type="search"]:disabled,
+select:disabled,
+textarea:disabled {
+  background-color: var(--win98-surface) !important;
+  color: var(--win98-button-shadow) !important;
+}
+
+/* ===== WIN98 BUTTONS ===== */
+button,
+input[type="submit"],
+input[type="reset"],
+.btn,
+.button {
+  /* Reset existing styles */
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  
+  /* Win98 Authentic Button Styling */
+  box-sizing: border-box !important;
+  color: transparent !important;
+  text-shadow: 0 0 var(--win98-text-color) !important;
+  background: var(--win98-surface) !important;
+  box-shadow: var(--win98-border-raised-outer), var(--win98-border-raised-inner) !important;
+  
+  /* Button dimensions and spacing */
+  min-width: 75px !important;
+  min-height: 23px !important;
+  padding: 0 12px !important;
+  
+  /* Typography */
+  font-family: "MS Sans Serif", Arial !important;
+  font-size: 11px !important;
+  cursor: pointer !important;
+  
+  /* Remove transitions */
+  transition: none !important;
+}
+
+/* ===== BUTTON ACTIVE STATE ===== */
+button:not(:disabled):active,
+input[type="submit"]:not(:disabled):active,
+input[type="reset"]:not(:disabled):active,
+.btn:not(:disabled):active,
+.button:not(:disabled):active {
+  box-shadow: var(--win98-border-sunken-outer), var(--win98-border-sunken-inner) !important;
+  text-shadow: 1px 1px var(--win98-text-color) !important;
+}
+
+/* ===== BUTTON FOCUS STATE ===== */
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+.btn:focus,
+.button:focus {
+  outline: 1px dotted var(--win98-text-color) !important;
+  outline-offset: -4px !important;
+}
+
+/* ===== BUTTON DISABLED STATE ===== */
+button:disabled,
+input[type="submit"]:disabled,
+input[type="reset"]:disabled,
+.btn:disabled,
+.button:disabled {
+  color: var(--win98-button-shadow) !important;
+  text-shadow: 1px 1px 0 var(--win98-button-highlight) !important;
+  cursor: not-allowed !important;
+}
+
+/* ===== REMOVE BROWSER INPUT DECORATIONS ===== */
+/* Clear the 'X' from Internet Explorer */
+input[type=search]::-ms-clear { 
+  display: none !important; 
+  width: 0 !important; 
+  height: 0 !important; 
+}
+
+input[type=search]::-ms-reveal { 
+  display: none !important; 
+  width: 0 !important; 
+  height: 0 !important; 
+}
+
+/* Clear the 'X' from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { 
+  display: none !important; 
+}
+
+/* Remove Firefox button borders */
+button::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner {
+  border: 0 !important;
+}
+
+/* ===== SELECT DROPDOWN STYLING ===== */
+select {
+  cursor: pointer !important;
+  padding-right: 20px !important;
+}
+
+/* ===== FIELD LABELS ===== */
+.field__label,
+label {
+  font-family: "MS Sans Serif", Arial !important;
+  font-size: 11px !important;
+  color: var(--win98-text-color) !important;
+  margin-bottom: 2px !important;
+  display: block !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 749px) {
+  .field__input,
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="url"],
+  input[type="tel"],
+  input[type="search"],
+  select {
+    height: 23px !important;
+    min-height: 23px !important;
+    font-size: 12px !important;
+  }
+  
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  .btn,
+  .button {
+    min-height: 25px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* ===== SPECIFIC COMPONENT OVERRIDES ===== */
+/* Newsletter signup */
+.newsletter-form .field__input {
+  width: 100% !important;
+}
+
+/* Search form */
+.search__input {
+  padding: 3px 4px !important;
+  box-shadow: var(--win98-border-field) !important;
+  background-color: var(--win98-button-highlight) !important;
+  font-family: "MS Sans Serif", Arial !important;
+  font-size: 11px !important;
+  height: 21px !important;
+  border: none !important;
+}
+
+/* Contact form */
+.contact .field__input,
+.contact textarea {
+  width: 100% !important;
+}
+
+/* Customer forms */
+.customer .field input {
+  width: 100% !important;
+}

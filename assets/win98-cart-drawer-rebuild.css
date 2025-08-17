@@ -62,7 +62,7 @@
   width: 100%;
   height: 100%;
   background: var(--win98-surface);
-  border-left: 2px outset var(--win98-surface);
+  border: 2px outset var(--win98-surface);
   font-family: var(--win98-font);
   display: flex;
   flex-direction: column;
@@ -110,29 +110,41 @@
 }
 
 .cart-close-btn {
-  width: 16px;
-  height: 14px;
-  background: #c0c0c0;
-  border: 1px outset #c0c0c0;
-  color: #000000;
-  font-size: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-.cart-close-btn:hover {
-  background: #dfdfdf;
+  /* Use exact same styling as product card close buttons */
+  box-sizing: border-box !important;
+  border: none !important;
+  color: transparent !important;
+  text-shadow: 0 0 #222222 !important;
+  background: #c0c0c0 !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  min-width: 16px !important;
+  min-height: 14px !important;
+  width: 16px !important;
+  height: 14px !important;
+  font-family: "MS Sans Serif", Arial !important;
+  font-size: 0 !important;
+  cursor: pointer !important;
+  position: relative !important;
+  margin: 0 0 0 auto !important;
+  flex-shrink: 0 !important;
+  
+  /* Close button icon */
+  background-image: url('icon-close.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 8px 7px !important;
 }
 
 .cart-close-btn:active {
-  border: 1px inset #c0c0c0;
-  background: #808080;
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080 !important;
+  text-shadow: 1px 1px #222222 !important;
+}
+
+.cart-close-btn:focus {
+  outline: none !important;
 }
 
 /* ===== COMPONENT 2: WINDOW CONTENT AREA ===== */
@@ -145,6 +157,220 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+/* ===== EMPTY CART STATE ===== */
+
+.empty-cart-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 40px 20px;
+  min-height: 300px;
+}
+
+.empty-cart-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.empty-cart-title {
+  font-family: var(--win98-font);
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--win98-text);
+  margin: 0 0 8px 0;
+}
+
+.empty-cart-message {
+  font-family: var(--win98-font);
+  font-size: 11px;
+  color: var(--win98-text);
+  margin: 0 0 24px 0;
+  line-height: 1.4;
+  max-width: 250px;
+}
+
+/* Win98 Button Styling */
+.win98-button {
+  display: inline-block;
+  padding: 4px 12px;
+  font-family: var(--win98-font);
+  font-size: 11px;
+  font-weight: normal;
+  color: var(--win98-text);
+  background: var(--win98-surface);
+  border: none;
+  box-shadow: var(--win98-border-raised);
+  text-decoration: none;
+  cursor: pointer;
+  min-width: 75px;
+  text-align: center;
+  transition: none;
+}
+
+.win98-button:hover {
+  text-decoration: none;
+  color: var(--win98-text);
+}
+
+.win98-button:active {
+  box-shadow: var(--win98-border-sunken);
+  padding: 5px 11px 3px 13px;
+}
+
+.win98-button:focus {
+  outline: 1px dotted var(--win98-text);
+  outline-offset: -4px;
+}
+
+/* ===== COMPONENT 3: CART ITEMS CONTAINER ===== */
+
+.cart-items-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cart-items-header {
+  display: grid;
+  grid-template-columns: 1fr 45px 80px;
+  gap: 8px;
+  padding: 8px 12px;
+  background: var(--win98-surface-dark);
+  border: 1px inset var(--win98-surface);
+  font-family: var(--win98-font);
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--win98-text);
+  margin-bottom: 4px;
+}
+
+.cart-items-list {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--win98-white);
+  border: 2px inset var(--win98-surface);
+  padding: 4px;
+}
+
+/* ===== COMPONENT 4: INDIVIDUAL CART ITEM ===== */
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 48px 1fr 45px 80px;
+  gap: 8px;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #e0e0e0;
+  font-family: var(--win98-font);
+  background: var(--win98-white);
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.item-image {
+  width: 48px;
+  height: 48px;
+  border: 1px inset var(--win98-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--win98-surface);
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.no-image {
+  font-size: 20px;
+  opacity: 0.5;
+}
+
+.item-details {
+  min-width: 0;
+}
+
+.item-title {
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0 0 2px 0;
+  color: var(--win98-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-variant {
+  font-size: 10px;
+  color: var(--win98-surface-darker);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-quantity {
+  display: flex;
+  justify-content: center;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  background: var(--win98-white);
+  border: 1px inset var(--win98-surface);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.quantity-btn {
+  width: 14px;
+  height: 18px;
+  background: var(--win98-surface);
+  border: 1px outset var(--win98-surface);
+  font-family: var(--win98-font);
+  font-size: 9px;
+  font-weight: bold;
+  color: var(--win98-text);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.quantity-btn:active {
+  border: 1px inset var(--win98-surface);
+}
+
+.quantity-input {
+  width: 20px;
+  height: 16px;
+  text-align: center;
+  font-family: var(--win98-font);
+  font-size: 9px;
+  border: none;
+  background: var(--win98-white);
+  color: var(--win98-text);
+  outline: none;
+}
+
+.item-price {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--win98-text);
+  text-align: right;
 }
 
 /* Temporary styling for development */

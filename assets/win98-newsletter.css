@@ -1,0 +1,218 @@
+/**
+ * Win98 Newsletter Component
+ * Authentic Windows 98 newsletter form styling with proper layout
+ */
+
+/* ===== WIN98 NEWSLETTER FORM LAYOUT ===== */
+.footer__newsletter .newsletter-form {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 0 !important;
+  width: 100% !important;
+  max-width: 400px !important;
+  margin: 0 auto !important;
+}
+
+/* ===== FIELD WRAPPER ADJUSTMENTS ===== */
+.footer__newsletter .newsletter-form__field-wrapper {
+  width: 100% !important;
+  display: flex !important;
+  position: relative !important;
+}
+
+.footer__newsletter .newsletter-form__field-wrapper .field {
+  display: flex !important;
+  width: 100% !important;
+  position: relative !important;
+  z-index: 0 !important;
+  margin: 0 !important;
+}
+
+/* ===== EMAIL INPUT FIELD ===== */
+.footer__newsletter .newsletter-form__field-wrapper .field__input {
+  /* Remove the huge right padding */
+  padding-right: 4px !important;
+  padding-left: 4px !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+  
+  /* Win98 styling already applied by win98-forms.css */
+  flex: 1 !important;
+  min-width: 200px !important;
+  border-radius: 0 !important;
+  border: none !important;
+  height: 21px !important;
+  
+  /* Ensure proper text styling */
+  font-family: "MS Sans Serif", Arial !important;
+  font-size: 11px !important;
+  line-height: 1.2 !important;
+}
+
+/* ===== NEWSLETTER SUBMIT BUTTON ===== */
+.newsletter-form__button {
+  /* Remove absolute positioning */
+  position: static !important;
+  width: auto !important;
+  min-width: 75px !important;
+  height: 23px !important;
+  margin: 0 !important;
+  margin-left: 2px !important;
+  z-index: 1 !important;
+  
+  /* Win98 button styling */
+  background: #c0c0c0 !important;
+  border: none !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
+  
+  /* Typography */
+  font-family: "MS Sans Serif", Arial !important;
+  font-size: 11px !important;
+  color: transparent !important;
+  text-shadow: 0 0 #222222 !important;
+  
+  /* Layout */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 8px !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  
+  /* Remove transitions */
+  transition: none !important;
+  
+  /* Remove focus ring styling */
+  outline: none !important;
+}
+
+.newsletter-form__button:active {
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080 !important;
+  text-shadow: 1px 1px #222222 !important;
+}
+
+.newsletter-form__button:focus,
+.newsletter-form__button:focus-visible {
+  outline: 1px dotted #222222 !important;
+  outline-offset: -4px !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
+  background-color: #c0c0c0 !important;
+}
+
+.newsletter-form__button:not(:focus-visible):not(.focused) {
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
+  background-color: #c0c0c0 !important;
+}
+
+/* ===== BUTTON ICON STYLING ===== */
+.newsletter-form__button .svg-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.newsletter-form__button .svg-wrapper svg,
+.newsletter-form__button .icon {
+  width: 12px !important;
+  height: 12px !important;
+  fill: #222222 !important;
+  color: #222222 !important;
+}
+
+/* ===== FIELD LABEL ===== */
+.footer__newsletter .field__label {
+  position: absolute !important;
+  left: -9999px !important;
+  visibility: hidden !important;
+}
+
+/* ===== NEWSLETTER HEADING ===== */
+.footer-block__heading {
+  font-family: "MS Sans Serif", Arial !important;
+  font-size: 11px !important;
+  font-weight: bold !important;
+  color: #222222 !important;
+  margin-bottom: 8px !important;
+}
+
+/* ===== NEWSLETTER MESSAGES ===== */
+.newsletter-form__message {
+  font-family: "MS Sans Serif", Arial !important;
+  font-size: 11px !important;
+  margin-top: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px !important;
+}
+
+.newsletter-form__message--success {
+  color: #000080 !important;
+  margin-top: 8px !important;
+}
+
+.newsletter-form__message .svg-wrapper {
+  width: 12px !important;
+  height: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+.newsletter-form__message .svg-wrapper svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 749px) {
+  .footer__newsletter .newsletter-form {
+    max-width: 100% !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+  
+  .newsletter-form__button {
+    margin-left: 0 !important;
+    width: 100% !important;
+    height: 25px !important;
+    justify-content: center !important;
+  }
+  
+  .footer__newsletter .newsletter-form__field-wrapper .field__input {
+    height: 23px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* ===== REMOVE FIELD WRAPPERS STYLING ===== */
+.footer__newsletter .field:before,
+.footer__newsletter .field:after {
+  display: none !important;
+}
+
+/* ===== FOOTER BLOCK NEWSLETTER CONTAINER ===== */
+.footer-block--newsletter {
+  margin-top: 2rem !important;
+  width: 100% !important;
+}
+
+.footer-block__newsletter {
+  width: 100% !important;
+  max-width: 400px !important;
+  margin: 0 auto !important;
+}
+
+/* ===== ENSURE PROPER FORM ALIGNMENT ===== */
+@media screen and (min-width: 750px) {
+  .footer__newsletter .newsletter-form {
+    align-items: stretch !important;
+    margin: 0 !important;
+  }
+  
+  .footer__newsletter .newsletter-form__message {
+    justify-content: flex-start !important;
+  }
+}

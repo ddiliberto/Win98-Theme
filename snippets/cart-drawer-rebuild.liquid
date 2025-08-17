@@ -30,21 +30,70 @@
             {% unless cart == empty %}
               <span class="cart-count">({{ cart.item_count }})</span>
             {% endunless %}
+            <button 
+              class="cart-close-btn" 
+              type="button"
+              onclick="this.closest('cart-drawer').close()"
+              aria-label="{{ 'accessibility.close' | t }}"
+            >
+              ✕
+            </button>
           </div>
-          <button 
-            class="cart-close-btn drawer__close" 
-            type="button"
-            onclick="this.closest('cart-drawer').close()"
-            aria-label="{{ 'accessibility.close' | t }}"
-          >
-            ✕
-          </button>
         </div>
         
         <!-- COMPONENT 2: Window Content Area -->
         <div class="win98-content">
-          {% comment %} Content will go here {% endcomment %}
-          <p>Cart content coming soon...</p>
+          {% if cart == empty %}
+            <!-- EMPTY CART STATE -->
+            <div class="empty-cart-state">
+              <div class="empty-cart-icon">🛒</div>
+              <h3 class="empty-cart-title">{{ 'sections.cart.empty' | t }}</h3>
+              <p class="empty-cart-message">{{ 'sections.cart.empty_desc' | t }}</p>
+              <a href="{{ routes.all_products_collection_url }}" class="win98-button continue-shopping-btn">
+                {{ 'general.continue_shopping' | t }}
+              </a>
+            </div>
+          {% else %}
+            <!-- COMPONENT 3: CART ITEMS CONTAINER -->
+            <div class="cart-items-container">
+              <div class="cart-items-header">
+                <span class="header-item">Item</span>
+                <span class="header-quantity">Qty</span>
+                <span class="header-price">Price</span>
+              </div>
+              
+              <div class="cart-items-list">
+                {% for item in cart.items %}
+                  <!-- COMPONENT 4: Individual Cart Items will go here -->
+                  <div class="cart-item">
+                    <div class="item-image">
+                      {% if item.image %}
+                        {{ item.image | image_url: width: 64 | image_tag: loading: 'lazy', alt: item.product.title }}
+                      {% else %}
+                        <div class="no-image">📦</div>
+                      {% endif %}
+                    </div>
+                    <div class="item-details">
+                      <h4 class="item-title">{{ item.product.title }}</h4>
+                      {% unless item.product.has_only_default_variant %}
+                        <p class="item-variant">{{ item.variant.title }}</p>
+                      {% endunless %}
+                    </div>
+                    <div class="item-quantity">
+                      <div class="quantity-controls">
+                        <button class="quantity-btn decrease" onclick="changeQuantity({{ item.index }}, {{ item.quantity | minus: 1 }})">-</button>
+                        <input type="number" value="{{ item.quantity }}" min="0" class="quantity-input" onchange="changeQuantity({{ item.index }}, this.value)">
+                        <button class="quantity-btn increase" onclick="changeQuantity({{ item.index }}, {{ item.quantity | plus: 1 }})">+</button>
+                      </div>
+                    </div>
+                    <div class="item-price">
+                      {{ item.final_line_price | money }}
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
         </div>
       </div>
       
