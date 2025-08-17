@@ -45,8 +45,12 @@
 
 /* Container for the entire Win98 cart */
 .win98-cart-container {
+  width: 400px;
+  max-width: calc(100vw - 20px);
+  height: 100vh;
   transform: translateX(100%);
   transition: transform 0.3s ease;
+  position: relative;
 }
 
 .drawer.active .win98-cart-container {
@@ -55,15 +59,15 @@
 
 /* Main Win98 Window */
 .win98-window {
-  width: 400px;
-  max-width: calc(100vw - 20px);
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: var(--win98-surface);
   border-left: 2px outset var(--win98-surface);
   font-family: var(--win98-font);
   display: flex;
   flex-direction: column;
   box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
 }
 
 /* Title Bar - Use standard classes that match existing title-bar-controls.css */
@@ -179,7 +183,7 @@
 
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 749px) {
-  .win98-window {
+  .win98-cart-container {
     width: calc(100vw - 10px);
     max-width: 350px;
   }
