@@ -22,24 +22,26 @@
       
       <!-- COMPONENT 1: Window Frame & Title Bar -->
       <div class="win98-window">
-        <div class="win98-titlebar">
-          <div class="win98-titlebar-text">
+        <div class="title-bar">
+          <div class="title-bar-text">
             <span class="win98-icon">🛒</span>
             <span class="win98-title">{{ 'sections.cart.title' | t }}</span>
             {% unless cart == empty %}
               <span class="win98-count">({{ cart.item_count }})</span>
             {% endunless %}
           </div>
-          <button 
-            class="win98-titlebar-close drawer__close" 
-            type="button"
-            onclick="this.closest('cart-drawer').close()"
-            aria-label="{{ 'accessibility.close' | t }}"
-          >
-            <span class="svg-wrapper">
-              {{- 'icon-close.svg' | inline_asset_content -}}
-            </span>
-          </button>
+          <div class="title-bar-controls">
+            <button 
+              class="drawer__close" 
+              type="button"
+              onclick="this.closest('cart-drawer').close()"
+              aria-label="{{ 'accessibility.close' | t }}"
+            >
+              <span class="svg-wrapper">
+                {{- 'icon-close.svg' | inline_asset_content -}}
+              </span>
+            </button>
+          </div>
         </div>
         
         <!-- COMPONENT 2: Window Content Area -->
