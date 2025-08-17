@@ -120,26 +120,26 @@
 
 /* Cart drawer specific close button styling */
 .win98-window .title-bar-controls button {
-  box-sizing: border-box;
-  width: 16px;
-  height: 14px;
-  background: #c0c0c0;
-  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  font-size: 0;
-  color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  box-sizing: border-box !important;
+  width: 16px !important;
+  height: 14px !important;
+  background: #c0c0c0 !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 0 !important;
+  color: transparent !important;
+  display: block !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
   
   /* Close button icon */
-  background-image: url('icon-close.svg');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 8px 7px;
+  background-image: url('icon-close.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 8px 7px !important;
 }
 
 .win98-window .title-bar-controls button:active {
@@ -194,8 +194,8 @@
   }
   
   .win98-window .title-bar-controls button {
-    width: 18px;
-    height: 18px;
-    background-size: 9px 8px;
+    width: 18px !important;
+    height: 18px !important;
+    background-size: 9px 8px !important;
   }
 }
