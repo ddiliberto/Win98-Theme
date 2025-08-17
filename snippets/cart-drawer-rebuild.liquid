@@ -29,10 +29,8 @@
             {% unless cart == empty %}
               <span class="win98-count">({{ cart.item_count }})</span>
             {% endunless %}
-          </div>
-          <div class="title-bar-controls">
             <button 
-              class="drawer__close" 
+              class="win98-inline-close drawer__close" 
               type="button"
               onclick="this.closest('cart-drawer').close()"
               aria-label="{{ 'accessibility.close' | t }}"

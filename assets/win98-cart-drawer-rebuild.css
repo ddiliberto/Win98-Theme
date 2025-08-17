@@ -77,10 +77,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 3px 4px 3px 6px;
+  padding: 4px 4px 4px 6px;
   flex-shrink: 0;
   border-bottom: 1px solid var(--win98-surface-darker);
   box-sizing: border-box;
+  position: relative;
 }
 
 .win98-window .title-bar-text {
@@ -95,12 +96,40 @@
   overflow: hidden;
 }
 
-.win98-window .title-bar-controls {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  height: 100%;
-  position: relative;
+/* Inline close button within title text */
+.win98-inline-close {
+  box-sizing: border-box !important;
+  width: 16px !important;
+  height: 14px !important;
+  background: #c0c0c0 !important;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  margin: 0 0 0 8px !important;
+  font-size: 0 !important;
+  color: transparent !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  flex-shrink: 0 !important;
+  
+  /* Close button icon */
+  background-image: url('icon-close.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: 8px 7px !important;
+}
+
+.win98-inline-close:active {
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080 !important;
+}
+
+.win98-inline-close:focus {
+  outline: none !important;
+}
+
+.win98-inline-close .svg-wrapper {
+  display: none !important;
 }
 
 .win98-icon {
@@ -122,42 +151,7 @@
   flex-shrink: 0;
 }
 
-/* Cart drawer specific close button styling */
-.win98-window .title-bar-controls button {
-  box-sizing: border-box !important;
-  width: 16px !important;
-  height: 14px !important;
-  background: #c0c0c0 !important;
-  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf !important;
-  border: none !important;
-  cursor: pointer !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  font-size: 0 !important;
-  color: transparent !important;
-  display: block !important;
-  position: relative !important;
-  flex-shrink: 0 !important;
-  
-  /* Close button icon */
-  background-image: url('icon-close.svg') !important;
-  background-repeat: no-repeat !important;
-  background-position: center center !important;
-  background-size: 8px 7px !important;
-}
-
-.win98-window .title-bar-controls button:active {
-  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
-}
-
-.win98-window .title-bar-controls button:focus {
-  outline: none;
-}
-
-/* Hide SVG content */
-.win98-window .title-bar-controls button .svg-wrapper {
-  display: none;
-}
+/* Remove old title-bar-controls styling since we moved to inline button */
 
 /* ===== COMPONENT 2: WINDOW CONTENT AREA ===== */
 
@@ -197,7 +191,7 @@
     font-size: 10px;
   }
   
-  .win98-window .title-bar-controls button {
+  .win98-inline-close {
     width: 18px !important;
     height: 18px !important;
     background-size: 9px 8px !important;
