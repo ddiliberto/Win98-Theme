@@ -232,40 +232,51 @@
   display: flex;
   align-items: center;
   background: var(--win98-gray);
-  border: 1px inset var(--win98-gray);
-  padding: 1px;
+  border: 2px inset var(--win98-gray);
+  padding: 2px;
+  margin-bottom: 4px;
 }
 
 .win98-qty-btn {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   background: var(--win98-light-gray);
-  border: 1px outset var(--win98-gray);
-  font-size: 8px;
+  border: 2px outset var(--win98-gray);
+  font-size: 10px;
+  font-weight: bold;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--win98-black);
+  font-family: "MS Sans Serif", Arial, sans-serif;
+}
+
+.win98-qty-btn:hover {
+  background: var(--win98-white);
 }
 
 .win98-qty-btn:active {
-  border: 1px inset var(--win98-gray);
+  border: 2px inset var(--win98-gray);
+  background: var(--win98-gray);
 }
 
 .win98-qty-input {
-  width: 32px;
-  height: 16px;
-  border: 1px inset var(--win98-gray);
+  width: 36px;
+  height: 20px;
+  border: 2px inset var(--win98-gray);
   background: var(--win98-white);
   text-align: center;
-  font-size: 9px;
+  font-size: 10px;
+  font-family: "MS Sans Serif", Arial, sans-serif;
   color: var(--win98-black);
-  margin: 0 1px;
+  margin: 0 2px;
+  box-sizing: border-box;
 }
 
 .win98-qty-input:focus {
   outline: none;
+  background: var(--win98-white);
 }
 
 /* ===== ITEM TOTAL ===== */
@@ -287,19 +298,26 @@
 
 /* ===== REMOVE BUTTON ===== */
 .win98-remove-btn {
-  width: 20px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   background: var(--win98-light-gray);
-  border: 1px outset var(--win98-gray);
-  font-size: 8px;
+  border: 2px outset var(--win98-gray);
+  font-size: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--win98-black);
+  font-family: "MS Sans Serif", Arial, sans-serif;
+}
+
+.win98-remove-btn:hover {
+  background: var(--win98-white);
 }
 
 .win98-remove-btn:active {
-  border: 1px inset var(--win98-gray);
+  border: 2px inset var(--win98-gray);
+  background: var(--win98-gray);
 }
 
 /* ===== FOOTER ===== */
@@ -404,11 +422,34 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    align-items: center;
   }
   
   .win98-item-image {
     width: 50px;
     height: 50px;
+  }
+  
+  .quantity {
+    margin-bottom: 0;
+  }
+  
+  .win98-qty-btn {
+    width: 18px;
+    height: 18px;
+    font-size: 9px;
+  }
+  
+  .win98-qty-input {
+    width: 32px;
+    height: 18px;
+    font-size: 9px;
+  }
+  
+  .win98-remove-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
   }
 }
 
