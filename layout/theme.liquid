@@ -270,7 +270,7 @@
 
     {%- if settings.cart_type == 'drawer' -%}
       {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
-      {{ 'win98-cart-drawer-v2.css' | asset_url | stylesheet_tag }}
+      {{ 'win98-cart-drawer-simple.css' | asset_url | stylesheet_tag }}
       {{ 'component-cart.css' | asset_url | stylesheet_tag }}
       {{ 'component-totals.css' | asset_url | stylesheet_tag }}
       {{ 'component-price.css' | asset_url | stylesheet_tag }}
@@ -315,7 +315,7 @@
     </a>
 
     {%- if settings.cart_type == 'drawer' -%}
-      {%- render 'cart-drawer-v2' -%}
+      {%- render 'cart-drawer-simple' -%}
     {%- endif -%}
 
     {% sections 'header-group' %}
