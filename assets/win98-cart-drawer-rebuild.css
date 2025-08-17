@@ -115,7 +115,42 @@
   flex-shrink: 0;
 }
 
-/* The close button styling will automatically inherit from win98-title-bar-controls.css */
+/* Cart drawer specific close button styling */
+.win98-window .title-bar-controls button {
+  box-sizing: border-box;
+  width: 16px;
+  height: 14px;
+  background: #c0c0c0;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Close button icon */
+  background-image: url('icon-close.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 8px 7px;
+}
+
+.win98-window .title-bar-controls button:active {
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+}
+
+.win98-window .title-bar-controls button:focus {
+  outline: none;
+}
+
+/* Hide SVG content */
+.win98-window .title-bar-controls button .svg-wrapper {
+  display: none;
+}
 
 /* ===== COMPONENT 2: WINDOW CONTENT AREA ===== */
 
@@ -153,5 +188,11 @@
   .win98-title,
   .win98-count {
     font-size: 10px;
+  }
+  
+  .win98-window .title-bar-controls button {
+    width: 18px;
+    height: 18px;
+    background-size: 9px 8px;
   }
 }
