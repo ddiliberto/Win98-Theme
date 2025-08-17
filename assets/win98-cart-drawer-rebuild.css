@@ -1,0 +1,171 @@
+/**
+ * Win98 Cart Drawer - Component-by-Component Rebuild
+ * Clean, maintainable CSS with each component clearly defined
+ */
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --win98-surface: #c0c0c0;
+  --win98-surface-light: #dfdfdf;
+  --win98-surface-dark: #808080;
+  --win98-surface-darker: #404040;
+  --win98-text: #000000;
+  --win98-white: #ffffff;
+  --win98-titlebar-bg: linear-gradient(90deg, #000080 0%, #1084d0 100%);
+  --win98-titlebar-text: #ffffff;
+  --win98-border-raised: inset -1px -1px #000000, inset 1px 1px #ffffff, inset -2px -2px #808080, inset 2px 2px #dfdfdf;
+  --win98-border-sunken: inset -1px -1px #ffffff, inset 1px 1px #000000, inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+  --win98-font: "MS Sans Serif", Arial, sans-serif;
+}
+
+/* ===== DRAWER BASE ===== */
+.drawer {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  transition: visibility 0.3s ease;
+}
+
+.drawer.active {
+  visibility: visible;
+}
+
+.cart-drawer__overlay {
+  display: none;
+}
+
+/* ===== COMPONENT 1: WINDOW FRAME & TITLE BAR ===== */
+
+/* Container for the entire Win98 cart */
+.win98-cart-container {
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+}
+
+.drawer.active .win98-cart-container {
+  transform: translateX(0);
+}
+
+/* Main Win98 Window */
+.win98-window {
+  width: 400px;
+  max-width: calc(100vw - 20px);
+  height: 100vh;
+  background: var(--win98-surface);
+  border-left: 2px outset var(--win98-surface);
+  font-family: var(--win98-font);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Title Bar */
+.win98-titlebar {
+  background: var(--win98-titlebar-bg);
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 4px 2px 6px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--win98-surface-darker);
+}
+
+.win98-titlebar-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--win98-titlebar-text);
+  font-size: 11px;
+  font-weight: bold;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.win98-icon {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.win98-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.win98-count {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Title Bar Close Button */
+.win98-titlebar-close {
+  width: 16px;
+  height: 14px;
+  background: var(--win98-surface);
+  box-shadow: var(--win98-border-raised);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: var(--win98-text);
+  line-height: 1;
+}
+
+.win98-titlebar-close:hover {
+  background: var(--win98-surface-light);
+}
+
+.win98-titlebar-close:active {
+  box-shadow: var(--win98-border-sunken);
+  background: var(--win98-surface-dark);
+}
+
+/* ===== COMPONENT 2: WINDOW CONTENT AREA ===== */
+
+/* Content area inside the window */
+.win98-content {
+  flex: 1;
+  background: var(--win98-surface);
+  padding: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Temporary styling for development */
+.win98-content p {
+  font-family: var(--win98-font);
+  font-size: 11px;
+  color: var(--win98-text);
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 749px) {
+  .win98-window {
+    width: calc(100vw - 10px);
+    max-width: 350px;
+  }
+  
+  .win98-titlebar-text {
+    gap: 4px;
+  }
+  
+  .win98-title,
+  .win98-count {
+    font-size: 10px;
+  }
+}

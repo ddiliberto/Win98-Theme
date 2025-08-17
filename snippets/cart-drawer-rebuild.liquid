@@ -1,0 +1,52 @@
+{% comment %}
+  Win98 Cart Drawer - Complete Rebuild
+  Building each component step by step for clean, maintainable code
+{% endcomment %}
+
+{{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+{{ 'win98-cart-drawer-rebuild.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  .drawer {
+    visibility: hidden;
+  }
+</style>
+
+<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}">
+  <div id="CartDrawer" class="cart-drawer">
+    <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
+    
+    <div class="drawer__inner win98-cart-container">
+      
+      <!-- COMPONENT 1: Window Frame & Title Bar -->
+      <div class="win98-window">
+        <div class="win98-titlebar">
+          <div class="win98-titlebar-text">
+            <span class="win98-icon">🛒</span>
+            <span class="win98-title">{{ 'sections.cart.title' | t }}</span>
+            {% unless cart == empty %}
+              <span class="win98-count">({{ cart.item_count }})</span>
+            {% endunless %}
+          </div>
+          <button 
+            class="win98-titlebar-close drawer__close" 
+            type="button"
+            onclick="this.closest('cart-drawer').close()"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            ✕
+          </button>
+        </div>
+        
+        <!-- COMPONENT 2: Window Content Area -->
+        <div class="win98-content">
+          {% comment %} Content will go here {% endcomment %}
+          <p>Cart content coming soon...</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</cart-drawer>
